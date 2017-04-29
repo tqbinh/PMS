@@ -1,32 +1,49 @@
-﻿Build started 4/29/2017 8:41:44 AM.
-     1>Project "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM\PSM.vcxproj" on node 2 (Build target(s)).
+﻿Build started 4/29/2017 7:00:55 PM.
+     1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM\kernelExtractUniqueEdge.cu 
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\extractUniqueEdge.cu 
        CudaBuild:
-         Compiling CUDA source file kernelExtractUniqueEdge.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp9051a5418b864bf784869010561d0ad5.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernelExtractUniqueEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM\kernelExtractUniqueEdge.cu"
+         Compiling CUDA source file extractUniqueEdge.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp9b707cb3f7694d449ddc1f3786a70ae2.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\extractUniqueEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\extractUniqueEdge.cu"
          
-         D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernelExtractUniqueEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM\kernelExtractUniqueEdge.cu" 
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/ThesisCoding/PSM/PSM/kernelExtractUniqueEdge.cu(3): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/ThesisCoding/PSM/PSM/kernelExtractUniqueEdge.cu(3): warning : inline qualifier ignored for "__global__" function
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\extractUniqueEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\extractUniqueEdge.cu" 
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(39): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(46): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(64): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(72): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : extern inline function "kernelExtractUniqueEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : extern inline function "kernelCastingInt2Float" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(39): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(46): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(64): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/extractUniqueEdge.cu(72): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : extern inline function "kernelExtractUniqueEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : extern inline function "kernelCastingInt2Float" was referenced but not defined
        Link:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\countNumberOfEdgeLabel.cu.obj
          Debug\countNumberOfLabelVetex.cu.obj
          Debug\extractUniqueEdge.cu.obj
          Debug\kernel.cu.obj
          Debug\kernelaccess_d_LO_from_idx_of_d_O.cu.obj
+         Debug\kernelCastingInt2Float.cu.obj
          Debug\kernelCountLabelInGraphDB.cu.obj
          Debug\kernelCountNumberOfLabelVertex.cu.obj
          Debug\kernelExtractUniqueEdge.cu.obj
@@ -34,7 +51,7 @@
          Debug\kernelPrintf.cu.obj
          Debug\kernelReduce.cu.obj
          Debug\markInvalidVertex.cu.obj
-         Debug\prescan.cu.obj
+         Debug\scan_largearray_kernel.cu.obj
          Debug\checkArray.obj
          Debug\checkDataBetweenHostAndGPU.obj
          Debug\dfs.obj
@@ -43,17 +60,18 @@
          Debug\gspan.obj
          Debug\ismin.obj
          Debug\misc.obj
+         Debug\scan_gold.obj
          Debug\sumUntilReachZero.obj
-         PSM.vcxproj -> D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\PSM.exe
+         PSM.vcxproj -> D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe
        PostBuildEvent:
-         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\"
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\"
+         echo copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\"
          :VCEnd
-         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\Debug\"
+         copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart*.dll" "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\"
          C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\cudart32_55.dll
                  1 file(s) copied.
-     1>Done Building Project "D:\BinhLuanVan\CodeLuanVanGPU\ThesisCoding\PSM\PSM\PSM.vcxproj" (Build target(s)).
+     1>Done Building Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:09.39
+Time Elapsed 00:00:06.29

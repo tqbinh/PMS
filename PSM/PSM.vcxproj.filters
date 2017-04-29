@@ -14,7 +14,8 @@
     <CudaCompile Include="countNumberOfEdgeLabel.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
     <CudaCompile Include="kernelExtractUniqueEdge.cu" />
-    <CudaCompile Include="prescan.cu" />
+    <CudaCompile Include="scan_largearray_kernel.cu" />
+    <CudaCompile Include="kernelCastingInt2Float.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -26,6 +27,7 @@
     <ClCompile Include="displayArray.cpp" />
     <ClCompile Include="checkDataBetweenHostAndGPU.cpp" />
     <ClCompile Include="sumUntilReachZero.cpp" />
+    <ClCompile Include="scan_gold.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gspan.h" />
@@ -44,6 +46,11 @@
     <ClInclude Include="countNumberOfEdgeLabel.h" />
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="kernelExtractUniqueEdge.h" />
-    <ClInclude Include="prescan.h" />
+    <ClInclude Include="scan_largearray_kernel.h" />
+    <ClInclude Include="helper_timer.h" />
+    <ClInclude Include="helper_string.h" />
+    <ClInclude Include="helper_cuda.h" />
+    <ClInclude Include="exception.h" />
+    <ClInclude Include="castingIntToFloat.h" />
   </ItemGroup>
 </Project>

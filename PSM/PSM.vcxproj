@@ -160,6 +160,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
     </CudaCompile>
     <CudaCompile Include="kernelaccess_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="kernelCastingInt2Float.cu" />
     <CudaCompile Include="kernelCountLabelInGraphDB.cu" />
     <CudaCompile Include="kernelCountNumberOfLabelVertex.cu" />
     <CudaCompile Include="kernelExtractUniqueEdge.cu" />
@@ -167,7 +168,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernelPrintf.cu" />
     <CudaCompile Include="kernelReduce.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
-    <CudaCompile Include="prescan.cu" />
+    <CudaCompile Include="scan_largearray_kernel.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="checkArray.cpp" />
@@ -178,17 +179,23 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClCompile Include="gspan.cpp" />
     <ClCompile Include="ismin.cpp" />
     <ClCompile Include="misc.cpp" />
+    <ClCompile Include="scan_gold.cpp" />
     <ClCompile Include="sumUntilReachZero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="castingIntToFloat.h" />
     <ClInclude Include="checkArray.h" />
     <ClInclude Include="checkDataBetweenHostAndGPU.h" />
     <ClInclude Include="countNumberOfEdgeLabel.h" />
     <ClInclude Include="countNumberOfLabelVetex.h" />
     <ClInclude Include="displayArray.h" />
+    <ClInclude Include="exception.h" />
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="gspan.h" />
+    <ClInclude Include="helper_cuda.h" />
+    <ClInclude Include="helper_string.h" />
+    <ClInclude Include="helper_timer.h" />
     <ClInclude Include="kernelaccess_d_LO_from_idx_of_d_O.h" />
     <ClInclude Include="kernelCountLabelInGraphDB.h" />
     <ClInclude Include="kernelExtractUniqueEdge.h" />
@@ -196,7 +203,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="kernelPrintf.h" />
     <ClInclude Include="kernelReduce.h" />
     <ClInclude Include="markInvalidVertex.h" />
-    <ClInclude Include="prescan.h" />
+    <ClInclude Include="scan_largearray_kernel.h" />
     <ClInclude Include="sumUntilReachZero.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
