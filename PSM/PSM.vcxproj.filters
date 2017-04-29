@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="kernelPrintf.cu" />
+    <CudaCompile Include="kernelCountLabelInGraphDB.cu" />
+    <CudaCompile Include="kernelMarkInvalidVertex.cu" />
+    <CudaCompile Include="markInvalidVertex.cu" />
+    <CudaCompile Include="kernelaccess_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="access_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="countNumberOfLabelVetex.cu" />
+    <CudaCompile Include="kernelCountNumberOfLabelVertex.cu" />
+    <CudaCompile Include="kernelReduce.cu" />
+    <CudaCompile Include="countNumberOfEdgeLabel.cu" />
+    <CudaCompile Include="extractUniqueEdge.cu" />
+    <CudaCompile Include="kernelExtractUniqueEdge.cu" />
+    <CudaCompile Include="prescan.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dfs.cpp" />
+    <ClCompile Include="graph.cpp" />
+    <ClCompile Include="gspan.cpp" />
+    <ClCompile Include="ismin.cpp" />
+    <ClCompile Include="misc.cpp" />
+    <ClCompile Include="checkArray.cpp" />
+    <ClCompile Include="displayArray.cpp" />
+    <ClCompile Include="checkDataBetweenHostAndGPU.cpp" />
+    <ClCompile Include="sumUntilReachZero.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gspan.h" />
+    <ClInclude Include="kernelPrintf.h" />
+    <ClInclude Include="checkArray.h" />
+    <ClInclude Include="kernelCountLabelInGraphDB.h" />
+    <ClInclude Include="kernelMarkInvalidVertex.h" />
+    <ClInclude Include="markInvalidVertex.h" />
+    <ClInclude Include="displayArray.h" />
+    <ClInclude Include="checkDataBetweenHostAndGPU.h" />
+    <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="kernelaccess_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="countNumberOfLabelVetex.h" />
+    <ClInclude Include="kernelReduce.h" />
+    <ClInclude Include="sumUntilReachZero.h" />
+    <ClInclude Include="countNumberOfEdgeLabel.h" />
+    <ClInclude Include="extractUniqueEdge.h" />
+    <ClInclude Include="kernelExtractUniqueEdge.h" />
+    <ClInclude Include="prescan.h" />
+  </ItemGroup>
+</Project>

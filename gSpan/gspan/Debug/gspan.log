@@ -1,0 +1,51 @@
+﻿Build started 3/2/2017 9:40:31 AM.
+     1>Project "D:\BinhLuanVan\gspan\gspan\gspan.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /analyze- /errorReport:prompt /clr:nostdlib dfs.cpp graph.cpp gspan.cpp ismin.cpp main.cpp misc.cpp
+         dfs.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         graph.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>graph.cpp(34): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>graph.cpp(36): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>graph.cpp(79): warning C4244: 'initializing' : conversion from 'std::streamoff' to 'unsigned int', possible loss of data
+     1>graph.cpp(144): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>graph.cpp(146): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>graph.cpp(170): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+     1>graph.cpp(172): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\stdio.h(357) : see declaration of 'sprintf'
+         gspan.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         ismin.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         main.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>main.cpp(50): warning C4101: 'opt' : unreferenced local variable
+         misc.cpp
+     1>d:\binhluanvan\gspan\gspan\gspan.h(139): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\gspan\gspan\gspan.h(140): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+         Generating Code...
+       Link:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\gspan\Debug\gspan.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\gspan\Debug\gspan.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Debug\dfs.obj
+         Debug\graph.obj
+         Debug\gspan.obj
+         Debug\ismin.obj
+         Debug\main.obj
+         Debug\misc.obj
+         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+         gspan.vcxproj -> D:\BinhLuanVan\gspan\Debug\gspan.exe
+     1>Done Building Project "D:\BinhLuanVan\gspan\gspan\gspan.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:15.17
