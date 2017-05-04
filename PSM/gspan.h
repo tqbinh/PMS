@@ -14,6 +14,8 @@
 #include<algorithm>
 #include<fstream>
 
+
+
 template <typename T> inline void _swap(T &x,T &y){T z=x;x=y;y=z;} //Template để swap 2 phần tử có cùng kiểu dữ liệu T bất kỳ
 
 struct Edge{ // Cấu trúc của một cạnh 

@@ -17,6 +17,8 @@
 #include "countNumberOfLabelVetex.h"
 #include "countNumberOfEdgeLabel.h"
 #include "extractUniqueEdge.h"
+#include "ExtensionStructure.h"
+#include "getAndStoreExtension.h"
 using namespace std;
 
 //declare prototype
@@ -122,7 +124,7 @@ int main(int argc, char * const  argv[])
 	//1. khai báo biến trên GPU
 	int *d_O;
 	int *d_LO;
-	int *d_N;
+	int *d_N; //Số lượng phần tử của d_N bằng noDeg
 	int *d_LN;
 
 	//2. Kiểm tra lỗi khi cấp phát
@@ -237,9 +239,11 @@ int main(int argc, char * const  argv[])
 	}
 	printf("\nNumber of different label Le is: %d ;",Le);
 	/*******Thu thập tất cả các pattern P có 1 cạnh và tất cả các embeddings của P ********
-	1. Duyệt qua cơ sở dữ liệu và rút trích các cạnh phân biệt dựa vào mảng d_O,d_LO,d_N và d_LN và set giá trị 1 trong mảng d_SinglePattern có kích thước là (Lv.LE)
+	1. Duyệt qua cơ sở dữ liệu và rút trích các cạnh phân biệt dựa vào mảng d_O,d_LO,d_N và d_LN và 
+	set giá trị 1 trong mảng d_SinglePattern có kích thước là (Lv.LE)
 	tương ứng (lij.Lv+lj).
-	2. Reduction d_singlePattern để biết số lượng pattern(numberOfPattern) là bao nhiêu. Sau đó cấp phát numberOfPattern threads để tìm embeddings cho pattern đó.
+	2. Reduction d_singlePattern để biết số lượng pattern(numberOfPattern) là bao nhiêu. Sau đó cấp 
+	phát numberOfPattern threads để tìm embeddings cho pattern đó.
 	   Kết quả được lưu vào mảng cấu trúc d_Ext có số lượng phần tử bằng với d_N. 
 	   Các thông tin cần lưu gồm:
 		i. DFS Code của pattern theo cấu trúc (vi,vj,li,lij,lj)
@@ -285,6 +289,32 @@ int main(int argc, char * const  argv[])
 	}
 	*/
 
+	/* //May/04/2017
+		1. Tạo một cấu trúc Extension để lưu trữ các mở rộng: DFSCode của cạnh mở rộng (vi,vj,li,lij,lj),global from vertex id(vgi),
+		global to vertex id (vgj) và pointer trỏ đến header của embedding tương ứng với cạnh mở rộng.
+		2. Tạo một mảng có kích thước bằng với kích thước của d_N để lưu trữ các cạnh mở rộng ban đầu, lúc chưa có bất kỳ một cạnh
+		phổ biến nào (P=0).
+		3. Tạo một kernel có số lượng threads bằng d_O, mỗi thread sẽ xử lý một đỉnh. Nhiệm vụ của thread là đọc các cạnh kề với nó rồi
+		lưu trữ thông tin vào mảng Extension tương ứng tại vị trí.
+	*/
+
+	int numberOfElementd_N=noDeg;
+	size_t nBytesOfArrayExtension = numberOfElementd_N*sizeof(Extension);
+	Extension *d_Extension;
+	cudaStatus= cudaMalloc((Extension**)&d_Extension,nBytesOfArrayExtension);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"CudaMalloc d_Extension fail",cudaStatus);
+		exit(1);
+	}
+	/*else
+	{
+		memset(d_Extension,0,nBytesOfArrayExtension);
+	}*/
+
+	int numberOfElementd_O=sizeOfarrayO;
+	
+
+	getAndStoreExtension(d_Extension,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Le,Lv);
 
 
 

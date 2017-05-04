@@ -15,7 +15,7 @@ __global__ void kernelExtractUniqueEdge(int *d_O,int *d_LO,unsigned int numberEl
 			}			
 			int ek;
 			if (j==numberElementOfd_O) {
-				ek=d_O[i]+(numberElementOfd_N - d_O[i]);
+				ek=numberElementOfd_N;
 
 			}
 			else

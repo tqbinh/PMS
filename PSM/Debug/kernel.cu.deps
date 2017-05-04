@@ -326,57 +326,61 @@ C:\Program Files\Microsoft Visual Studio 11.0\VC\include\map
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\xtree
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\conio.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelPrintf.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\gspan.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\vector
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\set
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\algorithm
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\fstream
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelCountLabelInGraphDB.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelMarkInvalidVertex.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\markInvalidVertex.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\markInvalidVertex.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\checkArray.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkArray.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\math.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\displayArray.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\checkDataBetweenHostAndGPU.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\access_d_LO_from_idx_of_d_O.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\access_d_LO_from_idx_of_d_O.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelaccess_d_LO_from_idx_of_d_O.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\countNumberOfLabelVetex.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelReduce.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime_api.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\sumUntilReachZero.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\countNumberOfEdgeLabel.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\sumUntilReachZero.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\extractUniqueEdge.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\kernelExtractUniqueEdge.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\thesiscoding\psm\psm\prescan.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime_api.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\math.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scan_largearray_kernel.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions_decls.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\ExtensionStructure.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h

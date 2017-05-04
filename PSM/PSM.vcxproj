@@ -156,6 +156,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="countNumberOfEdgeLabel.cu" />
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
+    <CudaCompile Include="getAndStoreExtension.cu" />
     <CudaCompile Include="kernel.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
     </CudaCompile>
@@ -191,7 +192,9 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="countNumberOfLabelVetex.h" />
     <ClInclude Include="displayArray.h" />
     <ClInclude Include="exception.h" />
+    <ClInclude Include="ExtensionStructure.h" />
     <ClInclude Include="extractUniqueEdge.h" />
+    <ClInclude Include="getAndStoreExtension.h" />
     <ClInclude Include="gspan.h" />
     <ClInclude Include="helper_cuda.h" />
     <ClInclude Include="helper_string.h" />

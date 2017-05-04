@@ -16,6 +16,7 @@
     <CudaCompile Include="kernelExtractUniqueEdge.cu" />
     <CudaCompile Include="scan_largearray_kernel.cu" />
     <CudaCompile Include="kernelCastingInt2Float.cu" />
+    <CudaCompile Include="getAndStoreExtension.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -52,5 +53,7 @@
     <ClInclude Include="helper_cuda.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="castingIntToFloat.h" />
+    <ClInclude Include="ExtensionStructure.h" />
+    <ClInclude Include="getAndStoreExtension.h" />
   </ItemGroup>
 </Project>
