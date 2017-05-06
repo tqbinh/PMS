@@ -170,6 +170,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernelReduce.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
     <CudaCompile Include="scan_largearray_kernel.cu" />
+    <CudaCompile Include="validEdge.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="checkArray.cpp" />
@@ -208,6 +209,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="markInvalidVertex.h" />
     <ClInclude Include="scan_largearray_kernel.h" />
     <ClInclude Include="sumUntilReachZero.h" />
+    <ClInclude Include="validEdge.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

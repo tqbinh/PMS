@@ -19,6 +19,7 @@
 #include "extractUniqueEdge.h"
 #include "ExtensionStructure.h"
 #include "getAndStoreExtension.h"
+#include "validEdge.h"
 using namespace std;
 
 //declare prototype
@@ -289,7 +290,7 @@ int main(int argc, char * const  argv[])
 	}
 	*/
 
-	/* //May/04/2017
+	/* //May/04/2017: Trích các cạnh từ CSDL và lưu vào d_Extension.
 		1. Tạo một cấu trúc Extension để lưu trữ các mở rộng: DFSCode của cạnh mở rộng (vi,vj,li,lij,lj),global from vertex id(vgi),
 		global to vertex id (vgj) và pointer trỏ đến header của embedding tương ứng với cạnh mở rộng.
 		2. Tạo một mảng có kích thước bằng với kích thước của d_N để lưu trữ các cạnh mở rộng ban đầu, lúc chưa có bất kỳ một cạnh
@@ -306,15 +307,49 @@ int main(int argc, char * const  argv[])
 		fprintf(stderr,"CudaMalloc d_Extension fail",cudaStatus);
 		exit(1);
 	}
-	/*else
-	{
-		memset(d_Extension,0,nBytesOfArrayExtension);
-	}*/
 
-	int numberOfElementd_O=sizeOfarrayO;
+
+	int numberOfElementd_O=sizeOfarrayO;	
+	cudaStatus = getAndStoreExtension(d_Extension,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Le,Lv);
+	cudaStatus=cudaDeviceSynchronize();
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaDeviceSynchronize getAndStoreExtension failed",cudaStatus);
+		exit(1);
+	}
+
+
+	/* //05-May-2017: Khởi tạo mảng V với giá trị của các phần tử ban đầu là 0, để lưu trữ những mở rộng hợp lệ.
+	1. Mở rộng hợp lệ là mở rộng có Lj<=Li
+	2. Mảng V có số lượng phần tử bằng với số lượng phần tử của mảng d_Extension
+	3. Tạo kernel với số lượng threads bằng với số lượng phần tử của d_Extension
+		Mỗi thread sẽ xử lý một phần tử trong d_Extension. Kiểm tra nếu Lj<=Li thì gán V tại vị trí tương ứng là 1
+	*/
+
+	int numberElementd_Extension = numberOfElementd_N;
+	int *V;
+	size_t nBytesV= numberElementd_Extension*sizeof(int);
+
+	cudaStatus=cudaMalloc((int**)&V,nBytesV);
+	if (cudaStatus!= cudaSuccess){
+		fprintf(stderr,"cudaMalloc array V failed",cudaStatus);
+		exit(1);
+	}
+	else
+	{
+		cudaMemset(V,0,nBytesV);
+	}
+
+	cudaStatus=validEdge(d_Extension,V,numberElementd_Extension);
+	cudaStatus=cudaDeviceSynchronize();
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaDeviceSynchronize validEdge failed",cudaStatus);
+		exit(1);
+	}
+
+
+
 	
 
-	getAndStoreExtension(d_Extension,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Le,Lv);
 
 
 
@@ -324,8 +359,10 @@ labelError:
 	cudaFree(d_O);
 	cudaFree(d_LO);
 	cudaFree(d_N);
-	cudaFree(d_LN);
+	cudaFree(d_LN);	
 	cudaFree(d_singlePattern);
+	cudaFree(d_Extension);
+	cudaFree(V);
 	cudaDeviceReset();	
 
 	fout.close();

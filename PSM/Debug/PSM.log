@@ -1,13 +1,19 @@
-﻿Build started 5/4/2017 1:06:42 PM.
+﻿Build started 5/6/2017 2:19:05 PM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getAndStoreExtension.cu 
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu 
        CudaBuild:
-         Compiling CUDA source file getAndStoreExtension.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpc9465d997ef94752bdc593770133a1c8.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getAndStoreExtension.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getAndStoreExtension.cu"
+         Compiling CUDA source file validEdge.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp2b8ba16c4fa04076a0fc5323079e6b0a.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\validEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu"
          
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getAndStoreExtension.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getAndStoreExtension.cu" 
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\validEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu" 
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
        Link:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\countNumberOfEdgeLabel.cu.obj
@@ -25,6 +31,7 @@
          Debug\kernelReduce.cu.obj
          Debug\markInvalidVertex.cu.obj
          Debug\scan_largearray_kernel.cu.obj
+         Debug\validEdge.cu.obj
          Debug\checkArray.obj
          Debug\checkDataBetweenHostAndGPU.obj
          Debug\dfs.obj
@@ -47,4 +54,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:07.45
+Time Elapsed 00:00:08.12
