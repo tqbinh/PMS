@@ -6,13 +6,6 @@
 
 */
 
-__global__ void kernelPrintFloat(float* A,int n){
-	int i=blockIdx.x*blockDim.x + threadIdx.x;
-	if (i<n){
-		printf("[%d]:%.0f ;",i,A[i]);
-	}
-
-}
 
 
 extern "C" inline cudaError_t extractUniqueEdge(int *d_O,int *d_LO,unsigned int sizeOfArrayO,int *d_N,int *d_LN, unsigned int sizeOfArrayN,

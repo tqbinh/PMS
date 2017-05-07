@@ -157,6 +157,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
     <CudaCompile Include="getAndStoreExtension.cu" />
+    <CudaCompile Include="getLastElement.cu" />
     <CudaCompile Include="kernel.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
     </CudaCompile>
@@ -169,6 +170,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernelPrintf.cu" />
     <CudaCompile Include="kernelReduce.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
+    <CudaCompile Include="scanV.cu" />
     <CudaCompile Include="scan_largearray_kernel.cu" />
     <CudaCompile Include="validEdge.cu" />
   </ItemGroup>
@@ -196,6 +198,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="ExtensionStructure.h" />
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="getAndStoreExtension.h" />
+    <ClInclude Include="getLastElement.h" />
     <ClInclude Include="gspan.h" />
     <ClInclude Include="helper_cuda.h" />
     <ClInclude Include="helper_string.h" />
@@ -207,6 +210,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="kernelPrintf.h" />
     <ClInclude Include="kernelReduce.h" />
     <ClInclude Include="markInvalidVertex.h" />
+    <ClInclude Include="scanV.h" />
     <ClInclude Include="scan_largearray_kernel.h" />
     <ClInclude Include="sumUntilReachZero.h" />
     <ClInclude Include="validEdge.h" />

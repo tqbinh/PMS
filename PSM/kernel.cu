@@ -20,6 +20,9 @@
 #include "ExtensionStructure.h"
 #include "getAndStoreExtension.h"
 #include "validEdge.h"
+#include "scanV.h"
+#include "getLastElement.h"
+
 using namespace std;
 
 //declare prototype
@@ -314,7 +317,7 @@ int main(int argc, char * const  argv[])
 	cudaStatus=cudaDeviceSynchronize();
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"cudaDeviceSynchronize getAndStoreExtension failed",cudaStatus);
-		exit(1);
+		return 1;
 	}
 
 
@@ -343,15 +346,35 @@ int main(int argc, char * const  argv[])
 	cudaStatus=cudaDeviceSynchronize();
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"cudaDeviceSynchronize validEdge failed",cudaStatus);
-		exit(1);
+		return 1;
 	}
 
+	/* //07-May-2017: Extract unique Edge from d_Extension
+	1. Tiếp theo, chúng ta exclusive scan mảng V để thu được index chỉ vị trí của các valid edge trong d_Extension.
+	2. Input data: mảng V
+	3. Output data: mảng index
+	Mảng Index có số lượng phần tử bằng với mảng V
+	*/
 
+	int* index;
+	cudaStatus=cudaMalloc((int**)&index,numberElementd_Extension*sizeof(int));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"Cuda Malloc failed",cudaStatus);
+		return 1;
+	}	
 
-	
+	cudaStatus = scanV(V,numberElementd_Extension,index);
+	cudaStatus=cudaDeviceSynchronize();
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaDeviceSynchronize getAndStoreExtension failed",cudaStatus);
+		return 1;
+	}
 
+	//Khởi tạo một mảng d_Unique có kích thước bằng với kích thước của giá trị của phần tử index cuối cùng vừa mới scan được.
+	int numberElementd_UniqueExtension=0;
+	getLastElement(index,numberElementd_Extension,numberElementd_UniqueExtension);
 
-
+	printf("\n\nnumberElementd_UniqueExtension:%d",numberElementd_UniqueExtension);
 
 	//gspan.graphMining(arrayO,arrayLO,arrayN,arrayLN,minsup);
 labelError:

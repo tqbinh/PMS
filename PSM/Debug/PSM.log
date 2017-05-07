@@ -1,25 +1,162 @@
-﻿Build started 5/6/2017 2:19:05 PM.
+﻿Build started 5/7/2017 2:31:55 PM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu 
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getLastElement.cu 
+       AddCudaCompileDeps:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu 
        CudaBuild:
-         Compiling CUDA source file validEdge.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp2b8ba16c4fa04076a0fc5323079e6b0a.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\validEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu"
+         Compiling CUDA source file getLastElement.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpd860aa9efcae41f7b86a4c5ef4f9d5d4.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getLastElement.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getLastElement.cu"
          
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\validEdge.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\validEdge.cu" 
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getLastElement.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getLastElement.cu" 
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(7): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getLastElement.cu(35): warning : statement is unreachable
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : extern inline function "kernelPrintf" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(7): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getLastElement.cu(35): warning : statement is unreachable
+       CudaBuild:
+         Compiling CUDA source file kernel.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp43f3e4eccc58459a869e0c0e36f32cf6.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu"
+         
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu" 
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(5): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(5): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\markInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkArray.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\access_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\sumUntilReachZero.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(141): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(147): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(152): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(157): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(171): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(177): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(183): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(191): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(6): warning : extern inline function "displayArray" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(9): warning : extern inline function "checkDataBetweenHostAndGPU" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(9): warning : extern inline function "countNumberOfLabelVetex" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(10): warning : extern inline function "countNumberOfEdgeLabel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(11): warning : extern inline function "extractUniqueEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h(11): warning : extern inline function "getAndStoreExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\validEdge.h(9): warning : extern inline function "validEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(7): warning : extern inline function "getLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(5): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(5): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\markInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkArray.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\access_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(6): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\sumUntilReachZero.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(141): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(147): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(152): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(157): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(171): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(177): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(183): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(191): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(6): warning : extern inline function "displayArray" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(9): warning : extern inline function "checkDataBetweenHostAndGPU" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(9): warning : extern inline function "countNumberOfLabelVetex" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(10): warning : extern inline function "countNumberOfEdgeLabel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(11): warning : extern inline function "extractUniqueEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h(11): warning : extern inline function "getAndStoreExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\validEdge.h(9): warning : extern inline function "validEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(7): warning : extern inline function "getLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(142): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(143): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380): warning C4533: initialization of 'grid' is skipped by 'goto labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380): warning C4533: initialization of 'block' is skipped by 'goto labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(195) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(194) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(380) : see declaration of 'labelError'
        Link:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\countNumberOfEdgeLabel.cu.obj
          Debug\countNumberOfLabelVetex.cu.obj
          Debug\extractUniqueEdge.cu.obj
          Debug\getAndStoreExtension.cu.obj
+         Debug\getLastElement.cu.obj
          Debug\kernel.cu.obj
          Debug\kernelaccess_d_LO_from_idx_of_d_O.cu.obj
          Debug\kernelCastingInt2Float.cu.obj
@@ -30,6 +167,7 @@
          Debug\kernelPrintf.cu.obj
          Debug\kernelReduce.cu.obj
          Debug\markInvalidVertex.cu.obj
+         Debug\scanV.cu.obj
          Debug\scan_largearray_kernel.cu.obj
          Debug\validEdge.cu.obj
          Debug\checkArray.obj
@@ -54,4 +192,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:08.12
+Time Elapsed 00:00:13.65

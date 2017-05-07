@@ -3,7 +3,7 @@
 
 __global__ void	kernelValidEdge(Extension *d_Extension,int *V,unsigned int numberElementd_Extension){
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
-	if(i<numberElementd_Extension){
+	if(i<numberElementd_Extension){	
 		if(d_Extension[i].li<=d_Extension[i].lj){
 			V[i]=1;
 		}
@@ -27,8 +27,8 @@ cudaError_t validEdge(Extension *d_Extension,int *V,unsigned int numberElementd_
 		goto labelError;
 	}
 	//
-	//printf("\nV array: ");
-	//kernelPrintf<<<grid,block>>>(V,numberElementd_Extension);
+	printf("\nV array: ");
+	kernelPrintf<<<grid,block>>>(V,numberElementd_Extension);
 
 labelError:
 
