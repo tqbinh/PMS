@@ -329,6 +329,7 @@ C:\Program Files\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\ExtensionStructure.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\vector
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\set
@@ -380,7 +381,6 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions_decls.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\disseration\pms\psm\ExtensionStructure.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
@@ -392,5 +392,8 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scan_largearray_kernel.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidExtension.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h

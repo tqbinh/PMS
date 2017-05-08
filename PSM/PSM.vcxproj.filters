@@ -20,6 +20,7 @@
     <CudaCompile Include="validEdge.cu" />
     <CudaCompile Include="scanV.cu" />
     <CudaCompile Include="getLastElement.cu" />
+    <CudaCompile Include="getValidExtension.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -61,5 +62,6 @@
     <ClInclude Include="validEdge.h" />
     <ClInclude Include="scanV.h" />
     <ClInclude Include="getLastElement.h" />
+    <ClInclude Include="getValidExtension.h" />
   </ItemGroup>
 </Project>

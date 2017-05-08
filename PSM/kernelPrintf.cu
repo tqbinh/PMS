@@ -12,6 +12,26 @@ __global__ void kernelPrintf(int *O,int sizeO){
 }
 
 
+cudaError_t printfInt(int* d_array,int noElem_d_Array){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((noElem_d_Array+block.x-1)/block.x);
+
+	kernelPrintf<<<grid,block>>>(d_array,noElem_d_Array);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintExtention failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
+}
+
+
 
 __global__ void kernelPrintFloat(float* A,int n){
 	int i=blockIdx.x*blockDim.x + threadIdx.x;
@@ -19,4 +39,53 @@ __global__ void kernelPrintFloat(float* A,int n){
 		printf("[%d]:%.0f ;",i,A[i]);
 	}
 
+}
+
+cudaError_t printFloat(float* d_array,int numberElementOfArray){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((numberElementOfArray+block.x-1)/block.x);
+
+	kernelPrintFloat<<<grid,block>>>(d_array,numberElementOfArray);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintExtention failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
+}
+
+
+
+__global__ void kernelPrintExtention(Extension *d_Extension,unsigned int n){
+	int i=blockIdx.x*blockDim.x + threadIdx.x;
+	if (i<n){		
+		printf("\n[%d]: DFS code:(%d,%d,%d,%d,%d)  (vgi,vgj):(%d,%d)\n",i,d_Extension[i].vi,d_Extension[i].vj,d_Extension[i].li,d_Extension[i].lij,d_Extension[i].lj,d_Extension[i].vgi,d_Extension[i].vgj);
+	}
+
+}
+
+
+cudaError_t printfExtension(Extension *d_E,unsigned int noElem_d_E){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((noElem_d_E+block.x-1)/block.x);
+
+	kernelPrintExtention<<<grid,block>>>(d_E,noElem_d_E);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintExtention failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
 }

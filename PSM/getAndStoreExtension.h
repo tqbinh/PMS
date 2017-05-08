@@ -5,6 +5,7 @@
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include "ExtensionStructure.h"
+#include "kernelPrintf.h"
 
 
 

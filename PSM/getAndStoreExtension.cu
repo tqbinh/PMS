@@ -5,15 +5,6 @@
 #include "getAndStoreExtension.h"
 
 
-__global__ void kernelPrintExtention(Extension *d_Extension,unsigned int n){
-	int i=blockIdx.x*blockDim.x + threadIdx.x;
-	if (i<n){
-		__syncthreads();
-		printf("\n[%d]: DFS code:(%d,%d,%d,%d,%d)  (vgi,vgj):(%d,%d)\n",i,d_Extension[i].vi,d_Extension[i].vj,d_Extension[i].li,d_Extension[i].lij,d_Extension[i].lj,d_Extension[i].vgi,d_Extension[i].vgj);
-	}
-
-}
-
 
 __global__ void kernelGetAndStoreExtension(int *d_O,int *d_LO,unsigned int numberOfElementd_O,int *d_N,int *d_LN,unsigned int numberOfElementd_N,Extension *d_Extension){
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
@@ -69,12 +60,12 @@ cudaError_t getAndStoreExtension(Extension *d_Extension,int *d_O,int *d_LO,unsig
 	}
 
 	
-	kernelPrintExtention<<<((numberOfElementd_N+block.x-1)/block.x),block>>>(d_Extension,numberOfElementd_N); //Số lượng phần tử của d_Extension bằng số lượng phần tử của d_N nhưng chúng có kích thước khác nhau vì mỗi phần tử của d_Extension là một cấu trúc trong khi d_N là một số int.
-	cudaStatus=cudaDeviceSynchronize();
-	if (cudaStatus!=cudaSuccess){
-		fprintf(stderr,"cudaDeviceSynchronize kernelPrintExtention failed",cudaStatus);
-		goto labelError;
-	}
+	//kernelPrintExtention<<<((numberOfElementd_N+block.x-1)/block.x),block>>>(d_Extension,numberOfElementd_N); //Số lượng phần tử của d_Extension bằng số lượng phần tử của d_N nhưng chúng có kích thước khác nhau vì mỗi phần tử của d_Extension là một cấu trúc trong khi d_N là một số int.
+	//cudaStatus=cudaDeviceSynchronize();
+	//if (cudaStatus!=cudaSuccess){
+	//	fprintf(stderr,"cudaDeviceSynchronize kernelPrintExtention failed",cudaStatus);
+	//	goto labelError;
+	//}
 
 labelError:
 

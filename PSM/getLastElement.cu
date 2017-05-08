@@ -1,14 +1,20 @@
 #include "getLastElement.h"
 #include "kernelPrintf.h"
 
-__global__ void kernelGetLastElement(int *Arr,unsigned int noArr,int *value){
-	int i = blockIdx.x*blockDim.x + threadIdx.x;
-	if (i<noArr){
-		if(i==noArr-1){
-			value[0] = Arr[i];			
-		}
-	}
+//__global__ void kernelGetLastElement(int *Arr,unsigned int noArr,int *value){
+//	int i = blockIdx.x*blockDim.x + threadIdx.x;
+//	if (i<noArr){
+//		if(i==noArr-1){
+//			value[0] = Arr[i];			
+//		}
+//	}
+//}
+
+__global__ void kernelGetLastElement2(int *Arr,unsigned int noArr, int *value){
+	value[0]=Arr[noArr-1];
+	//printf("\n Value:%d",value[0]);
 }
+
 
 cudaError_t getLastElement(int *d_index,unsigned int numberElementd_index,int &numberElementd_UniqueExtension){
 	cudaError_t cudaStatus;
@@ -18,7 +24,8 @@ cudaError_t getLastElement(int *d_index,unsigned int numberElementd_index,int &n
 	int *value;
 	cudaMalloc((int**)&value,1*sizeof(int));
 	
-	kernelGetLastElement<<<grid,block>>>(d_index,numberElementd_index,value);
+	//kernelGetLastElement<<<grid,block>>>(d_index,numberElementd_index,value);
+	kernelGetLastElement2<<<1,1>>>(d_index,numberElementd_index,value);
 	cudaDeviceSynchronize();
 	cudaStatus= cudaGetLastError();
 	if(cudaStatus != cudaSuccess){
@@ -27,11 +34,12 @@ cudaError_t getLastElement(int *d_index,unsigned int numberElementd_index,int &n
 	}
 	
 	cudaMemcpy(&numberElementd_UniqueExtension,value,1*sizeof(int),cudaMemcpyDeviceToHost);
-	printf("\n\nnumberElementd_UniqueExtension:%d",numberElementd_UniqueExtension);
+	//printf("\n\nnumberElementd_UniqueExtension:%d",numberElementd_UniqueExtension);
 	
 
 Error:
-	return cudaStatus;
 	cudaFree(value);
-	cudaFree(d_index);
+	//cudaFree(d_index);
+
+	return cudaStatus;	
 }

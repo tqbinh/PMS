@@ -35,7 +35,8 @@ cudaError_t scanV(int *V,unsigned int numberElementV,int *index){
 		goto Error;
 	}
 
-	
+	printf("\n Array VLoat: ");
+	kernelPrintFloat<<<grid,block>>>(VFloat,numberElementV);
 	
 	preallocBlockSums(numberElementV);
 	prescanArray(indexFloat,VFloat,numberElementV);
@@ -47,8 +48,7 @@ cudaError_t scanV(int *V,unsigned int numberElementV,int *index){
 		goto Error;
 	}
 
-	printf("\n Scan Result float: ");
-	kernelPrintFloat<<<grid,block>>>(VFloat,numberElementV);
+	
 
 	kernelCastingFloat2Int<<<grid,block>>>(index,indexFloat,numberElementV);
 
@@ -68,13 +68,14 @@ cudaError_t scanV(int *V,unsigned int numberElementV,int *index){
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"cudaDeviceSynchronize kernelPrintf failed",cudaStatus);
 		goto Error;
-	}
+	}*/
 
-*/
+
 
 Error:
-	cudaFree(VFloat);
-	cudaFree(indexFloat);
-
+	//cudaFree(VFloat);
+	//cudaFree(indexFloat);
+	//cudaFree(index);
+	//cudaFree(V);
 	return cudaStatus;
 }

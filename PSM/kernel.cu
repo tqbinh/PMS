@@ -22,8 +22,20 @@
 #include "validEdge.h"
 #include "scanV.h"
 #include "getLastElement.h"
+#include "getValidExtension.h"
 
 using namespace std;
+
+#define CHECK(call) \
+{ \
+const cudaError_t error = call; \
+if (error != cudaSuccess) \
+{ \
+printf("Error: %s:%d, ", __FILE__, __LINE__); \
+printf("code:%d, reason: %s\n", error, cudaGetErrorString(error)); \
+exit(1); \
+} \
+}
 
 //declare prototype
 //void displayArray(int*,const unsigned int);
@@ -260,29 +272,30 @@ int main(int argc, char * const  argv[])
 	6. Cấp phát numberOfPattern threads để cập nhật mảng F tương ứng với giá trị của kết quả scan trên B
 	7. Reduction F để có độ support của từng pattern.
 	*/
-	int *d_singlePattern=NULL;
-	//size_t nBytesd_singlePattern = Lv*Le*sizeof(int);
-	//Kích thước của mảng d_singlePattern là =[Lv!/(k!(Lv-k)!+n]*Le = [((Lv-2+1)*(Lv-2+2))/2 + Lv]*Le = [((Lv-1)*Lv)/2 + Lv]*Le
-	//Trong trường hợp này k luôn = 2 vì cạnh có 2 đầu nhãn đỉnh lấy từ tập nhãn đỉnh phân biệt. 
-	//Le là tập nhãn cạnh phân biệt trong CSDL
-	//Vậy chúng ta có công thức cho kích thước của d_singlePattern như sau:
-	unsigned int numberOfElementd_singlePattern=(((Lv-1)*Lv)/2 +Lv)*Le;
-	size_t nBytesd_singlePattern = numberOfElementd_singlePattern*sizeof(int);
-	cudaStatus=cudaMalloc((int**)&d_singlePattern,nBytesd_singlePattern);
-	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"cudaMalloc d_singlePattern failed", cudaStatus);
-		return 1;
-	}
-	else
-	{
-		cudaMemset(d_singlePattern,0,nBytesd_singlePattern);
-	}
-	
-	cudaStatus = extractUniqueEdge(d_O,d_LO,sizeOfarrayO,d_N,d_LN,sizeOfArrayN,d_singlePattern,numberOfElementd_singlePattern,Lv,Le);
-	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"call extractUniqueEdge failed",cudaStatus);
-		return 1;
-	}
+
+	//int *d_singlePattern=NULL;
+	////size_t nBytesd_singlePattern = Lv*Le*sizeof(int);
+	////Kích thước của mảng d_singlePattern là =[Lv!/(k!(Lv-k)!+n]*Le = [((Lv-2+1)*(Lv-2+2))/2 + Lv]*Le = [((Lv-1)*Lv)/2 + Lv]*Le
+	////Trong trường hợp này k luôn = 2 vì cạnh có 2 đầu nhãn đỉnh lấy từ tập nhãn đỉnh phân biệt. 
+	////Le là tập nhãn cạnh phân biệt trong CSDL
+	////Vậy chúng ta có công thức cho kích thước của d_singlePattern như sau:
+	//unsigned int numberOfElementd_singlePattern=(((Lv-1)*Lv)/2 +Lv)*Le;
+	//size_t nBytesd_singlePattern = numberOfElementd_singlePattern*sizeof(int);
+	//cudaStatus=cudaMalloc((int**)&d_singlePattern,nBytesd_singlePattern);
+	//if(cudaStatus!=cudaSuccess){
+	//	fprintf(stderr,"cudaMalloc d_singlePattern failed", cudaStatus);
+	//	return 1;
+	//}
+	//else
+	//{
+	//	cudaMemset(d_singlePattern,0,nBytesd_singlePattern);
+	//}
+	//
+	//cudaStatus = extractUniqueEdge(d_O,d_LO,sizeOfarrayO,d_N,d_LN,sizeOfArrayN,d_singlePattern,numberOfElementd_singlePattern,Lv,Le);
+	//if(cudaStatus!=cudaSuccess){
+	//	fprintf(stderr,"call extractUniqueEdge failed",cudaStatus);
+	//	return 1;
+	//}
 
 
 	//*******Nhãn truy xuất nhãn LO theo index từ d_N; tên hàm đặt bị nhầm
@@ -320,6 +333,7 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 
+	CHECK(printfExtension(d_Extension,numberOfElementd_N));
 
 	/* //05-May-2017: Khởi tạo mảng V với giá trị của các phần tử ban đầu là 0, để lưu trữ những mở rộng hợp lệ.
 	1. Mở rộng hợp lệ là mở rộng có Lj<=Li
@@ -370,22 +384,87 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 
-	//Khởi tạo một mảng d_Unique có kích thước bằng với kích thước của giá trị của phần tử index cuối cùng vừa mới scan được.
-	int numberElementd_UniqueExtension=0;
-	getLastElement(index,numberElementd_Extension,numberElementd_UniqueExtension);
+	printf("\n Scan Result index: ");
+	kernelPrintf<<<grid,block>>>(index,numberElementd_Extension);
 
-	printf("\n\nnumberElementd_UniqueExtension:%d",numberElementd_UniqueExtension);
+	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaDeviceSynchronize kernelPrintf failed",cudaStatus);
+		exit(1);
+	}
 
-	//gspan.graphMining(arrayO,arrayLO,arrayN,arrayLN,minsup);
+/*	//Khởi tạo một mảng d_Unique có kích thước bằng với kích thước của giá trị của phần tử index cuối cùng vừa mới scan được.
+	1. Hàm getLastElement sẽ trả về giá trị của phần tử cuối của mảng index
+	2. Viết hàm để trích và lưu trữ các mở rộng hợp lệ
+		a. khởi tạo mảng có kích thước bằng với kích thước của phần tử cuối của mảng index
+		b. Rút trích các mở rộng hợp lệ từ d_Extension tương ứng tại vị trí V=1 vào index tương ứng.
+*/
+	//1. Hàm getLastElement
+	int noElem_d_ValidExtension=0;
+	cudaStatus=getLastElement(index,numberElementd_Extension,noElem_d_ValidExtension);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"getLastElement failed",cudaStatus);
+		return 1;
+	}
+	noElem_d_ValidExtension++;
+	//printf("\n\nnumberElementd_UniqueExtension:%d",noElem_d_ValidExtension);
+
+	/* //08-May-2017: getValidExtension */
+	//2.Hàm extractValidExtension: Trích và lưu trữ các mở rộng hợp lệ
+	//2.1. Cấp phát bộ nhớ cho d_ValidExtension
+	Extension *d_ValidExtension;
+	cudaStatus=cudaMalloc((Extension**)&d_ValidExtension,noElem_d_ValidExtension*sizeof(Extension));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudamalloc failed",cudaStatus);
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_ValidExtension,0,noElem_d_ValidExtension*sizeof(Extension));
+	}
+
+	
+	cudaDeviceSynchronize();
+	
+	cudaStatus=getValidExtension(d_Extension,V,index,numberElementd_Extension,d_ValidExtension);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"getValidExtension failed",cudaStatus);
+		return 1;
+	}
+
+	//printf("\nNumber Element of d_ValidExtension:%d",noElem_d_ValidExtension);
+	//CHECK(printfExtension(d_ValidExtension,noElem_d_ValidExtension));
+
+	/* //Hàm getUniqueExtension: Trích tra các cạnh duy nhất dựa vào nhãn Li, Lj và Lij của edge extension
+	1. Tạo mảng d_UniqueExtension với số lượng phần tử là Lv*Le (số lượng mở rộng hợp lệ có thể có)
+	2. Input : là mảng d_ValidExtension và noElem_d_ValidExtension số lượng phần tử của d_ValidExtension
+		Output: d_UniqueExtension và noElem_d_UniqueExtension là kích thước của nó
+	*/
+	unsigned int noElem_allPossibleExtension=Le*Lv;
+	int *d_allPossibleExtension;
+
+	cudaStatus=cudaMalloc((int**)&d_allPossibleExtension,noElem_allPossibleExtension*sizeof(int));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaMalloc d_allPossibleExtension failed",cudaStatus);
+		return 1;
+	}
+
+	//unsigned int noElem_d_UniqueExtension=0;
+
+	//cudaStatus=getUniqueExtension(d_ValidExtension,noElem_d_ValidExtension,d_UniqueExtension,noElem_d_UniqueExtension);
+	
+
 labelError:
 	//giải phóng vùng nhớ của dữ liệu
 	cudaFree(d_O);
 	cudaFree(d_LO);
 	cudaFree(d_N);
 	cudaFree(d_LN);	
-	cudaFree(d_singlePattern);
+//	cudaFree(d_singlePattern);
 	cudaFree(d_Extension);
 	cudaFree(V);
+	cudaFree(d_ValidExtension);	
 	cudaDeviceReset();	
 
 	fout.close();
