@@ -7,4 +7,4 @@
 #include "castingIntToFloat.h"
 using namespace std;
 
-extern "C" inline cudaError_t scanV(int*,unsigned int,int*);
+extern "C" inline cudaError_t scanV(int *inputArray,unsigned int numberElementOfInputArray,int *outputArray);

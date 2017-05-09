@@ -12,7 +12,7 @@ __global__ void kernelPrintf(int *O,int sizeO){
 }
 
 
-cudaError_t printfInt(int* d_array,int noElem_d_Array){
+cudaError_t printInt(int* d_array,int noElem_d_Array){
 	cudaError cudaStatus;
 
 	dim3 block(1024);

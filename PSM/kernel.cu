@@ -23,7 +23,8 @@
 #include "scanV.h"
 #include "getLastElement.h"
 #include "getValidExtension.h"
-
+#include "getUniqueExtension.h"
+#include "calcLabelAndStoreUniqueExtension.h"
 using namespace std;
 
 #define CHECK(call) \
@@ -437,11 +438,11 @@ int main(int argc, char * const  argv[])
 	//CHECK(printfExtension(d_ValidExtension,noElem_d_ValidExtension));
 
 	/* //Hàm getUniqueExtension: Trích tra các cạnh duy nhất dựa vào nhãn Li, Lj và Lij của edge extension
-	1. Tạo mảng d_UniqueExtension với số lượng phần tử là Lv*Le (số lượng mở rộng hợp lệ có thể có)
-	2. Input : là mảng d_ValidExtension và noElem_d_ValidExtension số lượng phần tử của d_ValidExtension
-		Output: d_UniqueExtension và noElem_d_UniqueExtension là kích thước của nó
+	1. Tạo mảng d_allPossibleExtension có kích thước là noElem_allPossibleExtension=Le*Lv*Lv để lưu trữ 
+		tất cả các mở rộng có thể có của tất cả các đỉnh. Các mở rộng có thể có từ 1 đỉnh trên righ most path có kích thước là Le*Lv.
+	2. Viết hàm getUniqueExtension để gán giá trị là 1 tại vị trí Li Lj tương ứng của extension.
 	*/
-	unsigned int noElem_allPossibleExtension=Le*Lv;
+	unsigned int noElem_allPossibleExtension=Le*Lv*Lv;
 	int *d_allPossibleExtension;
 
 	cudaStatus=cudaMalloc((int**)&d_allPossibleExtension,noElem_allPossibleExtension*sizeof(int));
@@ -450,10 +451,76 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 
-	//unsigned int noElem_d_UniqueExtension=0;
-
-	//cudaStatus=getUniqueExtension(d_ValidExtension,noElem_d_ValidExtension,d_UniqueExtension,noElem_d_UniqueExtension);
+	/* //09-May-2017 */
 	
+	cudaStatus=getUniqueExtension(d_ValidExtension,noElem_d_ValidExtension,Lv,Le,d_allPossibleExtension);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"getUniqueExtension failed",cudaStatus);
+		return 1;
+	}
+	printf("\n\nLe:%d Lv:%d",Le,Lv);
+	printf("\nd_allPossibleExtension: ");
+	printInt(d_allPossibleExtension,noElem_allPossibleExtension);
+	
+	/* //Tiếp theo chúng ta exclusive scan mảng d_allPossibleExtension để thu được index phục vụ cho việc
+		lưu trữ các unique extension.
+	1. Chúng ta khởi tạo một mảng d_allPossibleExtensionScanResult có kích thước bằng với kích thước của d_allPossibleExtension
+		đồng thời khởi tạo giá trị cho các phần tử của nó là 0.
+	2. Sau khi thu được kết quả scan, chúng ta tạo một mảng Extension* d_UniqueExtension có kích thước bằng với kích thước của giá trị phần tử cuối cùng
+		trong mảng d_allPossibleExtensionScanResult cộng với 1.
+	3. Dựa vào giá trị index trong mảng d_allPossibleExtensionScanResult để suy ra các nhãn Li, Lj và Lij của Extension và lưu trữ chúng vào d_UniqueExtension
+	*/
+	
+	int *d_allPossibleExtensionScanResult;
+	cudaStatus=cudaMalloc((int**)&d_allPossibleExtensionScanResult,noElem_allPossibleExtension*sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaMalloc d_allPossibleExtensionScanResult failed");
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_allPossibleExtensionScanResult,0,noElem_allPossibleExtension*sizeof(int));
+	}
+
+	cudaStatus=scanV(d_allPossibleExtension,noElem_allPossibleExtension,d_allPossibleExtensionScanResult);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\nscanV function failed",cudaStatus);
+		return 1;
+	}
+
+	printf("\n\nd_allPossibleExtensionScanResult:\n");
+	CHECK(printInt(d_allPossibleExtensionScanResult,noElem_allPossibleExtension));
+
+	//Lấy giá trị của phần tử cuối cùng trong mảng d_allPossibleExtensionScanResult
+	int noElem_d_UniqueExtension=0;
+
+	cudaStatus=getLastElement(d_allPossibleExtensionScanResult,noElem_allPossibleExtension,noElem_d_UniqueExtension);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"getLastElement failed",cudaStatus);
+		return 1;
+	}
+	//noElem_d_UniqueExtension++;
+	//printf("\n\nnoElem_d_UniqueExtension:%d",noElem_d_UniqueExtension);
+	Extension *d_UniqueExtension;
+	cudaStatus=cudaMalloc((Extension**)&d_UniqueExtension,noElem_d_UniqueExtension*sizeof(Extension));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaMalloc d_UniqueExtension failed",cudaStatus);
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_UniqueExtension,0,noElem_d_UniqueExtension*sizeof(Extension));
+	}
+
+
+	cudaStatus=calcLabelAndStoreUniqueExtension(d_allPossibleExtension,d_allPossibleExtensionScanResult,noElem_allPossibleExtension,d_UniqueExtension,noElem_d_UniqueExtension,Le,Lv);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n\ncalcLabelAndStoreUniqueExtension function failed",cudaStatus);
+		return 1;
+	}
+
+	printf("\n\nUnique Extension:");
+	printfExtension(d_UniqueExtension,noElem_d_UniqueExtension);
 
 labelError:
 	//giải phóng vùng nhớ của dữ liệu
@@ -465,6 +532,7 @@ labelError:
 	cudaFree(d_Extension);
 	cudaFree(V);
 	cudaFree(d_ValidExtension);	
+	cudaFree(d_UniqueExtension);
 	cudaDeviceReset();	
 
 	fout.close();

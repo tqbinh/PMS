@@ -153,11 +153,13 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="access_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="calcLabelAndStoreUniqueExtension.cu" />
     <CudaCompile Include="countNumberOfEdgeLabel.cu" />
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
     <CudaCompile Include="getAndStoreExtension.cu" />
     <CudaCompile Include="getLastElement.cu" />
+    <CudaCompile Include="getUniqueExtension.cu" />
     <CudaCompile Include="getValidExtension.cu" />
     <CudaCompile Include="kernel.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
@@ -189,6 +191,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="calcLabelAndStoreUniqueExtension.h" />
     <ClInclude Include="castingIntToFloat.h" />
     <ClInclude Include="checkArray.h" />
     <ClInclude Include="checkDataBetweenHostAndGPU.h" />
@@ -200,6 +203,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="getAndStoreExtension.h" />
     <ClInclude Include="getLastElement.h" />
+    <ClInclude Include="getUniqueExtension.h" />
     <ClInclude Include="getValidExtension.h" />
     <ClInclude Include="gspan.h" />
     <ClInclude Include="helper_cuda.h" />
