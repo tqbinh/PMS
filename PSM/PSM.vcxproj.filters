@@ -23,6 +23,8 @@
     <CudaCompile Include="getValidExtension.cu" />
     <CudaCompile Include="getUniqueExtension.cu" />
     <CudaCompile Include="calcLabelAndStoreUniqueExtension.cu" />
+    <CudaCompile Include="calcBoundary.cu" />
+    <CudaCompile Include="calcSupport.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -67,5 +69,7 @@
     <ClInclude Include="getValidExtension.h" />
     <ClInclude Include="getUniqueExtension.h" />
     <ClInclude Include="calcLabelAndStoreUniqueExtension.h" />
+    <ClInclude Include="calcBoundary.h" />
+    <ClInclude Include="calcSupport.h" />
   </ItemGroup>
 </Project>

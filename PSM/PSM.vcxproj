@@ -153,7 +153,9 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="access_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="calcBoundary.cu" />
     <CudaCompile Include="calcLabelAndStoreUniqueExtension.cu" />
+    <CudaCompile Include="calcSupport.cu" />
     <CudaCompile Include="countNumberOfEdgeLabel.cu" />
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
@@ -191,7 +193,9 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="calcBoundary.h" />
     <ClInclude Include="calcLabelAndStoreUniqueExtension.h" />
+    <ClInclude Include="calcSupport.h" />
     <ClInclude Include="castingIntToFloat.h" />
     <ClInclude Include="checkArray.h" />
     <ClInclude Include="checkDataBetweenHostAndGPU.h" />

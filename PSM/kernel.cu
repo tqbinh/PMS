@@ -25,6 +25,8 @@
 #include "getValidExtension.h"
 #include "getUniqueExtension.h"
 #include "calcLabelAndStoreUniqueExtension.h"
+#include "calcBoundary.h"
+#include "calcSupport.h"
 using namespace std;
 
 #define CHECK(call) \
@@ -61,6 +63,7 @@ int main(int argc, char * const  argv[])
 	char* fname;
 	//fname = "Klesscus";
 	fname = "Klessorigin";
+	//fname = "KlessoriginCust1";
 
 	gSpan gspan;	
 	ofstream fout("result.txt");
@@ -522,6 +525,88 @@ int main(int argc, char * const  argv[])
 	printf("\n\nUnique Extension:");
 	printfExtension(d_UniqueExtension,noElem_d_UniqueExtension);
 
+	/* //10-May-2017: Tính độ hỗ trợ
+	1. Trước tiên, chúng ta cấp phát một mảng d_B, mảng này có số lượng phần tử bằng với số lượng phần tử của d_ValidExtension
+		Mảng d_B dùng để đánh dấu vị trí biên (boundary: nơi tiếp giáp giữa 2 đồ thị)
+	2. Exclusive scan mảng d_B và lưu kế quả vào d_scanB_result
+	3. Khởi tạo mảng d_F có số lượng phần tử bằng với giá trị của phần tử cuối cùng của mảng d_scanB_Result cộng 1
+	4. Tính độ hỗ trợ của từng phần tử trong mảng d_UniqueExtension dựa vào d_ValidExtension và ScanB_Result
+	*/
+	
+	//1. Cấp phát một mảng d_B và gán các giá trị 0 cho mọi phần tử của d_B
+	unsigned int noElement_d_B=noElem_d_ValidExtension;
+	int* d_B;
+	cudaStatus=cudaMalloc((int**)&d_B,noElement_d_B*sizeof(int));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaMalloc d_B failed",cudaStatus);
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_B,0,noElement_d_B*sizeof(int));
+	}
+
+	cudaStatus=calcBoundary(d_ValidExtension,noElem_d_ValidExtension,d_B,Lv);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"calcBoundary function failed",cudaStatus);
+		return 1;
+	}
+
+	printf("\n\nd_B:\n");
+	printInt(d_B,noElement_d_B);
+
+	//2. Exclusive Scan mảng d_B
+	int* d_scanB_Result;
+	cudaStatus=cudaMalloc((int**)&d_scanB_Result,noElement_d_B*sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"cudaMalloc d_scanB_Result failed",cudaStatus);
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_scanB_Result,0,noElement_d_B*sizeof(int));
+	}
+
+	cudaStatus=scanV(d_B,noElement_d_B,d_scanB_Result);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\nscanB function failed",cudaStatus);
+		return 1;
+	}
+
+	printf("\n\nd_scanB_Result:\n");
+	printInt(d_scanB_Result,noElement_d_B);
+
+	//3. Tính độ hỗ trợ cho các mở rộng trong d_UniqueExtension
+	//3.1 Tạo mảng d_F có số lượng phần tử bằng với giá trị cuối cùng của mảng d_scanB_Result cộng 1 và gán giá trị 0 cho các phần tử.
+	int noElement_F=0;
+	cudaStatus=getLastElement(d_scanB_Result,noElement_d_B,noElement_F);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ngetLastElement function failed",cudaStatus);
+		return 1;
+	}
+
+	noElement_F++;
+	printf("\nnoElement_F:%d",noElement_F);
+
+	int *d_F;
+	cudaStatus=cudaMalloc((int**)&d_F,noElement_F*sizeof(int));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaMalloc d_F failed",cudaStatus);
+		return 1;
+	}
+	else
+	{
+		cudaMemset(d_F,0,noElement_F*sizeof(int));
+	}
+
+	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncalcSupport function failed",cudaStatus);
+		return 1;
+	}
+
+
+
 labelError:
 	//giải phóng vùng nhớ của dữ liệu
 	cudaFree(d_O);
@@ -533,6 +618,9 @@ labelError:
 	cudaFree(V);
 	cudaFree(d_ValidExtension);	
 	cudaFree(d_UniqueExtension);
+	cudaFree(d_B);
+
+
 	cudaDeviceReset();	
 
 	fout.close();
