@@ -1,10 +1,10 @@
 #include "calcSupport.h"
 #include "kernelPrintf.h"
 
-//__device__ int li,lij,lj;
 
 
-__global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,int *d_F){
+
+__global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F){
 	int i= blockIdx.x*blockDim.x + threadIdx.x;
 	if(i<noElem_d_ValidExtension){
 		if(d_ValidExtension[i].li==li && d_ValidExtension[i].lij==lij && d_ValidExtension[i].lj==lj){
@@ -16,7 +16,7 @@ __global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtens
 
 
 
-cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,int *d_F,unsigned int noElem_F){
+cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,unsigned int noElem_F){
 	cudaError_t cudaStatus;
 
 	dim3 block(1024);
@@ -44,7 +44,10 @@ cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_Uniqu
 		kernelCalcSupport<<<grid,block>>>(li,lij,lj,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F);
 		cudaDeviceSynchronize();
 		printf("\n[%d] d_F:",i);
-		printInt(d_F,noElem_F);
+		printFloat(d_F,noElem_F);
+		float support=0;
+		reduction(d_F,noElem_F,support);
+		printf("  Support:%.0f\n",support);
 		cudaMemset(d_F,0,noElem_F*sizeof(int));
 	}
 		

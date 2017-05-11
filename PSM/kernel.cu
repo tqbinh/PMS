@@ -588,15 +588,15 @@ int main(int argc, char * const  argv[])
 	noElement_F++;
 	printf("\nnoElement_F:%d",noElement_F);
 
-	int *d_F;
-	cudaStatus=cudaMalloc((int**)&d_F,noElement_F*sizeof(int));
+	float *d_F;
+	cudaStatus=cudaMalloc((int**)&d_F,noElement_F*sizeof(float));
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncudaMalloc d_F failed",cudaStatus);
 		return 1;
 	}
 	else
 	{
-		cudaMemset(d_F,0,noElement_F*sizeof(int));
+		cudaMemset(d_F,0,noElement_F*sizeof(float));
 	}
 
 	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F);

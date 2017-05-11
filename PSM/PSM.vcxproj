@@ -175,6 +175,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernelPrintf.cu" />
     <CudaCompile Include="kernelReduce.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
+    <CudaCompile Include="reduction.cu" />
     <CudaCompile Include="scanV.cu" />
     <CudaCompile Include="scan_largearray_kernel.cu" />
     <CudaCompile Include="validEdge.cu" />
@@ -220,6 +221,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="kernelPrintf.h" />
     <ClInclude Include="kernelReduce.h" />
     <ClInclude Include="markInvalidVertex.h" />
+    <ClInclude Include="reduction.h" />
     <ClInclude Include="scanV.h" />
     <ClInclude Include="scan_largearray_kernel.h" />
     <ClInclude Include="sumUntilReachZero.h" />
