@@ -26,6 +26,7 @@
     <CudaCompile Include="calcBoundary.cu" />
     <CudaCompile Include="calcSupport.cu" />
     <CudaCompile Include="reduction.cu" />
+    <CudaCompile Include="createForwardEmbedding.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -73,5 +74,7 @@
     <ClInclude Include="calcBoundary.h" />
     <ClInclude Include="calcSupport.h" />
     <ClInclude Include="reduction.h" />
+    <ClInclude Include="createForwardEmbedding.h" />
+    <ClInclude Include="Embedding.h" />
   </ItemGroup>
 </Project>

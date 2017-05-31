@@ -318,20 +318,20 @@ void gSpan::importDataToArray(int*& _arrayO,int*& _arrayLO,int*& _arrayN,int*& _
 	for(unsigned int id=0; id< TRANS.size(); ++id) //duyệt qua các đồ thị trong cơ sở dữ liệu đồ thị TRANS
 	{
 		//i=id*_maxOfVer;
-		Graph& g = TRANS[id]; //khai báo g làm một alias của TRANS[id], tức g là một đồ thị đang được xem xét. Mỗi vòng lặp thì g tương ứng với một đồ thị khác nhau trong cơ sở dữ liệu đồ thị TRANS.
-		int numberOfVer=0;
+		Graph& g = TRANS[id]; //khai báo g làm một alias của TRANS[id], tức g là một đồ thị đang được xem xét. 
+		int numberOfVer=0;	//Mỗi vòng lặp thì g tương ứng với một đồ thị khác nhau trong cơ sở dữ liệu đồ thị TRANS.
 		numberOfVer=g.vertex_size();
 		for(Graph::vertex_iterator v = g.begin(); v !=g.end(); ++v) //g.size() là số đỉnh trong đồ thị, ở đây có nghĩa là vòng lặp để duyệt qua tất cả các đỉnh trong đồ thị.
 		{		
-			for(Vertex::edge_iterator it = v->edge.begin();it!=v->edge.end();++it)
+			for(Vertex::edge_iterator it = v->edge.begin();it!=v->edge.end();++it)//Duyệt qua các cạnh của đỉnh
 			{
-				_arrayLO[i]=g[it->from].label;
-				_arrayN[j]=it->to+id*_maxOfVer; //ánh xạ đỉnh của graph database TRANS sang 
-				_arrayLN[j]=it->elabel;
-				j=j+1;				
-				++numberOfEdges;
+				_arrayLO[i]=g[it->from].label; //gán nhãn cho đỉnh From trong mảng LO, bị gán nhiều lần trong mỗi lần lặp cạnh không tốt
+				_arrayN[j]=it->to+id*_maxOfVer; //gán id cho đỉnh to trong mảng N
+				_arrayLN[j]=it->elabel; //gán nhãn cho cạnh
+				j=j+1;				//tăng chỉ số trong mảng N và mảng LN
+				++numberOfEdges; //số cạnh đã duyệt
 			}
-			if (i>=(_sizeOfarrayO-2)){
+			if (i>=(_sizeOfarrayO-1)){
 				return;
 			}else if(i==((numberOfVer-1)+(id*_maxOfVer))){				
 				_arrayO[((id+1)*_maxOfVer)]=numberOfEdges;

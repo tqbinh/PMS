@@ -158,6 +158,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="calcSupport.cu" />
     <CudaCompile Include="countNumberOfEdgeLabel.cu" />
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
+    <CudaCompile Include="createForwardEmbedding.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
     <CudaCompile Include="getAndStoreExtension.cu" />
     <CudaCompile Include="getLastElement.cu" />
@@ -202,7 +203,9 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="checkDataBetweenHostAndGPU.h" />
     <ClInclude Include="countNumberOfEdgeLabel.h" />
     <ClInclude Include="countNumberOfLabelVetex.h" />
+    <ClInclude Include="createForwardEmbedding.h" />
     <ClInclude Include="displayArray.h" />
+    <ClInclude Include="Embedding.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="ExtensionStructure.h" />
     <ClInclude Include="extractUniqueEdge.h" />

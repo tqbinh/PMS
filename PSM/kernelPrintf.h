@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include "cuda_runtime.h"
 #include "ExtensionStructure.h"
+#include "Embedding.h"
+
+extern "C" inline __global__ void kernelPrintEmbedding(struct_Embedding *d_Embedding,int noElem_Embedding);
+extern "C" inline cudaError_t printEmbedding(struct_Embedding *d_Embedding,int noElem_Embedding);
 
 extern "C" inline __global__ void kernelPrintf(int*,int sizeO);
 extern "C" inline cudaError_t printInt(int*,int sizeO);

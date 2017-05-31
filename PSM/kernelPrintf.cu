@@ -89,3 +89,30 @@ Error:
 	
 	return cudaStatus;
 }
+
+__global__ void kernelPrintEmbedding(struct_Embedding *d_Embedding,int noElem_Embedding){
+	int i=blockIdx.x*blockDim.x + threadIdx.x;
+	if (i<noElem_Embedding){		
+		printf("\n[%d]: (idx:%d, vid:%d)",i,d_Embedding[i].idx,d_Embedding[i].vid);
+	}
+}
+
+
+cudaError_t printEmbedding(struct_Embedding *d_Embedding,int noElem_Embedding){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((noElem_Embedding+block.x-1)/block.x);
+
+	kernelPrintEmbedding<<<grid,block>>>(d_Embedding,noElem_Embedding);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintEmbedding failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
+}

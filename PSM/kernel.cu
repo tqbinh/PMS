@@ -27,6 +27,8 @@
 #include "calcLabelAndStoreUniqueExtension.h"
 #include "calcBoundary.h"
 #include "calcSupport.h"
+#include <thrust\device_vector.h>
+#include <thrust\host_vector.h>	
 using namespace std;
 
 #define CHECK(call) \
@@ -48,6 +50,8 @@ exit(1); \
 int main(int argc, char * const  argv[])
 {	
 
+
+
 	//*************************** Load Graph database with some parameters ***********************
 
 	//unsigned int minsup = 34;
@@ -64,6 +68,8 @@ int main(int argc, char * const  argv[])
 	//fname = "Klesscus";
 	fname = "Klessorigin";
 	//fname = "KlessoriginCust1";
+	//fname= "G0G1G2_custom";
+	
 
 	gSpan gspan;	
 	ofstream fout("result.txt");
@@ -437,8 +443,8 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 
-	//printf("\nNumber Element of d_ValidExtension:%d",noElem_d_ValidExtension);
-	//CHECK(printfExtension(d_ValidExtension,noElem_d_ValidExtension));
+	printf("\nNumber Element of d_ValidExtension:%d",noElem_d_ValidExtension);
+	CHECK(printfExtension(d_ValidExtension,noElem_d_ValidExtension));
 
 	/* //Hàm getUniqueExtension: Trích tra các cạnh duy nhất dựa vào nhãn Li, Lj và Lij của edge extension
 	1. Tạo mảng d_allPossibleExtension có kích thước là noElem_allPossibleExtension=Le*Lv*Lv để lưu trữ 
@@ -598,8 +604,10 @@ int main(int argc, char * const  argv[])
 	{
 		cudaMemset(d_F,0,noElement_F*sizeof(float));
 	}
+		
 
-	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F);
+	/* //Gọi hàm calcSupport để tính độ hỗ trợ cho các mở rộng trong mảng d_UniqueExtension đồng thời gọi hàm buildEmbedding để xây dựng embedding cho mở rộng thoả minsup*/
+	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F,minsup);
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncalcSupport function failed",cudaStatus);
 		return 1;
@@ -624,7 +632,7 @@ labelError:
 	cudaDeviceReset();	
 
 	fout.close();
-	delete[] arrayO;
+	//delete[] arrayO;
 	delete[] arrayN;
 	delete[] arrayLO;
 	delete[] arrayLN;
