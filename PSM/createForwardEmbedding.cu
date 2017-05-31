@@ -216,10 +216,11 @@ __global__ void kernelGetInformationLastElement(struct_Q *d_arr_Q,int positionLa
 
 cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int li,int lij,int lj){
 	cudaError_t cudaStatus;
-
-	thrust::device_vector<struct_Embedding*> dVecQ(1);
-	thrust::device_vector<struct_Q> dArrayQ(1);
-	
+	/*
+	//thrust::device_vector<struct_Embedding*> dVecQ(1);
+	//thrust::device_vector<struct_Q> dArrayQ(1);
+	//
+	*/
 
 	/*//GPU step: Duyệt qua mảng d_ValidExtension và đánh dấu 1 tại những vị trí có cạnh bằng (li,lij,lj) trong mảng M tương ứng
 		1. Tạo mảng M có kích thước bằng với d_ValidExtension và gán giá trị ban đầu cho các phần tử trong M bằng 0.
@@ -344,25 +345,26 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	printf("\nd_Q2:");
 	printEmbedding(d_Q2,noElem_d_Q);
 
-	//wrap_pointer from raw_pointer to device pointer
-	thrust::device_ptr<struct_Embedding> dev_ptr(d_Q1);
-	thrust::device_vector<struct_Embedding> Vec(dev_ptr,dev_ptr+noElem_d_Q);
-	printf("\nSo luong phan tu cua Vec:%d",Vec.size());
-	
-	printf("\nd_Q1:%p",d_Q1);
-	printf("\ndev_prt:%p",dev_ptr);
-	for (int i = 0; i < Vec.size(); i++)
-	{
-		//printf("\nVec[%d]: (raw_pointer:%p",i,(thrust::raw_pointer_cast(&Vec[i])));
-		printf("\nVec[%d]:%p",i,Vec[i]);
-	}
+	/*
+	////wrap_pointer from raw_pointer to device pointer
+	//thrust::device_ptr<struct_Embedding> dev_ptr(d_Q1);
+	//thrust::device_vector<struct_Embedding> Vec(dev_ptr,dev_ptr+noElem_d_Q);
+	//printf("\nSo luong phan tu cua Vec:%d",Vec.size());
+	//
+	//printf("\nd_Q1:%p",d_Q1);
+	//printf("\ndev_prt:%p",dev_ptr);
+	//for (int i = 0; i < Vec.size(); i++)
+	//{
+	//	//printf("\nVec[%d]: (raw_pointer:%p",i,(thrust::raw_pointer_cast(&Vec[i])));
+	//	printf("\nVec[%d]:%p",i,Vec[i]);
+	//}
 
 	//unwrap pointer from device pointer to raw pointer
-	struct_Embedding *raw_ptr = thrust::raw_pointer_cast(&Vec[0]);
+	//struct_Embedding *raw_ptr = thrust::raw_pointer_cast(&Vec[0]);
 	//printf("\nraw_ptr:%p",raw_ptr);
 	//printf("\n\nValue of raw_ptr:");
 	//printEmbedding(raw_ptr,noElem_d_Q);
-	 
+	*/ 
 	
 	//Tạo mảng d_arr_Q, mỗi phần tử của d_arr_Q sẽ trỏ tới địa chỉ của vùng nhớ được trỏ tới bởi d_Q1 và d_Q2
 	struct_Embedding **d_arr_Q=NULL;
@@ -396,6 +398,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		printf("\nCopy successful");
 	}
 
+	/*
 	//printf("\nd_Q1:%p",d_Q1);
 	//printf("\nd_Q2:%p",d_Q2);
 	//kernelPrintd_array_Q<<<1,1>>>(d_arr_Q);
@@ -406,6 +409,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	//printf("\n\n d_arr_Q:");
 	//kernelPrintArrayEmbedding<<<1,2>>>(d_arr_Q,2,noElem_d_Q);
 	
+	*/
 	/*
 	//Tạo một mảng mới có kích thước bằng d_arr_Q và sao chép d_arr_Q sang mảng mới
 	struct_Embedding **d_arr_new_Q=NULL;
@@ -471,19 +475,15 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	////printStructQ<<<1,3>>>(device_arr_newQ,3);
 	//kernelcp<<<1,1>>>(device_arr_newQ,3,2,d_Q1,noElem_d_Q);
 
-
-
-
+	/*
 	//Truy xuat tat ca embedding from d_Q2
 	//kernelPrintEmbeddingFromLastQ<<<1,noElem_d_Q>>>(d_arr_Q,1,noElem_d_Q);
 	//dVecQ[0]=d_Q1;
 	//printf("\ndVecQ[0]:%p",dVecQ[0]);
 	//convertDeviceVectorToStruct(dVecQ);
+	*/
 	
-	
-	
-	
-
+	/*
 	//kernelVector<<<1,1>>>(convertDeviceVectorToStruct(dVecQ),d_Q1,noElem_d_Q);
 	//Chuyển dVecQ đang chứa d_Q1 thành struct_Q, sau đó đưa nó vào phần tử đầu tiên của dVecQ là dArrayQ[0]
 	//dArrayQ[0]=(convertDeviceVectorToStruct(dVecQ,d_Q1,noElem_d_Q,-1));
@@ -500,15 +500,15 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 
 	//dVecQ.resize(2);
 	//dVecQ[1]=d_Q2;
+	*/
 
-
-	//cudaDeviceSynchronize();
-	//cudaStatus=cudaGetLastError();
-	//if(cudaStatus!=cudaSuccess){
-	//	fprintf(stderr,"\ncudaDeviceSynchronize() failed");
-	//	goto Error;
-	//}
-//Error:
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaDeviceSynchronize() failed");
+		goto Error;
+	}
+Error:
 	//cudaFree(d_M);
 	//cudaFree(d_Q1);
 	//cudaFree(d_Q2);

@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include <thrust\device_vector.h>
-#include <thrust\host_vector.h>
-#include <thrust\device_ptr.h>
+//#include <thrust\device_vector.h>
+//#include <thrust\host_vector.h>
+//#include <thrust\device_ptr.h>
 using namespace std;
 
 //cấu trúc Embedding
@@ -26,17 +26,17 @@ struct struct_Q
 
 };
 
-struct struct_QQ
-{
-	int size;
-	struct_Q *structQ;
-};
-
-
- // Template structure to pass to kernel
-template < typename T >
-struct KernelArray
-{    
-	T*  _array;    
-	int _size;
-}; 
+//struct struct_QQ
+//{
+//	int size;
+//	struct_Q *structQ;
+//};
+//
+//
+// // Template structure to pass to kernel
+//template < typename T >
+//struct KernelArray
+//{    
+//	T*  _array;    
+//	int _size;
+//}; 
