@@ -214,7 +214,7 @@ __global__ void kernelGetInformationLastElement(struct_Q *d_arr_Q,int positionLa
 }
 
 
-cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int li,int lij,int lj){
+cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int li,int lij,int lj,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int minsup,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg){
 	cudaError_t cudaStatus;
 	/*
 	//thrust::device_vector<struct_Embedding*> dVecQ(1);
@@ -463,9 +463,45 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	cudaMemcpy(hsizeOfLastElement,dsizeOfLastElement,sizeof(int),cudaMemcpyDeviceToHost);
 	printf("\nhsizeOfLastElement:%d",hsizeOfLastElement[0]);
 
-		//Làm sao để truy xuất tất cả các Embeddings khi truyền vào một mảng cấu trúc struct_Q: device_arr_Q
+		//Truy xuất tất cả các Embeddings khi truyền vào một mảng cấu trúc struct_Q: device_arr_Q
 	printf("\n\nPrint all embedding from the last element of device_arr_Q");
 	PrintAllEmbedding<<<1,hsizeOfLastElement[0]>>>(device_arr_Q,1,hsizeOfLastElement[0]);
+
+	/* 
+		- Sau khi đã xây dựng được các Embedding columns để biểu diễn embeddings cho các frequent 1-edge extension.
+		- Cụ thể các cột embedding ở đây là một mảng device_arr_Q, mỗi phần tử của device_arr_Q là một cột Q, với chỉ số 
+		được tính bắt đầu từ 0 (Q0, Q1, Q2,...).
+		- Mảng RMPath: dùng để lưu trữ index của device_arr_Q mà tại đó cột Q thuộc Right Most Path. 
+		- Biến lastColumn: lữu trữ index của cột cuối cùng (tức là đỉnh phải nhất của Embedding). Từ cột này chúng ta có
+		thể lần ngược để duyệt qua tất cả các Q thuộc Right Most Path
+		1. Viết hàm getExtension
+		- Input: device_arr_Q,lastColumn,RMPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup.
+		- Output: RMPath
+	*/
+	int lastColumn=1;
+	vector<struct_DFS> P(1); //P là frequent Pattern
+	P.at(0).from=0;
+	P.at(0).to=1;
+	P.at(0).li=li;
+	P.at(0).lij=lij;
+	P.at(0).lj=lj;
+
+	
+
+	vector<int> RMPath(2);
+	for (int i = 0; i < 2; i++)
+	{
+		RMPath.at(i)=i;
+		//printf("\nRMPath[%d]:%d",i,RMPath[i]);
+	}
+	getExtension(device_arr_Q,lastColumn,P,RMPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg); 
+
+	
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	printf("\nR[%d]:%d",i,RMPath[i]);
+	//}
+
 
 	////Làm sao mở rộng kích thước của mảng device_arr_Q
 	//struct_Q *device_arr_newQ=NULL;

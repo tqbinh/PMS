@@ -161,6 +161,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="createForwardEmbedding.cu" />
     <CudaCompile Include="extractUniqueEdge.cu" />
     <CudaCompile Include="getAndStoreExtension.cu" />
+    <CudaCompile Include="getExtension.cu" />
     <CudaCompile Include="getLastElement.cu" />
     <CudaCompile Include="getUniqueExtension.cu" />
     <CudaCompile Include="getValidExtension.cu" />
@@ -175,6 +176,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="kernelMarkInvalidVertex.cu" />
     <CudaCompile Include="kernelPrintf.cu" />
     <CudaCompile Include="kernelReduce.cu" />
+    <CudaCompile Include="markEmbedding.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
     <CudaCompile Include="reduction.cu" />
     <CudaCompile Include="scanV.cu" />
@@ -210,6 +212,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="ExtensionStructure.h" />
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="getAndStoreExtension.h" />
+    <ClInclude Include="getExtension.h" />
     <ClInclude Include="getLastElement.h" />
     <ClInclude Include="getUniqueExtension.h" />
     <ClInclude Include="getValidExtension.h" />
@@ -229,6 +232,9 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="scan_largearray_kernel.h" />
     <ClInclude Include="sumUntilReachZero.h" />
     <ClInclude Include="validEdge.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="markEmbedding.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

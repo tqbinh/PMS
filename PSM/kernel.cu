@@ -27,8 +27,8 @@
 #include "calcLabelAndStoreUniqueExtension.h"
 #include "calcBoundary.h"
 #include "calcSupport.h"
-#include <thrust\device_vector.h>
-#include <thrust\host_vector.h>	
+//#include <thrust\device_vector.h>
+//#include <thrust\host_vector.h>	
 using namespace std;
 
 #define CHECK(call) \
@@ -225,6 +225,8 @@ int main(int argc, char * const  argv[])
 		fprintf(stderr, "checkDataBetweenHostAndGPU failed!");
 		return 1;
 	}
+	printf("\n***********Press the Enter key to continous**********");
+	getch();
 	/*
 	//********Đếm số đỉnh song song và loại nhỏ những đỉnh nhỏ hơn minsup****
 	//Nếu số đỉnh nhỏ hơn minSup thì đánh dấu đỉnh đó là -1 trong mảng O và mảng LO và các cạnh liên quan đến đỉnh đó cũng được đánh dấu là -1
@@ -607,7 +609,7 @@ int main(int argc, char * const  argv[])
 		
 
 	/* //Gọi hàm calcSupport để tính độ hỗ trợ cho các mở rộng trong mảng d_UniqueExtension đồng thời gọi hàm buildEmbedding để xây dựng embedding cho mở rộng thoả minsup*/
-	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F,minsup);
+	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F,minsup,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,maxOfVer,numberOfGraph,noDeg);
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncalcSupport function failed",cudaStatus);
 		return 1;

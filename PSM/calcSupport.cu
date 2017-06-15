@@ -16,7 +16,7 @@ __global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtens
 
 
 
-cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,unsigned int noElem_F,unsigned int minsup){
+cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,unsigned int noElem_F,unsigned int minsup,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg){
 	cudaError_t cudaStatus;
 
 	dim3 block(1024);
@@ -54,7 +54,8 @@ cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_Uniqu
 		//Nếu là nhỏ nhất thì mới đi tạo embedding cho pattern P.
 		if(support>=minsup){
 			//xây dựng embedding cho mở rộng thoả minsup
-			cudaStatus=createForwardEmbedding(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj);
+			printf("\n***********support of (%d,%d,%d) >= %d --> create embeddings for DFS_CODE************",li,lij,lj,minsup);
+			cudaStatus=createForwardEmbedding(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg);
 			if (cudaStatus!=cudaSuccess){
 				fprintf(stderr,"\ncreateForwardEmbedding failed");
 				goto Error;
