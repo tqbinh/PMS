@@ -90,6 +90,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
       <CodeGeneration>compute_20,sm_20</CodeGeneration>
+      <GenerateRelocatableDeviceCode>false</GenerateRelocatableDeviceCode>
     </CudaCompile>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -163,8 +164,11 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="getAndStoreExtension.cu" />
     <CudaCompile Include="getExtension.cu" />
     <CudaCompile Include="getLastElement.cu" />
+    <CudaCompile Include="getSatisfyEdge.cu" />
     <CudaCompile Include="getUniqueExtension.cu" />
     <CudaCompile Include="getValidExtension.cu" />
+    <CudaCompile Include="getValidExtensionFromEmbeding.cu" />
+    <CudaCompile Include="getValidForwardExtensionFromTheLastQ.cu" />
     <CudaCompile Include="kernel.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
     </CudaCompile>
@@ -187,6 +191,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClCompile Include="checkArray.cpp" />
     <ClCompile Include="checkDataBetweenHostAndGPU.cpp" />
     <ClCompile Include="dfs.cpp" />
+    <ClCompile Include="DFS_CODE.cpp" />
     <ClCompile Include="displayArray.cpp" />
     <ClCompile Include="graph.cpp" />
     <ClCompile Include="gspan.cpp" />
@@ -206,6 +211,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="countNumberOfEdgeLabel.h" />
     <ClInclude Include="countNumberOfLabelVetex.h" />
     <ClInclude Include="createForwardEmbedding.h" />
+    <ClInclude Include="DFS_Code.h" />
     <ClInclude Include="displayArray.h" />
     <ClInclude Include="Embedding.h" />
     <ClInclude Include="exception.h" />
@@ -213,9 +219,12 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="extractUniqueEdge.h" />
     <ClInclude Include="getAndStoreExtension.h" />
     <ClInclude Include="getExtension.h" />
+    <ClInclude Include="getExtensionFromEmbedding.h" />
     <ClInclude Include="getLastElement.h" />
+    <ClInclude Include="getSatisfyEdge.h" />
     <ClInclude Include="getUniqueExtension.h" />
     <ClInclude Include="getValidExtension.h" />
+    <ClInclude Include="getValidForwardExtensionFromTheLastQ.h" />
     <ClInclude Include="gspan.h" />
     <ClInclude Include="helper_cuda.h" />
     <ClInclude Include="helper_string.h" />

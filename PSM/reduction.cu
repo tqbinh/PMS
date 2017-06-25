@@ -54,8 +54,7 @@ __global__  void total(float * input, float * output, int len)
 
 
 cudaError_t reduction(float *deviceInput,int len,float &support){
-	cudaError_t cudaStatus;
-	
+	cudaError_t cudaStatus;	
 	
     float * deviceOutput;
 
@@ -86,6 +85,7 @@ cudaError_t reduction(float *deviceInput,int len,float &support){
 	printf("\n");
 	printFloat(deviceOutput,numOutputElements);
 	cudaMemcpy(&support,deviceOutput,numOutputElements*sizeof(float),cudaMemcpyDeviceToHost);
+
 
 Error:
 	return cudaStatus;

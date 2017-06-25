@@ -165,7 +165,7 @@ bool get_forward_root(Graph&,Vertex&,EdgeList&);
 Edge* get_backward(Graph&,Edge*,Edge*,History&);
 
 class gSpan{
-private:
+public:
 	typedef std::map<int,std::map<int,std::map<int,Projected> > >					Projected_map3; //Định nghĩa một kiểu dữ liệu mới tên là Projected_map3. Nó gồm có 3 ánh xạ lồng nhau (f1<first1,second1>) trong đó second1=(f2<first2,second2>) và second2=(f3<first3,second3>). Trong đó second3 = Projected
 	typedef std::map<int,std::map<int,Projected> >									Projected_map2; //Định nghĩa một kiểu dữ liệu mới tên là Projected_map2. Nó gồm có 2 hánh xạ lồng nhau
 	typedef std::map<int,Projected>													Projected_map1; //Định nghĩa một kiểu dữ liệu mới
@@ -201,6 +201,7 @@ private:
 	unsigned int support(Projected&);
 	void project (Projected&);
 	void report (Projected&,unsigned int);
+	void report(int*,int ,unsigned int);
 	
 	void read(char*);
 	void run_intern(void);

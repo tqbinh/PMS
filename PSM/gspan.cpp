@@ -84,7 +84,7 @@ void gSpan::report(Projected& projected,unsigned int sup) //Phương thức repo
 		DFS_CODE.toGraph(g); //Convert DFS code sang đồ thị.
 
 		if(!where) //default value of where is true
-			*os << "t # " << ID << " * " << sup;//fos << "t # " << ID << " * " << sup;
+			*os << "t # " << ID << " * " << sup; //fos << "t # " << ID << " * " << sup;
 		//*os << "\n";
 		//fos << "\n";
 
@@ -348,4 +348,48 @@ void gSpan::graphMining(int* &O,int* &LO,int* &N,int* &LN,unsigned int minsup)
 	cout<<"........";
 
 
+}
+
+
+void gSpan::report(int *graph,int noEle_graph,unsigned int sup){
+	if(where){		
+		*os << "t # " << ID << " " << sup << endl; //ghi đồ thị đó vào tập tin result.txt
+	}
+
+	if(!enc){ //enc default value is false
+		Graph g(directed); //khởi tạo g là một đồ thị vô hướng
+		DFS_CODE.toGraph(g); //Convert DFS code sang đồ thị.
+
+		if(!where) //default value of where is true
+			*os << "t # " << ID << " * " << sup; 		
+		g.write(*os);
+		
+	}else{
+		if(!where)
+			*os << "<" << ID << "> " << sup << " [";
+		DFS_CODE.write (*os);
+
+		if(!where) *os << "]";
+	}
+
+	if(where) {		
+		*os << "x ";
+		unsigned int oid = 0xffffffff;
+		/*for(Projected::iterator cur = projected.begin();cur != projected.end(); ++cur){
+			if(oid != cur->id){
+				if(cur!=projected.begin()) *os<< " ";fos<< " ";
+				*os<<cur->id;
+				fos<<cur->id;
+			}
+			oid = cur->id;
+		}	*/	
+		for (int i = 0; i < noEle_graph; i++)
+		{
+			if(i!=0)	*os<< " ";fos<<" ";
+			*os<<graph[i];
+			fos<<graph[i];
+		}
+	}
+	*os<<"\n";	
+	++ID;
 }

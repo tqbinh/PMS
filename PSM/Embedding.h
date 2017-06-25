@@ -7,6 +7,15 @@
 //#include <thrust\device_ptr.h>
 using namespace std;
 
+
+//cấu trúc một phần tử của d_arr_V
+struct struct_V
+{
+	int valid;
+	int backward;
+	struct_V():valid(0),backward(0){};
+};
+
 //cấu trúc Embedding
 struct struct_Embedding
 {

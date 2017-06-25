@@ -29,6 +29,9 @@
     <CudaCompile Include="createForwardEmbedding.cu" />
     <CudaCompile Include="getExtension.cu" />
     <CudaCompile Include="markEmbedding.cu" />
+    <CudaCompile Include="getValidExtensionFromEmbeding.cu" />
+    <CudaCompile Include="getValidForwardExtensionFromTheLastQ.cu" />
+    <CudaCompile Include="getSatisfyEdge.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -41,6 +44,7 @@
     <ClCompile Include="checkDataBetweenHostAndGPU.cpp" />
     <ClCompile Include="sumUntilReachZero.cpp" />
     <ClCompile Include="scan_gold.cpp" />
+    <ClCompile Include="DFS_CODE.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gspan.h" />
@@ -79,6 +83,10 @@
     <ClInclude Include="createForwardEmbedding.h" />
     <ClInclude Include="Embedding.h" />
     <ClInclude Include="getExtension.h" />
+    <ClInclude Include="getExtensionFromEmbedding.h" />
+    <ClInclude Include="getValidForwardExtensionFromTheLastQ.h" />
+    <ClInclude Include="DFS_Code.h" />
+    <ClInclude Include="getSatisfyEdge.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="markEmbedding.cuh" />

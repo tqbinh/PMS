@@ -43,3 +43,36 @@ Error:
 
 	return cudaStatus;	
 }
+
+__global__ void kernelGetLastElementExtension(Extension *inputArray,unsigned int noEleInputArray,int *value,int maxOfVer){
+	value[0] = (inputArray[noEleInputArray-1].vgi/maxOfVer);
+}
+
+
+
+inline cudaError_t getLastElementExtension(Extension* inputArray,unsigned int numberElementOfInputArray,int &outputValue,unsigned int maxOfVer){
+	cudaError_t cudaStatus;
+
+	int *value;
+	cudaMalloc((int**)&value,sizeof(int));
+	
+	
+	kernelGetLastElementExtension<<<1,1>>>(inputArray,numberElementOfInputArray,value,maxOfVer);
+	cudaDeviceSynchronize();
+	cudaStatus= cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"cudaDeviceSynchronize failed",cudaStatus);
+		goto Error;
+	}
+	
+	cudaMemcpy(&outputValue,value,sizeof(int),cudaMemcpyDeviceToHost);
+	//printf("\n\nnumberElementd_UniqueExtension:%d",numberElementd_UniqueExtension);
+	
+
+Error:
+	cudaFree(value);
+	//cudaFree(d_index);
+
+	return cudaStatus;	
+
+}

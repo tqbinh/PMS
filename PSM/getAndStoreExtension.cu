@@ -6,6 +6,7 @@
 
 
 
+
 __global__ void kernelGetAndStoreExtension(int *d_O,int *d_LO,unsigned int numberOfElementd_O,int *d_N,int *d_LN,unsigned int numberOfElementd_N,Extension *d_Extension){
 	int i = blockIdx.x*blockDim.x + threadIdx.x;
 	if (i<numberOfElementd_O){
@@ -47,7 +48,7 @@ __global__ void kernelGetAndStoreExtension(int *d_O,int *d_LO,unsigned int numbe
 cudaError_t getAndStoreExtension(Extension *d_Extension,int *d_O,int *d_LO,unsigned int numberOfElementd_O,int *d_N,int *d_LN,unsigned int numberOfElementd_N,unsigned int Le,unsigned int Lv){
 
 	cudaError_t cudaStatus;
-	dim3 block(1024);
+	dim3 block(blocksize);
 	dim3 grid((numberOfElementd_O+block.x-1)/block.x);
 
 	

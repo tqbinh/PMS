@@ -214,7 +214,7 @@ __global__ void kernelGetInformationLastElement(struct_Q *d_arr_Q,int positionLa
 }
 
 
-cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int li,int lij,int lj,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int minsup,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg){
+cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int li,int lij,int lj,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int minsup,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg, struct_Q *&device_arr_Q){
 	cudaError_t cudaStatus;
 	/*
 	//thrust::device_vector<struct_Embedding*> dVecQ(1);
@@ -222,6 +222,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	//
 	*/
 
+	//Giải thuật xây dựng Embedding
 	/*//GPU step: Duyệt qua mảng d_ValidExtension và đánh dấu 1 tại những vị trí có cạnh bằng (li,lij,lj) trong mảng M tương ứng
 		1. Tạo mảng M có kích thước bằng với d_ValidExtension và gán giá trị ban đầu cho các phần tử trong M bằng 0.
 		2. Tạo noElem_d_ValidExtension threads. Mỗi thread sẽ kiểm tra phần tử tương ứng trong mảng d_ValidExtension xem có bằng cạnh (li,lij,lj) 
@@ -305,13 +306,13 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	
 	printf("\nnoElem_d_Q1:%d",noElem_d_Q);
 
-	/*
+	/*		
 		5. Tạo mảng các cấu trúc Q1 và Q2 với kích thước tìm được đồng thời gán giá trị cho các phần tử của mảng là -1.
 	*/
 	struct_Embedding *d_Q1=NULL;
 	cudaStatus=cudaMalloc((struct_Embedding**)&d_Q1,noElem_d_Q*sizeof(struct_Embedding));
 	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\ncudaMalloc Embedding failed");
+		fprintf(stderr,"\ncudaMalloc d_Q1 Embedding failed");
 		exit(1);
 	}
 	else
@@ -322,7 +323,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	struct_Embedding *d_Q2=NULL;
 	cudaStatus=cudaMalloc((struct_Embedding**)&d_Q2,noElem_d_Q*sizeof(struct_Embedding));
 	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\ncudaMalloc Embedding failed");
+		fprintf(stderr,"\ncudaMalloc d_Q2 Embedding failed");
 		exit(1);
 	}
 	else
@@ -345,7 +346,8 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	printf("\nd_Q2:");
 	printEmbedding(d_Q2,noElem_d_Q);
 
-	/*
+	//KHÔNG DÙNG THRUST, code chỉ để tham khảo
+	/*  
 	////wrap_pointer from raw_pointer to device pointer
 	//thrust::device_ptr<struct_Embedding> dev_ptr(d_Q1);
 	//thrust::device_vector<struct_Embedding> Vec(dev_ptr,dev_ptr+noElem_d_Q);
@@ -365,8 +367,10 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	//printf("\n\nValue of raw_ptr:");
 	//printEmbedding(raw_ptr,noElem_d_Q);
 	*/ 
-	
+	//KHÔNG DÙNG MẢNG d_arr_Q
+	/*	
 	//Tạo mảng d_arr_Q, mỗi phần tử của d_arr_Q sẽ trỏ tới địa chỉ của vùng nhớ được trỏ tới bởi d_Q1 và d_Q2
+	
 	struct_Embedding **d_arr_Q=NULL;
 	cudaStatus=cudaMalloc((void**)&d_arr_Q,sizeof(struct_Embedding*)*2);
 	if(cudaStatus!=cudaSuccess){
@@ -397,19 +401,21 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	{
 		printf("\nCopy successful");
 	}
-
+	*/
 	/*
 	//printf("\nd_Q1:%p",d_Q1);
 	//printf("\nd_Q2:%p",d_Q2);
 	//kernelPrintd_array_Q<<<1,1>>>(d_arr_Q);
 
-	//cudaDeviceSynchronize();
+	//
+	cudaDeviceSynchronize();
 
 	//Copy d_arr_Q to d_arr_new_Q: from device to device memory
 	//printf("\n\n d_arr_Q:");
 	//kernelPrintArrayEmbedding<<<1,2>>>(d_arr_Q,2,noElem_d_Q);
 	
 	*/
+	//mở rộng mảng d_arr_Q, không dùng, code chỉ để tham khảo
 	/*
 	//Tạo một mảng mới có kích thước bằng d_arr_Q và sao chép d_arr_Q sang mảng mới
 	struct_Embedding **d_arr_new_Q=NULL;
@@ -435,10 +441,16 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	*/
 	
 	//Tạo một mảng device_Array_Q có kiểu là struct_Q
-	struct_Q *device_arr_Q=NULL;
-	cudaMalloc((void**)&device_arr_Q,sizeof(struct_Q)*2);
-	//Vì device_arr_Q là một device pointer nên để truy cập phần tử của chúng thì chúng ta cần phải sử dụng kernel
+	device_arr_Q=NULL;
+	cudaStatus = cudaMalloc((void**)&device_arr_Q,sizeof(struct_Q)*2);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc device_arr_Q failed");
+		//goto Error;
+		exit(1);
+	}
+	
 	//Chúng ta tạo kernel để chép dữ liệu từ d_Q1 vào device_array_Q
+	//Vì device_arr_Q là một device pointer nên để truy cập phần tử của chúng thì chúng ta cần phải sử dụng kernel
 	int prevQ=-1;	
 	int positionUpdate=0;
 	kernelcp<<<1,1>>>(device_arr_Q,2,positionUpdate,d_Q1,noElem_d_Q,prevQ);
@@ -449,15 +461,25 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	//printf("\n\nPrint device_arr_Q:");
 	//printStructQ<<<1,2>>>(device_arr_Q,2);
 
-
-
+	//Được chép ra kernel.cu để truy xuất thông tin của struct_Q *device_arr_Q
+	/*
+	//Lấy số lượng phần tử của một cột Q bất kỳ trong mảng device_arr_Q
 	printf("\nPrint information of size of the last element of d_arr_Q:");	
 	int positionLastElement = 1;
 	int *dsizeOfLastElement,*hsizeOfLastElement;
 	hsizeOfLastElement=(int*)malloc(sizeof(int));
-	cudaMalloc((void**)&dsizeOfLastElement,sizeof(int));
-	cudaMemset(dsizeOfLastElement,0,sizeof(int));
+	cudaStatus = cudaMalloc((void**)&dsizeOfLastElement,sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dsizeOfLastElement failed");
+		//goto Error;
+		exit(1);
+	}
+	else
+	{
+		cudaMemset(dsizeOfLastElement,0,sizeof(int));
+	}
 	
+	 
 	kernelGetInformationLastElement<<<1,1>>>(device_arr_Q,positionLastElement,dsizeOfLastElement);
 	cudaDeviceSynchronize();
 	cudaMemcpy(hsizeOfLastElement,dsizeOfLastElement,sizeof(int),cudaMemcpyDeviceToHost);
@@ -466,7 +488,9 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		//Truy xuất tất cả các Embeddings khi truyền vào một mảng cấu trúc struct_Q: device_arr_Q
 	printf("\n\nPrint all embedding from the last element of device_arr_Q");
 	PrintAllEmbedding<<<1,hsizeOfLastElement[0]>>>(device_arr_Q,1,hsizeOfLastElement[0]);
-
+	*/
+	
+	//Chép sang kernel.cu
 	/* 
 		- Sau khi đã xây dựng được các Embedding columns để biểu diễn embeddings cho các frequent 1-edge extension.
 		- Cụ thể các cột embedding ở đây là một mảng device_arr_Q, mỗi phần tử của device_arr_Q là một cột Q, với chỉ số 
@@ -478,7 +502,8 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		- Input: device_arr_Q,lastColumn,RMPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup.
 		- Output: RMPath
 	*/
-	int lastColumn=1;
+	/*int lastColumn=1;
+	
 	vector<struct_DFS> P(1); //P là frequent Pattern
 	P.at(0).from=0;
 	P.at(0).to=1;
@@ -495,7 +520,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		//printf("\nRMPath[%d]:%d",i,RMPath[i]);
 	}
 	getExtension(device_arr_Q,lastColumn,P,RMPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg); 
-
+	*/
 	
 	//for (int i = 0; i < 2; i++)
 	//{
@@ -542,7 +567,8 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncudaDeviceSynchronize() failed");
-		goto Error;
+		//goto Error;
+		exit(1);
 	}
 Error:
 	//cudaFree(d_M);

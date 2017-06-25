@@ -248,9 +248,6 @@ C:\Program Files\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\swprintf.inl
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
-C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\ExtensionStructure.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\iostream
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\istream
@@ -325,4 +322,7 @@ C:\Program Files\Microsoft Visual Studio 11.0\VC\include\cerrno
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\errno.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\crtdefs.h
 C:\Program Files\Microsoft Visual Studio 11.0\VC\include\share.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\Embedding.h

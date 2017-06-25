@@ -1,6 +1,7 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 #include <stdio.h>
+#include <vector>
 #include <iostream>
 #include <string>
 #include <map>
@@ -27,9 +28,12 @@
 #include "calcLabelAndStoreUniqueExtension.h"
 #include "calcBoundary.h"
 #include "calcSupport.h"
+#include "getSatisfyEdge.h"
 //#include <thrust\device_vector.h>
 //#include <thrust\host_vector.h>	
 using namespace std;
+
+#define blocksize 512
 
 #define CHECK(call) \
 { \
@@ -160,23 +164,27 @@ int main(int argc, char * const  argv[])
 	cudaStatusAllocate =cudaMalloc((int**) &d_O,nBytesO);
 	if (cudaStatusAllocate!=cudaSuccess){
 		fprintf(stderr, "cudaMalloc failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 
 	cudaStatusAllocate =cudaMalloc((int**) &d_LO,nBytesLO);
 	if (cudaStatusAllocate!=cudaSuccess){
 		fprintf(stderr, "cudaMalloc failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 	cudaStatusAllocate =cudaMalloc((int**) &d_N,nBytesN);
 	if (cudaStatusAllocate!=cudaSuccess){
 		fprintf(stderr, "cudaMalloc failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 	cudaStatusAllocate =cudaMalloc((int**) &d_LN,nBytesLN);
 	if (cudaStatusAllocate!=cudaSuccess){
 		fprintf(stderr, "cudaMalloc failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 
 
@@ -184,25 +192,29 @@ int main(int argc, char * const  argv[])
 	cudaStatusAllocate = cudaMemcpy(d_O,arrayO,nBytesO,cudaMemcpyHostToDevice);
 	if (cudaStatusAllocate != cudaSuccess) {
 		fprintf(stderr, "cudaMemcpy failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 
 	cudaStatusAllocate = cudaMemcpy(d_LO,arrayLO,nBytesLO,cudaMemcpyHostToDevice);
 	if (cudaStatusAllocate != cudaSuccess) {
 		fprintf(stderr, "cudaMemcpy failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 
 	cudaStatusAllocate = cudaMemcpy(d_N,arrayN,nBytesN,cudaMemcpyHostToDevice);
 	if (cudaStatusAllocate != cudaSuccess) {
 		fprintf(stderr, "cudaMemcpy failed!");
-		goto labelError;
+		//goto labelError; 
+		exit(1);
 	}
 
 	cudaStatusAllocate = cudaMemcpy(d_LN,arrayLN,nBytesLN,cudaMemcpyHostToDevice);
 	if (cudaStatusAllocate != cudaSuccess) {
 		fprintf(stderr, "cudaMemcpy failed!");
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 
 
@@ -210,10 +222,11 @@ int main(int argc, char * const  argv[])
 	cudaStatusAllocate= cudaDeviceSynchronize();
 	if (cudaStatusAllocate != cudaSuccess) {
 		fprintf(stderr, "cudaDeviceSynchronize returned error code %d after launching addKernel!\n", cudaStatusAllocate);
-		goto labelError;
+		//goto labelError;
+		exit(1);
 	}
 	//xác định grid and block structure
-	dim3 block(512);
+	dim3 block(blocksize);
 	dim3 grid((nBytesO + block.x -1)/block.x);
 	printf("grid %d; block %d;\n",grid.x,block.x);
 
@@ -225,7 +238,8 @@ int main(int argc, char * const  argv[])
 		fprintf(stderr, "checkDataBetweenHostAndGPU failed!");
 		return 1;
 	}
-	printf("\n***********Press the Enter key to continous**********");
+	printf("\n***********Finished: Database has been copied from host to device. Next: count different label of vertex in all graph in database **********");
+	printf("\n***********Press the Enter key to continous**********\n");
 	getch();
 	/*
 	//********Đếm số đỉnh song song và loại nhỏ những đỉnh nhỏ hơn minsup****
@@ -250,7 +264,9 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 	printf("\nNumber of different label Lv is: %d ;",Lv);
-	
+	printf("\n***********Finished: count different label of vertex in all graph in database. Next: count different label of edge in all graph in database **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
 	//*******Đếm các loại cạnh khác nhau trong CSDL đồ thị************
 	//Nhãn của tất cả các cạnh được lưu trữ trong mảng d_LN.
 	/*
@@ -266,6 +282,9 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 	printf("\nNumber of different label Le is: %d ;",Le);
+	printf("\n***********Finished: count different label of edge in all graph in database. Next: get and store all single edge extension into d_Extension **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
 	/*******Thu thập tất cả các pattern P có 1 cạnh và tất cả các embeddings của P ********
 	1. Duyệt qua cơ sở dữ liệu và rút trích các cạnh phân biệt dựa vào mảng d_O,d_LO,d_N và d_LN và 
 	set giá trị 1 trong mảng d_SinglePattern có kích thước là (Lv.LE)
@@ -347,6 +366,12 @@ int main(int argc, char * const  argv[])
 
 	CHECK(printfExtension(d_Extension,numberOfElementd_N));
 
+	
+	printf("\n***********Finished: get and store all single edge extension in to d_Extension. Next: set 1 for all valid single edge extension in V array **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
+
+
 	/* //05-May-2017: Khởi tạo mảng V với giá trị của các phần tử ban đầu là 0, để lưu trữ những mở rộng hợp lệ.
 	1. Mở rộng hợp lệ là mở rộng có Lj<=Li
 	2. Mảng V có số lượng phần tử bằng với số lượng phần tử của mảng d_Extension
@@ -375,6 +400,10 @@ int main(int argc, char * const  argv[])
 		return 1;
 	}
 
+	
+	printf("\n***********Finished: set 1 for all valid single edge extension in V array. Next: Extract all valid extension  from d_Extension base on V array **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
 	/* //07-May-2017: Extract unique Edge from d_Extension
 	1. Tiếp theo, chúng ta exclusive scan mảng V để thu được index chỉ vị trí của các valid edge trong d_Extension.
 	2. Input data: mảng V
@@ -448,6 +477,11 @@ int main(int argc, char * const  argv[])
 	printf("\nNumber Element of d_ValidExtension:%d",noElem_d_ValidExtension);
 	CHECK(printfExtension(d_ValidExtension,noElem_d_ValidExtension));
 
+
+	printf("\n***********Finished: Extract all valid extension  from d_Extension base on V array and put result in d_ValidExtension. Next: Extract unique extension from d_ValidExtension base on label of vertex and label of edge **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
+
 	/* //Hàm getUniqueExtension: Trích tra các cạnh duy nhất dựa vào nhãn Li, Lj và Lij của edge extension
 	1. Tạo mảng d_allPossibleExtension có kích thước là noElem_allPossibleExtension=Le*Lv*Lv để lưu trữ 
 		tất cả các mở rộng có thể có của tất cả các đỉnh. Các mở rộng có thể có từ 1 đỉnh trên righ most path có kích thước là Le*Lv.
@@ -473,6 +507,9 @@ int main(int argc, char * const  argv[])
 	printf("\nd_allPossibleExtension: ");
 	printInt(d_allPossibleExtension,noElem_allPossibleExtension);
 	
+	printf("\n***********Finished: Extract unique extension from d_ValidExtension base on label of vertex and label of edge and set 1 as result in d_allPossibleExtension array. Next: Mapping label of vertex and edge into edge and store them in d_UniqueExtension **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
 	/* //Tiếp theo chúng ta exclusive scan mảng d_allPossibleExtension để thu được index phục vụ cho việc
 		lưu trữ các unique extension.
 	1. Chúng ta khởi tạo một mảng d_allPossibleExtensionScanResult có kích thước bằng với kích thước của d_allPossibleExtension
@@ -533,6 +570,9 @@ int main(int argc, char * const  argv[])
 	printf("\n\nUnique Extension:");
 	printfExtension(d_UniqueExtension,noElem_d_UniqueExtension);
 
+	printf("\n***********Finished: Mapping label of vertex and edge into edge and store them in d_UniqueExtension . Next: compute support for valid unique extension in d_UniqueExtension **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
 	/* //10-May-2017: Tính độ hỗ trợ
 	1. Trước tiên, chúng ta cấp phát một mảng d_B, mảng này có số lượng phần tử bằng với số lượng phần tử của d_ValidExtension
 		Mảng d_B dùng để đánh dấu vị trí biên (boundary: nơi tiếp giáp giữa 2 đồ thị)
@@ -562,6 +602,10 @@ int main(int argc, char * const  argv[])
 
 	printf("\n\nd_B:\n");
 	printInt(d_B,noElement_d_B);
+	printf("\n***********Finished: set Boundary for d_ValidExtension . Next: compute support for valid unique extension in d_UniqueExtension **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+	//getch();
+
 
 	//2. Exclusive Scan mảng d_B
 	int* d_scanB_Result;
@@ -607,15 +651,172 @@ int main(int argc, char * const  argv[])
 		cudaMemset(d_F,0,noElement_F*sizeof(float));
 	}
 		
-
+	
 	/* //Gọi hàm calcSupport để tính độ hỗ trợ cho các mở rộng trong mảng d_UniqueExtension đồng thời gọi hàm buildEmbedding để xây dựng embedding cho mở rộng thoả minsup*/
-	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F,minsup,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,maxOfVer,numberOfGraph,noDeg);
+	//Mở rộng nào phổ biến sẽ được ghi nhận lại vào mảng h_frequentEdge (Có số lượng phần tử bằng với d_uniqueExtension)
+	//Tại vị trí tương ứng của cạnh lớn hơn bằng minsup sẽ được set là 1.
+	/*int numberEle_h_frequentEdge=noElem_d_UniqueExtension; //không dùng h_frequentEdge để hi nhận những mở rộng thoả minSup
+	int *h_frequentEdge = (int*) malloc(numberEle_h_frequentEdge*sizeof(int));
+	if(h_frequentEdge==NULL){
+		printf("\n Malloc array h_frequentEdge failed");
+		exit(1);
+	}
+	else
+	{
+		memset(h_frequentEdge,0,numberEle_h_frequentEdge*sizeof(int));
+	}*/
+	vector<int> h_satisfyEdge;
+	vector<int> h_satisfyEdgeSupport;
+	
+	//Hàm calcSupport tính độ hỗ trợ của tất cả các cạnh trong d_UniqueExtension
+	//Nó  trả về vị trí index của d_UniqueExtension mà tại đó thoả minSup
+	//Nó  trả về giá trị minSup
+	cudaStatus=calcSupport(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElement_F,minsup,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,maxOfVer,numberOfGraph,noDeg,h_satisfyEdge,h_satisfyEdgeSupport);
 	if (cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncalcSupport function failed",cudaStatus);
 		return 1;
 	}
 
+	for (int i = 0; i < h_satisfyEdge.size(); i++)
+	{
+		printf("\n h_satisfyEdge[%d]:%d",i,h_satisfyEdge[i]);
+		printf("\n h_satisfyEdgeSupport[%d]:%d",i,h_satisfyEdgeSupport[i]);
+	}
 
+
+
+	getch();
+
+	//Tiếp theo chúng ta dựa vào mảng h_frequentEdge để trích ra những cạnh phổ biến và xây dựng DFS_CODE cho chúng.
+	//Sau khi xây dựng DFS_Code, chúng ta sẽ chuyển chúng sang đồ thị và ghi đồ thị đó vào file kết quả result.txt
+
+	/*gspan.DFS_CODE.push(0,1,0,0,1);	
+	bool min = gspan.is_min();
+	printf("\n min:%d",min);*/
+
+	//Gọi P là pattern và EP là các embedding của pattern P
+	//Làm sao để có P? ==> Dựa vào h_frequentEdge để lấy cạnh trong d_UniqueExtension xây dựng DFS_Code P
+	for (int i = 0; i < h_satisfyEdge.size(); i++)
+	{		
+		int li;
+		int lij;
+		int lj;
+		int indexOfSatisfyEdge=h_satisfyEdge[i];
+		int *d_arr_edgeLabel=nullptr;
+		cudaStatus = getSatisfyEdge(d_UniqueExtension,noElem_d_UniqueExtension,indexOfSatisfyEdge,li,lij,lj,d_arr_edgeLabel);
+		if(cudaStatus != cudaSuccess){
+			fprintf(stderr,"\n getSatisfyEdge failed",cudaStatus);
+			//goto labelError;
+			exit(1);
+		}
+
+		int *h_arr_graphIdContainEmbedding=nullptr;
+		int noElem_h_arr_graphIdContainEmbedding=0;
+		cudaStatus =getGraphIdContainEmbedding(d_arr_edgeLabel,d_ValidExtension,noElem_d_ValidExtension,h_arr_graphIdContainEmbedding,noElem_h_arr_graphIdContainEmbedding,maxOfVer); //hàm này được để trong calcSupport file
+		if(cudaStatus != cudaSuccess){
+			fprintf(stderr,"\n getGraphIdContainEmbedding failed",cudaStatus);
+			//goto labelError;
+			exit(1);
+		}
+		
+		//printf("\n i:%d (li:%d, lij:%d, lj:%d)",i,li,lij,lj);
+		//printInt(d_arr_edgeLabel,3);			
+		//1.Xây dựng DFS_CODE, đồng thời ghi nhận lại minLabel và maxtoc của DFS_CODE
+		gspan.DFS_CODE.push(0,1,li,lij,lj); //Cạnh đầu tiên của DFS_Code luôn có (vi,vj)=(0,1), khi mở rộng DFS_CODE thì 
+		int minLabel = 0;
+		int maxtoc = 1; //là id của đỉnh cuối cùng trên rmpath của DFS_CODE_MIN
+						//tuỳ vào backward hay forward để tính (vi,vj). 
+		//2. Ở đây các cạnh đã thoả minDFS_CODE, nên không cần xét minDFS_CODE trong trường hợp này.
+
+		//3. Chuyển DFS_CODE sang đồ thị và ghi kết quả vào tập tin			
+		//int graph[3]={0,1,2};
+		gspan.report(h_arr_graphIdContainEmbedding,noElem_h_arr_graphIdContainEmbedding,h_satisfyEdgeSupport[i]);
+		//4. Tìm các Embedding của DFS_CODE
+		//xây dựng embedding cho mở rộng thoả minsup (dùng struct_Q *device_arr_Q=NULL; để lưu trữ các cột Q của embeddings)
+			struct_Q *device_arr_Q=nullptr; //các cột Q và thông tin của nó được lưu trữ trong mảng cấu trúc struct_Q *device_arr_Q;
+			printf("\n***********support of (%d,%d,%d) >= %d --> create embeddings for DFS_CODE************",li,lij,lj,minsup);
+			cudaStatus=createForwardEmbedding(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg,device_arr_Q);
+			if (cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\ncreateForwardEmbedding failed");
+				exit(1);
+			}
+
+			//Lấy số lượng phần tử của một cột Q bất kỳ trong mảng device_arr_Q
+			/*
+			printf("\nPrint information of size of the last element of d_arr_Q:");	
+			int positionLastElement = 1;
+			int *dsizeOfLastElement;
+			int hsizeOfLastElement=0;
+			
+			cudaStatus = cudaMalloc((void**)&dsizeOfLastElement,sizeof(int));
+			if(cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\n cudaMalloc dsizeOfLastElement failed");
+				//goto Error;
+				exit(1);
+			}
+			else
+			{
+				cudaMemset(dsizeOfLastElement,0,sizeof(int));
+			}
+			*/
+			//Hàm kernelGetInformationLastElement sẽ lấy kích thước của cột Q trong mảng device_arr_Q và lưu kết quả vào biến
+			/*
+			kernelGetInformationLastElement<<<1,1>>>(device_arr_Q,positionLastElement,dsizeOfLastElement); 
+			cudaDeviceSynchronize();
+			cudaMemcpy(&hsizeOfLastElement,dsizeOfLastElement,sizeof(int),cudaMemcpyDeviceToHost);
+			printf("\nhsizeOfLastElement:%d",hsizeOfLastElement);
+			*/
+			//Truy xuất tất cả các Embeddings khi truyền vào một mảng cấu trúc struct_Q: device_arr_Q
+			/*
+			printf("\n\nPrint all embedding from the last element of device_arr_Q");
+			PrintAllEmbedding<<<1,hsizeOfLastElement>>>(device_arr_Q,1,hsizeOfLastElement);
+			cudaDeviceSynchronize();
+			*/
+			
+			//11.5.2 Tìm các mở rộng cho các Embedding của DFS_CODE
+			/* 
+			- Sau khi đã xây dựng được các Embedding columns để biểu diễn embeddings cho các frequent 1-edge extension.
+			- Cụ thể các cột embedding ở đây là một mảng device_arr_Q, mỗi phần tử của device_arr_Q là một cột Q, với chỉ số 
+			được tính bắt đầu từ 0 (Q0, Q1, Q2,...).
+			- Mảng RMPath: dùng để lưu trữ index của device_arr_Q mà tại đó cột Q thuộc Right Most Path. 
+			- Biến lastColumn: lữu trữ index của cột cuối cùng (tức là đỉnh phải nhất của Embedding). Từ cột này chúng ta có
+			thể lần ngược để duyệt qua tất cả các Q thuộc Right Most Path
+			1. Viết hàm getExtension
+			- Input: device_arr_Q,lastColumn,RMPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup.
+			- Output: RMPath
+			*/
+			int lastColumn=1; //ở đây các embedding chỉ có 1 cạnh, nên Q cuối cùng nằm ở vị trí index=1 trong mảng device_arr_Q,
+								//Khi mở rộng embedding và bổ sung thêm Q mới vào sau mảng device_arr_Q thì chúng ta phải cập nhật lại lastColumn						
+			vector<int> RighMostPath(2); //chứa index của mảng device_arr_Q mà tại đó cột Q thuộc right most path
+				// Tương tự lastColumn, Khi mở rộng embedding và bổ sung thêm Q mới vào sau mảng device_arr_Q thì chúng ta phải cập nhật lại RightMostPath	
+			cHistory **dH=nullptr; //hàm getExtension sẽ trả về dH và số lượng phần tử của dH (chính bằng số lượng embedding) của DFS_CODE đang xét
+			int numberElem_dH=0;
+			cudaStatus = getExtension(device_arr_Q,lastColumn,RighMostPath,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg,dH,numberElem_dH); 
+			if(cudaStatus !=cudaSuccess){
+				fprintf(stderr,"\n getExtension failed",cudaStatus);
+				exit(1);
+			}
+
+			cudaStatus = markEmbedding(dH,device_arr_Q,lastColumn,numberElem_dH,maxOfVer,d_O,d_N);
+			if (cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\n markEmbedding function has been failed.",cudaStatus);
+				/*goto labelError;*/
+				exit(1);
+			}
+
+			printf("\n****************Display history of all embedding in dH array***********"); //kiểm tra thử dữ liệu của mảng dH trên device sau khi đã đánh dấu các embedding thuộc right most path
+			kernelPrintdeviceH<<<1,1>>>(dH,numberElem_dH);
+			cudaDeviceSynchronize();
+			
+
+			//5. Xây dựng hàm để lặp
+			gspan.DFS_CODE.pop();
+	}
+
+	printf("\n***********Finished: compute support for valid unique extension in d_UniqueExtension **********");
+	printf("\n***********Press the Enter key to continous**********\n");
+
+	//getch();
 
 labelError:
 	//giải phóng vùng nhớ của dữ liệu
@@ -623,7 +824,7 @@ labelError:
 	cudaFree(d_LO);
 	cudaFree(d_N);
 	cudaFree(d_LN);	
-//	cudaFree(d_singlePattern);
+	//	cudaFree(d_singlePattern);
 	cudaFree(d_Extension);
 	cudaFree(V);
 	cudaFree(d_ValidExtension);	

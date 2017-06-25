@@ -8,4 +8,4 @@ class cHistory; //khai báo class history rỗng để hệ thống hiểu cHist
 #include "getExtension.h"
 using namespace std;
 
-extern "C"  cudaError_t markEmbedding(cHistory **dH,struct_Q *device_arr_Q,int lastColumn,vector<int> RMPath,int n,unsigned int maxOfVer,int *d_O,int *d_N);
+extern "C"  cudaError_t markEmbedding(cHistory **dH,struct_Q *device_arr_Q,int lastColumn,int n,unsigned int maxOfVer,int *d_O,int *d_N);

@@ -190,7 +190,7 @@ __global__ void kernelPrintdeviceH(cHistory **device_H,int numberEmbeddings){
 
 
 
-cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS> &P,vector<int> &RMPath,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int minsup,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg){
+cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPath,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int minsup,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg,cHistory **&dH,int &numberElem_dH){
 	cudaError_t cudaStatus;
 
 	/*
@@ -227,16 +227,20 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 				o Dựa vào vid để biết được embedding thuộc đồ thị nào
 
 	*/
-
+	//Xây dựng lịch sử của embedding. Có bao nhiêu Embeddings thì chúng ta xây dựng bấy nhiêu lịch sử 
 	//1. Lấy số lượng embedding từ device_arr_Q và lưu kết quả vào biến noEle_Embeddings
 	//	 Lấy kích thước mảng dO, dLN và lưu vào mảng
 	int *noEle_Embeddings=NULL;
 	int *noEle_hEmbeddings=(int*)new int[1];
-	cudaMalloc((void**)&noEle_Embeddings,sizeof(int));
-	
-	kernelGetnoEle_Embedding<<<1,1>>>(device_arr_Q,lastColumn,noEle_Embeddings);
-	
-	cudaMemcpy(noEle_hEmbeddings,noEle_Embeddings,sizeof(int),cudaMemcpyDeviceToHost);
+	cudaStatus = cudaMalloc((void**)&noEle_Embeddings,sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaMalloc noEle_Embeddings failed");
+		exit(1);
+	}
+
+	kernelGetnoEle_Embedding<<<1,1>>>(device_arr_Q,lastColumn,noEle_Embeddings); //Trả về số lượng embedding của DFS_CODE dựa vào số lượng phần tử ở cột Q cuối trong mảng device_arr_Q
+	cudaDeviceSynchronize();
+	cudaMemcpy(noEle_hEmbeddings,noEle_Embeddings,sizeof(int),cudaMemcpyDeviceToHost); //Kết quả số lượng embedding của DFS_CODE được chép vào biến noEle_h_Embeddings.
 	cudaDeviceSynchronize();
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){
@@ -246,6 +250,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 
 	printf("\nnoEle_Embeddings:%d",*noEle_hEmbeddings);
 	
+	//2. Các lịch sử của embedding là một cấu trúc gồm có mảng d_HO và d_HLN, d_HO là số lượng đỉnh (giống nhau ở tất cả các embedding và bằng maxOfVer), nhưng chúng khác nhau về số lượng cạnh.
 	//Tạo mảng số nguyên có kích thước bằng số lượng embedding
 	//Mangr d_arr_number_HLN lưu trữ số lượng phần tử của mảng d_HLN trong object cHistory của embedding tương ứng.
 
@@ -259,7 +264,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 	{
 		cudaMemset(d_arr_number_HLN,0,sizeof(int)*noEle_hEmbeddings[0]);
 	}
-
+	//Tìm số lượng cạnh của từng embedding và lưu kết quả vào d_arr_number_HLN
 	findNumberOfEdgeInAGraph(d_arr_number_HLN,device_arr_Q,noEle_hEmbeddings[0],lastColumn,maxOfVer,d_O,numberOfGraph,noDeg);
 
 	//Chép kết quả qua host
@@ -287,7 +292,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 	//h_arrH.print();
 
 	//3. Bắt đầu quá trình sao chép mảng cHistory sang device
-	int n=noEle_hEmbeddings[0]; 
+	int n=noEle_hEmbeddings[0]; //Số lượng embedding
 	int numberElement_darrHO=maxOfVer;
 	//int numberElement_darrHLN[]={2,4}; // chính là mảng h_arr_number_HLN chỉ số lượng phần tử của mảng d_arr_HLN trong đối tượng cHistory
 	
@@ -321,9 +326,14 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 	}
 
 
-	cHistory **dH; //dH dùng để lưu kết quả cuối cùng của mảng cHistory
-	cudaMalloc((void**)&dH,sizeof(cHistory*)*n);
-
+//	cHistory **dH; //dH dùng để lưu kết quả cuối cùng của mảng cHistory
+	dH=nullptr;
+	cudaStatus = cudaMalloc((void**)&dH,sizeof(cHistory*)*n);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dH failed",cudaStatus);
+		exit(1);
+	}
+	numberElem_dH =n;
 	//Do không thể cấp phát bộ nhớ cho các member của dH một các trực tiếp trên device nên chúng ta sẽ cấp phát thông qua một biến khác device_H
 	cHistory **device_H=(cHistory**)malloc(sizeof(cHistory*)*n);
 
@@ -344,13 +354,24 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 		//Bây giờ làm sao chép đối tượng này sang bộ nhớ device?
 		//Tạo một con trỏ đối tượng 
 		
-		cudaMalloc((void**)&device_H[j],sizeof(cHistory));
+		cudaStatus=cudaMalloc((void**)&device_H[j],sizeof(cHistory));
+		if(cudaStatus!=cudaSuccess){
+			fprintf(stderr,"\n cudaMalloc device_H[j] failed",cudaStatus);
+			exit(1);
+		}
 		cudaMemcpy(device_H[j],&h2,sizeof(cHistory),cudaMemcpyHostToDevice); //copy h bỏ vào d_h
 
 		int *temp_dO,*temp_dHLN;	//khởi tạo bộ nhớ tạm trên device, gán dữ liệu cho bộ nhớ tạm này. Sau đó, gán chép bộ nhớ này cho các pointer bên trong.
-		cudaMalloc((void**)&temp_dO,sizeof(int)*numberElement_darrHO);
-		cudaMalloc((void**)&temp_dHLN,sizeof(int)*h_arr_number_HLN[j]);
-
+		cudaStatus=cudaMalloc((void**)&temp_dO,sizeof(int)*numberElement_darrHO);
+		if(cudaStatus!=cudaSuccess){
+			fprintf(stderr,"\n cudaMalloc temp_dO failed",cudaStatus);
+			exit(1);
+		}
+		cudaStatus=cudaMalloc((void**)&temp_dHLN,sizeof(int)*h_arr_number_HLN[j]);
+		if(cudaStatus!=cudaSuccess){
+			fprintf(stderr,"\n cudaMalloc temp_dHLN failed",cudaStatus);
+			exit(1);
+		}
 
 		cudaMemcpy(temp_dO,h2.d_arr_HO,sizeof(int)*numberElement_darrHO,cudaMemcpyHostToDevice);
 		cudaMemcpy(temp_dHLN,h2.d_arr_HLN,sizeof(int)*h_arr_number_HLN[j],cudaMemcpyHostToDevice);
@@ -419,12 +440,67 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<struct_DFS
 	Input: cHistory **dH, structQ *device_arr_Q, int lastColumn,vector<int> RMPath
 */	
 
+	//chép sang kernel.cu
+	/*
+	cudaStatus = markEmbedding(dH,device_arr_Q,lastColumn,n,maxOfVer,d_O,d_N);
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n markEmbedding function has been failed.");
+		goto Error;
+	}
+	*/
 
-cudaStatus = markEmbedding(dH,device_arr_Q,lastColumn,RMPath,n,maxOfVer,d_O,d_N);
+	//Chép sang kernel.cu
+	//printf("\****************ndH arr***********"); //kiểm tra thử dữ liệu của mảng dH trên device sau khi đã đánh dấu các embedding thuộc right most path
+	//kernelPrintdeviceH<<<1,1>>>(dH,n);
+
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\ncudaDeviceSynchronize markEmbedding failed");
+		goto Error;
+	}
+
+	/*
+	//5. Tiếp theo là tìm các mở rộng hợp lệ từ các embedding
+		5.1 Tìm các mở rộng backward từ đỉnh cuối cùng của right most path
+		5.2 Tìm các mở rộng forward từ đỉnh cuối cùng của right most path
+		5.3 Tìm các mở rộng forward từ đỉnh còn lại trên right most path
+
+		Input: đỉnh của embedding cần mở rộng, embedding history để biết đỉnh hoặc cạnh mở rộng đã thuộc embedding hay chưa, cơ sở dữ liệu để biết đỉnh, cạnh cần 
+		mở rộng là những đỉnh nào và cạnh nào, cột Q đang mở rộng có phải là cột cuối hay không vì nếu là cột cuối thì mới xét mở rộng backward, mảng V cho biết mở rộng 
+		có phải là mở rộng hợp lệ hay không và mở rộng là backward hay forward.
+		Output: là các Ext_k
+
+		Mọi thứ đã sẵn sàng, bây giờ chỉ viết hàm để khai thác các mở rộng hợp lệ
+		Giải thuật: tìm ra tất cả các mở rộng hợp lệ (valid extensions) từ một embedding column Qk (Qk thuộc RMPath) một cách song song.
+		B1. Duyệt qua các Qk thuộc right most path (RMPath lưu trữ thông tin các Qk thuộc right most path)
+		B2. Tìm bậc m lớn nhất của các vid thuộc Qk
+		B3. Cấp phát mảng V có kích thước: m x |Qk|
+		B4. Tìm các lân cận của các đỉnh vid trong Qk và ghi nhận những mở rộng hợp lệ vào mảng V cùng với thông tin forward hay backward
+		B5. Scan mảng V để biết kích thước của mảng Ext cần cấp phát là bao nhiêu, sau đó cấp phát mảng Ext và lưu trữ các mở rộng tương ứng vào mảng Ext với index trong V
+		B6. Có Ext chúng ta có thể tính được độ hỗ trợ của mở rộng.
+
+		Ở đây chúng ta thấy sau B6 thì cần phải kiểm tra xem DFS_Code thu được có phải là nhỏ nhất hay không? Vấn đề này được thực hiện tuần tự trên bộ nhớ CPU theo
+		giải thuật của gSpan. Thứ nữa, khi DFS_Code được xem là nhỏ nhất thì ta phải cập nhật lại dH history của embedding, cần phải gán những giá trị khác zero trong
+		dH history của embedding bằng 1, rồi sau đó duyệt qua RMPath để cập nhật lại những đỉnh và cạnh thuộc RMPath bằng 2 hỗ trợ cho việc xác định backward extension
+		được dễ dàng hơn.
+		Sau khi code xong mình cần phải sắp xếp lại code cho chuyên nghiệp và tăng tốc.
+		Cuối cùng là phải đề xuất ra hướng để cải thiện hiệu suất của bài báo
+		
+	*/
 	
-
+	int noEle_RMPath=0;
+	noEle_RMPath= RMPath.size();
+	for (int i = noEle_RMPath-1; i >=0; i--)
+	{			
+		//printf("\nRMPath[%d]:%d",i,RMPath[i]);
+		cudaStatus=getValidExtensionFromEmbeding(device_arr_Q,RMPath[i],dH,n,maxOfVer,d_O,d_LO,d_N,d_LN,numberOfElementd_O,numberOfElementd_N,lastColumn);
+		if(cudaStatus!=cudaSuccess){
+			fprintf(stderr,"\ngetValidExtensionFromEmbedding failed");
+			goto Error;
+		}
+	}
 	
-
 	cudaDeviceSynchronize();
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){

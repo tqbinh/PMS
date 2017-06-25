@@ -6,7 +6,7 @@ __global__ void kernelMarkEmbedding(cHistory **dH,struct_Q *device_arr_Q,int las
 	int i= blockDim.x*blockIdx.x + threadIdx.x; //mỗi thread i sẽ xử lý một embedding
 	if(i<n){
 		int vid = device_arr_Q[lastColumn]._d_arr_Q[i].vid; // Từ cột Q cuối cùng, mỗi thread i sẽ xử lý embedding thứ i
-		
+		int indexOfFirstVertexInGraph = vid-(vid%maxOfVer);
 		int toVid = vid;//đỉnh to của cạnh thuộc embedding
 		int idxOfdH= (vid%maxOfVer);
 		dH[i]->d_arr_HO[idxOfdH]=2;
@@ -18,7 +18,7 @@ __global__ void kernelMarkEmbedding(cHistory **dH,struct_Q *device_arr_Q,int las
 			
 			vid = device_arr_Q[prevQ]._d_arr_Q[newi].vid;
 			int fromVid=vid; //đỉnh from của cạnh thuộc embedding
-			int indexOfFirstVertexInGraph = vid-(vid%maxOfVer);
+			
 			
 			int idxEdge = d_O[vid]-d_O[indexOfFirstVertexInGraph]; //vị trí cạnh cần cập nhật được khởi tạo bằng giá trị index của vid đang xét trừ đi giá trị index của đỉnh đầu tiên trong đồ thị đó.
 			int indexOfdN=d_O[fromVid];
@@ -27,14 +27,25 @@ __global__ void kernelMarkEmbedding(cHistory **dH,struct_Q *device_arr_Q,int las
 				idxEdge=idxEdge+1;
 				indexOfdN++;
 			}
+
+			int fromVidR=toVid;
+			int toVidR=fromVid;
+			int indexOfEdgeR=d_O[fromVidR]-d_O[indexOfFirstVertexInGraph];
+			indexOfdN=d_O[fromVidR];
+			while(d_N[indexOfdN]!=toVidR){
+				indexOfEdgeR++;
+				indexOfdN++;
+			}
+
+			
 			//Nếu không phải là đỉnh đầu tiên thì phải cộng vào idxEdge một lượng bằng tổng bậc của các đỉnh trước đó
 			//Tổng bậc của các đỉnh trước đó chính bằng 
 						
 			idxOfdH = (vid%maxOfVer); //Đánh dấu đỉnh thuộc Embedding
 			dH[i]->d_arr_HO[idxOfdH]=2;
 
-			dH[i]->d_arr_HLN[idxEdge]=2;//Đánh dấu cạnh thuộc Embedding
-
+			dH[i]->d_arr_HLN[idxEdge]=2;//Đánh dấu cạnh thuộc Embedding. vì đây là đơn đồ thị vô hướng nên cạnh AB cũng bằng cạnh BA,do đó ta phải đánh dấu cạnh BA cũng thuộc embedding.
+			dH[i]->d_arr_HLN[indexOfEdgeR]=2;
 
 			if(device_arr_Q[prevQ]._prevQ==-1) return; //nếu là cột Q đầu tiên thì dừng lại vì đã duyệt xong embedding
 			newi=device_arr_Q[prevQ]._d_arr_Q[i].idx; //ngược lại thì lấy index của cột Q phía trước
@@ -46,7 +57,7 @@ __global__ void kernelMarkEmbedding(cHistory **dH,struct_Q *device_arr_Q,int las
 }
 
 
-cudaError_t markEmbedding(cHistory **dH,struct_Q *device_arr_Q,int lastColumn,vector<int> RMPath,int n,unsigned int maxOfVer,int *d_O,int *d_N){
+cudaError_t markEmbedding(cHistory **dH,struct_Q *device_arr_Q,int lastColumn,int n,unsigned int maxOfVer,int *d_O,int *d_N){
 	cudaError_t cudaStatus;
 
 	dim3 block(1024);
@@ -62,8 +73,8 @@ cudaError_t markEmbedding(cHistory **dH,struct_Q *device_arr_Q,int lastColumn,ve
 		goto Error;
 	}
 
-	printf("\****************ndH arr***********"); //kiểm tra thử dữ liệu của mảng dH trên device xem có đúng không
-	kernelPrintdeviceH<<<1,1>>>(dH,n);
+	//printf("\****************ndH arr***********"); //kiểm tra thử dữ liệu của mảng dH trên device sau khi đã đánh dấu các embedding thuộc right most path
+	//kernelPrintdeviceH<<<1,1>>>(dH,n);
 
 	cudaDeviceSynchronize();
 	cudaStatus=cudaGetLastError();
