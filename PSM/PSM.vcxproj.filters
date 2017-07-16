@@ -7,7 +7,6 @@
     <CudaCompile Include="kernelMarkInvalidVertex.cu" />
     <CudaCompile Include="markInvalidVertex.cu" />
     <CudaCompile Include="kernelaccess_d_LO_from_idx_of_d_O.cu" />
-    <CudaCompile Include="access_d_LO_from_idx_of_d_O.cu" />
     <CudaCompile Include="countNumberOfLabelVetex.cu" />
     <CudaCompile Include="kernelCountNumberOfLabelVertex.cu" />
     <CudaCompile Include="kernelReduce.cu" />
@@ -32,6 +31,8 @@
     <CudaCompile Include="getValidExtensionFromEmbeding.cu" />
     <CudaCompile Include="getValidForwardExtensionFromTheLastQ.cu" />
     <CudaCompile Include="getSatisfyEdge.cu" />
+    <CudaCompile Include="access_d_LO_from_idx_of_d_O.cu" />
+    <CudaCompile Include="header.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dfs.cpp" />
@@ -55,7 +56,6 @@
     <ClInclude Include="markInvalidVertex.h" />
     <ClInclude Include="displayArray.h" />
     <ClInclude Include="checkDataBetweenHostAndGPU.h" />
-    <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
     <ClInclude Include="kernelaccess_d_LO_from_idx_of_d_O.h" />
     <ClInclude Include="countNumberOfLabelVetex.h" />
     <ClInclude Include="kernelReduce.h" />
@@ -87,6 +87,8 @@
     <ClInclude Include="getValidForwardExtensionFromTheLastQ.h" />
     <ClInclude Include="DFS_Code.h" />
     <ClInclude Include="getSatisfyEdge.h" />
+    <ClInclude Include="access_d_LO_from_idx_of_d_O.h" />
+    <ClInclude Include="header.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="markEmbedding.cuh" />

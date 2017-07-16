@@ -1,6 +1,6 @@
 #include "calcLabelAndStoreUniqueExtension.h"
 
-__global__ void kernelCalcLabelAndStoreUniqueExtension(int *d_allPossibleExtension,int *d_allPossibleExtensionScanResult,unsigned int noElem_allPossibleExtension,Extension *d_UniqueExtension,unsigned int Le,unsigned int Lv){
+__global__ void kernelCalcLabelAndStoreUniqueExtension(int *d_allPossibleExtension,int *d_allPossibleExtensionScanResult,unsigned int noElem_allPossibleExtension,UniEdge *d_UniqueExtension,unsigned int Le,unsigned int Lv){
 	int i=blockIdx.x*blockDim.x + threadIdx.x;	
 	if(i<noElem_allPossibleExtension && d_allPossibleExtension[i]==1){
 		int li,lj,lij;
@@ -14,7 +14,7 @@ __global__ void kernelCalcLabelAndStoreUniqueExtension(int *d_allPossibleExtensi
 	}
 }
 
-cudaError_t calcLabelAndStoreUniqueExtension(int *d_allPossibleExtension,int *d_allPossibleExtensionScanResult,unsigned int noElem_allPossibleExtension,Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,unsigned int Le,unsigned int Lv){
+cudaError_t calcLabelAndStoreUniqueExtension(int *d_allPossibleExtension,int *d_allPossibleExtensionScanResult,unsigned int noElem_allPossibleExtension,UniEdge *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,unsigned int Le,unsigned int Lv){
 	cudaError_t cudaStatus;
 
 

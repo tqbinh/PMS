@@ -231,7 +231,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPa
 	//1. Lấy số lượng embedding từ device_arr_Q và lưu kết quả vào biến noEle_Embeddings
 	//	 Lấy kích thước mảng dO, dLN và lưu vào mảng
 	int *noEle_Embeddings=NULL;
-	int *noEle_hEmbeddings=(int*)new int[1];
+	int *noEle_hEmbeddings=(int*)malloc(sizeof(int));
 	cudaStatus = cudaMalloc((void**)&noEle_Embeddings,sizeof(int));
 	if(cudaStatus!=cudaSuccess){
 		fprintf(stderr,"\ncudaMalloc noEle_Embeddings failed");
@@ -250,7 +250,8 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPa
 
 	printf("\nnoEle_Embeddings:%d",*noEle_hEmbeddings);
 	
-	//2. Các lịch sử của embedding là một cấu trúc gồm có mảng d_HO và d_HLN, d_HO là số lượng đỉnh (giống nhau ở tất cả các embedding và bằng maxOfVer), nhưng chúng khác nhau về số lượng cạnh.
+	//2. Các lịch sử của embedding là một cấu trúc gồm có mảng d_HO và d_HLN, d_HO là số lượng đỉnh (giống nhau ở tất cả các embedding và bằng maxOfVer), 
+	//nhưng chúng khác nhau về số lượng cạnh.
 	//Tạo mảng số nguyên có kích thước bằng số lượng embedding
 	//Mangr d_arr_number_HLN lưu trữ số lượng phần tử của mảng d_HLN trong object cHistory của embedding tương ứng.
 
@@ -441,13 +442,13 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPa
 */	
 
 	//chép sang kernel.cu
-	/*
-	cudaStatus = markEmbedding(dH,device_arr_Q,lastColumn,n,maxOfVer,d_O,d_N);
-	if (cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\n markEmbedding function has been failed.");
-		goto Error;
-	}
-	*/
+	
+	//cudaStatus = markEmbedding(dH,device_arr_Q,lastColumn,n,maxOfVer,d_O,d_N);
+	//if (cudaStatus!=cudaSuccess){
+	//	fprintf(stderr,"\n markEmbedding function has been failed.");
+	//	goto Error;
+	//}
+	
 
 	//Chép sang kernel.cu
 	//printf("\****************ndH arr***********"); //kiểm tra thử dữ liệu của mảng dH trên device sau khi đã đánh dấu các embedding thuộc right most path
@@ -488,7 +489,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPa
 		Cuối cùng là phải đề xuất ra hướng để cải thiện hiệu suất của bài báo
 		
 	*/
-	
+	/*
 	int noEle_RMPath=0;
 	noEle_RMPath= RMPath.size();
 	for (int i = noEle_RMPath-1; i >=0; i--)
@@ -500,7 +501,7 @@ cudaError_t getExtension(struct_Q *device_arr_Q,int lastColumn,vector<int> &RMPa
 			goto Error;
 		}
 	}
-	
+	*/
 	cudaDeviceSynchronize();
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){

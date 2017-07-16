@@ -239,7 +239,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		7. Làm sao duyệt qua được tất cả các Embedding khi có Q2?
 	*/
 
-	/*1.Tạo mảng M có kích thước bằng với d_ValidExtension và gán giá trị ban đầu cho các phần tử trong M bằng 0.*/
+	/*1.Tạo mảng M có kích thước bằng với d_ValidExtension và khởi tạo giá trị cho các phần tử trong M bằng 0.*/
 	int* d_M;
 	cudaStatus=cudaMalloc((int**)&d_M,noElem_d_ValidExtension*sizeof(int));
 	if (cudaStatus!=cudaSuccess){
@@ -306,9 +306,9 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	
 	printf("\nnoElem_d_Q1:%d",noElem_d_Q);
 
-	/*		
-		5. Tạo mảng các cấu trúc Q1 và Q2 với kích thước tìm được đồng thời gán giá trị cho các phần tử của mảng là -1.
-	*/
+			
+	//5. Tạo mảng các cấu trúc Q1 và Q2 với kích thước tìm được đồng thời gán giá trị cho các phần tử của mảng là -1.
+
 	struct_Embedding *d_Q1=NULL;
 	cudaStatus=cudaMalloc((struct_Embedding**)&d_Q1,noElem_d_Q*sizeof(struct_Embedding));
 	if(cudaStatus!=cudaSuccess){
@@ -459,7 +459,7 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 	prevQ=0;
 	kernelcp<<<1,1>>>(device_arr_Q,2,positionUpdate,d_Q2,noElem_d_Q,prevQ);
 	//printf("\n\nPrint device_arr_Q:");
-	//printStructQ<<<1,2>>>(device_arr_Q,2);
+	printStructQ<<<1,2>>>(device_arr_Q,2);
 
 	//Được chép ra kernel.cu để truy xuất thông tin của struct_Q *device_arr_Q
 	/*
@@ -570,9 +570,12 @@ cudaError_t createForwardEmbedding(Extension *d_ValidExtension,unsigned int noEl
 		//goto Error;
 		exit(1);
 	}
+
 Error:
 	//cudaFree(d_M);
 	//cudaFree(d_Q1);
 	//cudaFree(d_Q2);
 	return cudaStatus;
 }
+
+

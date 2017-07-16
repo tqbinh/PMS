@@ -1,35 +1,26 @@
-﻿Build started 6/25/2017 4:49:23 PM.
+﻿Build started 7/17/2017 6:45:56 AM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\calcSupport.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\createForwardEmbedding.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getExtension.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidExtensionFromEmbeding.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidForwardExtensionFromTheLastQ.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu 
-       AddCudaCompileDeps:
-         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\markEmbedding.cu 
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu 
        CudaBuild:
-         Compiling CUDA source file calcSupport.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpd8e4ef5e145249a6bfcf18e3ee7a9e5b.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\calcSupport.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\calcSupport.cu"
+         Compiling CUDA source file header.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpe3a9c5428e9d4ef6891fcc5fa35334e9.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu"
          
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\calcSupport.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\calcSupport.cu" 
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu" 
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(8): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(18): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
@@ -38,24 +29,72 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(129): warning : transfer of control bypasses initialization of:
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(24): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(158): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(269): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(496): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(527): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(577): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(637): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(668): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(679): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(944): warning : variable "noElem_dHO" was declared but never referenced
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1055): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1134): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1250): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1268): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1366): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1506): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1557): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1775): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1784): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1796): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1807): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1819): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1831): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1871): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1888): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1908): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1966): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2122): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2123): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2154): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2155): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2267): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2579): warning : parameter "dArrUniEdge" was set but never used
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(23): warning : extern inline function "printUnsignedInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(11): warning : extern inline function "scanV(unsigned int *, unsigned int, unsigned int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV(int *, unsigned int, int *)" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(9): warning : extern inline function "getLastElementExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scan_largearray_kernel.h(10): warning C4005: 'BLOCK_SIZE' : macro redefinition
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(10): warning : extern inline function "getSizeBaseOnScanResult" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(8): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(18): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
@@ -64,358 +103,161 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(129): warning : transfer of control bypasses initialization of:
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(24): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(158): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(269): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(496): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(527): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(577): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(637): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(668): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(679): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(944): warning : variable "noElem_dHO" was declared but never referenced
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1055): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1134): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1250): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1268): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1366): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1506): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1557): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1775): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1784): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1796): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1807): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1819): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1831): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1871): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1888): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1908): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1966): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2122): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2123): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2154): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2155): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2267): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2579): warning : parameter "dArrUniEdge" was set but never used
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(23): warning : extern inline function "printUnsignedInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(11): warning : extern inline function "scanV(unsigned int *, unsigned int, unsigned int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV(int *, unsigned int, int *)" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(9): warning : extern inline function "getLastElementExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scan_largearray_kernel.h(10): warning C4005: 'BLOCK_SIZE' : macro redefinition
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(39): warning C4018: '<' : signed/unsigned mismatch
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(61): warning C4244: 'argument' : conversion from 'float' to 'const int', possible loss of data
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(188): warning C4533: initialization of 'grida' is skipped by 'goto Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(158) : see declaration of 'grida'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(188) : see declaration of 'Error'
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(188): warning C4533: initialization of 'blocka' is skipped by 'goto Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(157) : see declaration of 'blocka'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/calcSupport.cu(188) : see declaration of 'Error'
-       CudaBuild:
-         Compiling CUDA source file createForwardEmbedding.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpc7e2b20ca47b473caab968c0b6a6d7e6.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\createForwardEmbedding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\createForwardEmbedding.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\createForwardEmbedding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\createForwardEmbedding.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(132): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(142): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(142): warning : parameter "same" was set but never used
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(150): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(193): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(211): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(573): warning : label "Error" was declared but never referenced
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(9): warning : extern inline function "printEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(18): warning : extern inline function "printfExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(132): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(142): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(142): warning : parameter "same" was set but never used
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(150): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(193): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(211): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(573): warning : label "Error" was declared but never referenced
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(9): warning : extern inline function "printEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(18): warning : extern inline function "printfExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/createForwardEmbedding.cu(573): warning C4102: 'Error' : unreferenced label
-       CudaBuild:
-         Compiling CUDA source file getExtension.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpe52c0d55b9fb4712974c07e277e66667.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getExtension.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getExtension.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getExtension.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getExtension.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(122): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(165): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(170): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(248): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(261): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(402): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(460): warning : transfer of control bypasses initialization of:
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtensionFromEmbedding.h(12): warning : extern inline function "getValidExtensionFromEmbeding" was referenced but not defined
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(78): warning : calling a __host__ function("exit") from a __host__ __device__ function("cHistory::cHistory") is not allowed
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(88): warning : calling a __host__ function("exit") from a __host__ __device__ function("cHistory::cHistory") is not allowed
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(108): warning : calling a __host__ function("exit") from a __host__ __device__ function("ArrHistory::ArrHistory") is not allowed
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(122): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(165): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(170): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(248): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(261): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(402): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(460): warning : transfer of control bypasses initialization of:
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtensionFromEmbedding.h(12): warning : extern inline function "getValidExtensionFromEmbeding" was referenced but not defined
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(510): warning C4533: initialization of 'h_arrH' is skipped by 'goto Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(282) : see declaration of 'h_arrH'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(510) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(282) : see declaration of 'h_arrH'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getExtension.cu(510) : see declaration of 'Error'
-       CudaBuild:
-         Compiling CUDA source file getValidExtensionFromEmbeding.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp1931b9b0815c494daed590ac3988113f.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getValidExtensionFromEmbeding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidExtensionFromEmbeding.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getValidExtensionFromEmbeding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidExtensionFromEmbeding.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : extern inline function "getValidForwardExtensionFromTheLastQ" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : extern inline function "getValidForwardExtensionFromTheLastQ" was referenced but not defined
-       CudaBuild:
-         Compiling CUDA source file getValidForwardExtensionFromTheLastQ.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp046680b4bc67467cb0787f0a7c4c2089.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getValidForwardExtensionFromTheLastQ.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidForwardExtensionFromTheLastQ.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\getValidForwardExtensionFromTheLastQ.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\getValidForwardExtensionFromTheLastQ.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(13): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(59): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(99): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(150): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(164): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(180): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(190): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(205): warning : transfer of control bypasses initialization of:
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(13): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(59): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(99): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(150): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(164): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(180): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(190): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(205): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261): warning C4533: initialization of 'blockSize' is skipped by 'goto Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(198) : see declaration of 'blockSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261): warning C4533: initialization of 'gridSize' is skipped by 'goto Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(197) : see declaration of 'gridSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(198) : see declaration of 'blockSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(197) : see declaration of 'gridSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(198) : see declaration of 'blockSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(197) : see declaration of 'gridSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(198) : see declaration of 'blockSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(197) : see declaration of 'gridSize'
-                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/getValidForwardExtensionFromTheLastQ.cu(261) : see declaration of 'Error'
-       CudaBuild:
-         Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp3f3027c1f8ac43e588c402744b02e4db.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(5): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(5): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\markInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkArray.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\access_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(6): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\sumUntilReachZero.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(726): warning : variable "minLabel" was declared but never referenced
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(727): warning : variable "maxtoc" was declared but never referenced
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(821): warning : label "labelError" was declared but never referenced
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : extern inline function "kernelPrintf" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(18): warning : extern inline function "printfExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(6): warning : extern inline function "displayArray" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(9): warning : extern inline function "checkDataBetweenHostAndGPU" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(9): warning : extern inline function "countNumberOfLabelVetex" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(10): warning : extern inline function "countNumberOfEdgeLabel" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h(14): warning : extern inline function "getAndStoreExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\validEdge.h(9): warning : extern inline function "validEdge" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidExtension.h(9): warning : extern inline function "getValidExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getUniqueExtension.h(8): warning : extern inline function "getUniqueExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcLabelAndStoreUniqueExtension.h(8): warning : extern inline function "calcLabelAndStoreUniqueExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcBoundary.h(8): warning : extern inline function "calcBoundary" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : extern inline function "kernelPrintdeviceH" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(44): warning : extern inline function "getExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(23): warning : extern inline function "createForwardEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcSupport.h(17): warning : extern inline function "calcSupport" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcSupport.h(18): warning : extern inline function "getGraphIdContainEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getSatisfyEdge.h(10): warning : extern inline function "getSatisfyEdge" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelCountLabelInGraphDB.h(5): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelMarkInvalidVertex.h(5): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\markInvalidVertex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkArray.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\access_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelaccess_d_LO_from_idx_of_d_O.h(6): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelReduce.h(11): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\sumUntilReachZero.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(8): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\extractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(1): warning : extra text after expected end of preprocessing directive
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelExtractUniqueEdge.h(7): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(726): warning : variable "minLabel" was declared but never referenced
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(727): warning : variable "maxtoc" was declared but never referenced
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(821): warning : label "labelError" was declared but never referenced
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : extern inline function "kernelPrintf" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(18): warning : extern inline function "printfExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\displayArray.h(6): warning : extern inline function "displayArray" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\checkDataBetweenHostAndGPU.h(9): warning : extern inline function "checkDataBetweenHostAndGPU" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfLabelVetex.h(9): warning : extern inline function "countNumberOfLabelVetex" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\countNumberOfEdgeLabel.h(10): warning : extern inline function "countNumberOfEdgeLabel" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getAndStoreExtension.h(14): warning : extern inline function "getAndStoreExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\validEdge.h(9): warning : extern inline function "validEdge" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidExtension.h(9): warning : extern inline function "getValidExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getUniqueExtension.h(8): warning : extern inline function "getUniqueExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcLabelAndStoreUniqueExtension.h(8): warning : extern inline function "calcLabelAndStoreUniqueExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcBoundary.h(8): warning : extern inline function "calcBoundary" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : extern inline function "kernelPrintdeviceH" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(44): warning : extern inline function "getExtension" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(23): warning : extern inline function "createForwardEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcSupport.h(17): warning : extern inline function "calcSupport" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\calcSupport.h(18): warning : extern inline function "getGraphIdContainEmbedding" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getSatisfyEdge.h(10): warning : extern inline function "getSatisfyEdge" was referenced but not defined
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(142): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(143): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(680): warning C4018: '<' : signed/unsigned mismatch
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(699): warning C4018: '<' : signed/unsigned mismatch
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(821): warning C4102: 'labelError' : unreferenced label
-       CudaBuild:
-         Compiling CUDA source file markEmbedding.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp828bc05436a540ea8f99185e530e26da.cmd"
-         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\markEmbedding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\markEmbedding.cu"
-         
-         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\markEmbedding.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\markEmbedding.cu" 
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(13): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(14): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(15): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
-     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(10): warning : extern inline function "getSizeBaseOnScanResult" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(35) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(34) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(509) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(508) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(650) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(649) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1059) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1058) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1138) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1137) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1370) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1369) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1514) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1513) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595): warning C4533: initialization of 'blockSize' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595): warning C4533: initialization of 'gridSize' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'gridb' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'blockb' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1778) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1777) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
        Link:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\calcBoundary.cu.obj
@@ -433,6 +275,7 @@
          Debug\getValidExtension.cu.obj
          Debug\getValidExtensionFromEmbeding.cu.obj
          Debug\getValidForwardExtensionFromTheLastQ.cu.obj
+         Debug\header.cu.obj
          Debug\kernel.cu.obj
          Debug\kernelaccess_d_LO_from_idx_of_d_O.cu.obj
          Debug\kernelCastingInt2Float.cu.obj
@@ -471,4 +314,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:49.99
+Time Elapsed 00:00:19.01

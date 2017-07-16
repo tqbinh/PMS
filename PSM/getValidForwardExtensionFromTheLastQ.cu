@@ -9,8 +9,15 @@ __global__ void kernelPrintd_arr_V(struct_V *d_arr_V,int numberElementOf_d_arr_V
 	}
 }
 
+__global__ void kernelCpyFromd_arr_V_to_d_arrValidV(struct_V *d_arr_V,int numberElementOf_d_arr_V,int *d_arrV){
+	int i = threadIdx.x + blockDim.x*blockIdx.x;
+	if(i<numberElementOf_d_arr_V){
+		d_arrV[i]=d_arr_V[i].valid;
+	}
+}
 
-__global__ void kernelFindValidForwardFromLastQ(struct_Q *device_arr_Q,int indexOfQ,cHistory **dH,int n,int *d_O,int *d_LO,int *d_N,struct_V *d_arr_V,float *d_arr_degreeOfVerticesInQColumn, int maxOfVer,int m){
+
+__global__ void kernelFindValidForwardFromLastQ(struct_Q *device_arr_Q,int indexOfQ,cHistory **dH,int n,int *d_O,int *d_LO,int *d_N,int *d_LN,struct_V *d_arr_V,float *d_arr_degreeOfVerticesInQColumn, int maxOfVer,int m,Extension *d_arrE,int lastColumn){
 	int i = blockDim.x * blockIdx.x + threadIdx.x;
 	if(i<n){
 		int minLabel = d_LO[device_arr_Q[0]._d_arr_Q[0].vid];
@@ -35,6 +42,7 @@ __global__ void kernelFindValidForwardFromLastQ(struct_Q *device_arr_Q,int index
 		printf("\n Thread %d: vid:%d have degree: %d",i,vid,degreeVid);
 		//Duyệt qua các đỉnh kề với đỉnh vid dựa vào số lần duyệt là bậc
 		int indexToVidIndN=d_O[vid];
+		int labelFromVid = d_LO[vid];
 		int toVid;
 		int labelToVid;
 		for (int j = 0; j < degreeVid; j++,indexToVidIndN++) //Duyệt qua tất cả các đỉnh kề với đỉnh vid, nếu đỉnh không thuộc embedding thì --> cạnh cũng không thuộc embedding vì đây là Q cuối
@@ -48,7 +56,16 @@ __global__ void kernelFindValidForwardFromLastQ(struct_Q *device_arr_Q,int index
 			if(dH[i]->d_arr_HO[indexOfToVidInEmbedding]==0){ //Nếu giá trị tương ứng trên Embedding bằng zero thì xét xem label của nó có thoả lớn hơn hoặc bằng minLabel hay không
 				if(labelToVid>=minLabel){ //nếu thoả thì sẽ set mảng V tương ứng là 1 và chỉ định nó là forward
 					int indexOfd_arr_V=i*m+j;
-					d_arr_V[indexOfd_arr_V].valid=1;					
+					int indexOfd_LN=indexToVidIndN+j;
+					d_arr_V[indexOfd_arr_V].valid=1;
+					//cập nhật dữ liệu cho mảng d_arrE
+					d_arrE[indexOfd_arr_V].vgi=vid;
+					d_arrE[indexOfd_arr_V].vgj=toVid;
+					d_arrE[indexOfd_arr_V].lij=d_LN[indexOfd_LN];
+					d_arrE[indexOfd_arr_V].li=labelFromVid;
+					d_arrE[indexOfd_arr_V].lj=labelToVid;
+					d_arrE[indexOfd_arr_V].vi=indexOfQ;
+					d_arrE[indexOfd_arr_V].vj=indexOfQ+1;					
 				}
 			}
 		}
@@ -135,7 +152,7 @@ __global__ void kernelFindDegreeOfVertex(int *d_O,int *d_N,int numberOfElementd_
 }
 
 
-cudaError_t getValidForwardExtensionFromTheLastQ(struct_Q *device_arr_Q,int indexOfQ,cHistory **dH,int n,unsigned int maxOfVer,int *d_O,int *d_LO,int *d_N,int *d_LN,int numberOfElementd_O,int numberOfElementd_N){
+cudaError_t getValidForwardExtensionFromTheLastQ(Extension *&d_arrE,int &numberElement_d_arrE,struct_Q *device_arr_Q,int indexOfQ,cHistory **dH,int n,unsigned int maxOfVer,int *d_O,int *d_LO,int *d_N,int *d_LN,int numberOfElementd_O,int numberOfElementd_N){
 	cudaError_t cudaStatus;
 
 	dim3 block(1024);
@@ -240,8 +257,25 @@ cudaError_t getValidForwardExtensionFromTheLastQ(struct_Q *device_arr_Q,int inde
 		o Thread thứ i sẽ sử dụng các phần tử tương ứng index_d_arr_V từ [i*m,(i+1)*m - 1]
 		o Mỗi lần lặp bậc của vid thì biến tạm sẽ tăng lên 1 để chỉ vùng nhớ tương ứng trên d_arr_V
 		o Nếu đỉnh phải cùng của DFS_Code kết nối trực tiếp với đỉnh đầu tiên của DFS_Code thì không tồn tại backward edge (chỉ đúng trong đơn đồ thị vô hướng).
+
+		
 	*/
-	kernelFindValidForwardFromLastQ<<<grid,block>>>(device_arr_Q,indexOfQ,dH,n,d_O,d_LO,d_N,d_arr_V,d_arr_degreeOfVerticesInQColumn,maxOfVer,m);
+	//Tạo mảng d_arrE có số lượng phần tử bằng với mảng d_arr_V để lưu vgi,vgj và nhãn của cạnh mở rộng
+	//Extension *d_arrE;
+	d_arrE=nullptr;
+	numberElement_d_arrE=numberElementOf_d_arr_V;
+	cudaStatus = cudaMalloc((void**)&d_arrE,numberElementOf_d_arr_V*sizeof(Extension));
+	if (cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc d_arrE failed",cudaStatus);
+		exit(1);
+	}
+	else
+	{
+		cudaMemset(d_arrE,-1,numberElementOf_d_arr_V*sizeof(Extension));
+	}
+	int lastColumn =1; //chỉ gán tạm thời thôi, chứ nó cần truyền từ ngoài vào.
+	
+	kernelFindValidForwardFromLastQ<<<grid,block>>>(device_arr_Q,indexOfQ,dH,n,d_O,d_LO,d_N,d_LN,d_arr_V,d_arr_degreeOfVerticesInQColumn,maxOfVer,m,d_arrE,lastColumn);
 	cudaDeviceSynchronize();
 	cudaStatus = cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){
@@ -250,8 +284,42 @@ cudaError_t getValidForwardExtensionFromTheLastQ(struct_Q *device_arr_Q,int inde
 	}
 	
 	//Hiển thị kết quả mảng d_arr_V với số lượng phần tử numberElementOf_d_arr_V
-	kernelPrintd_arr_V<<<1,numberElementOf_d_arr_V>>>(d_arr_V,numberElementOf_d_arr_V);
-	
+	/*kernelPrintd_arr_V<<<1,numberElementOf_d_arr_V>>>(d_arr_V,numberElementOf_d_arr_V);
+	cudaDeviceSynchronize();
+	printfExtension(d_arrE,numberElementOf_d_arr_V);
+	cudaDeviceSynchronize();*/
+
+	//Scan mảng d_arr_V để thu được mảng index d_arr_V_scanResult. Từ mảng này chúng ta có cơ sở để tạo mảng d_Ext để chép kết quả từ d_arr_E bỏ vào d_Ext.
+	//1. Trước tiên, cần chép các phần tử valid từ mảng d_arr_V sang mảng số nguyên d_arrValidV;
+	int *d_arrValidV;
+	cudaStatus = cudaMalloc((void**)&d_arrValidV,numberElementOf_d_arr_V*sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc d_arrValidV failed",cudaStatus);
+		exit(1);
+	}
+	else
+	{
+		cudaMemset(d_arrValidV,0,numberElementOf_d_arr_V*sizeof(int));
+	}
+
+	dim3 blockb(512);
+	dim3 gridb((numberElementOf_d_arr_V+blockb.x-1)/blockb.x);
+
+	kernelCpyFromd_arr_V_to_d_arrValidV<<<gridb,blockb>>>(d_arr_V,numberElementOf_d_arr_V,d_arrValidV);
+	cudaDeviceSynchronize();
+
+	int * d_arrValidV_scanResult;
+	cudaStatus = cudaMalloc((void**)&d_arrValidV_scanResult,numberElementOf_d_arr_V*sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc d_arrValidV failed",cudaStatus);
+		exit(1);
+	}
+
+	scanV(d_arrValidV,numberElementOf_d_arr_V,d_arrValidV_scanResult);
+
+	//Hiển thị kết quả d_arrValidV_scanResult
+	printInt(d_arrValidV_scanResult,numberElementOf_d_arr_V);
+
 	cudaDeviceSynchronize();
 	cudaStatus = cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){

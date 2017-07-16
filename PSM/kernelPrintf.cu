@@ -23,7 +23,35 @@ cudaError_t printInt(int* d_array,int noElem_d_Array){
 
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus != cudaSuccess){
-		fprintf(stderr,"\nkernelPrintExtention failed");
+		fprintf(stderr,"\nkernelPrintInt failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
+}
+
+__global__ void kernelprintUnsignedInt(unsigned int *O,int sizeO){
+	int i=blockIdx.x*blockDim.x + threadIdx.x;
+	
+	if(i<sizeO){			
+		printf("[%d]:%d ; ",i,O[i]);
+	}
+
+}
+
+inline cudaError_t printUnsignedInt(unsigned int* d_array,int noElem_d_Array){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((noElem_d_Array+block.x-1)/block.x);
+
+	kernelprintUnsignedInt<<<grid,block>>>(d_array,noElem_d_Array);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintInt failed");
 		goto Error;
 	}
 Error:
@@ -83,6 +111,37 @@ cudaError_t printfExtension(Extension *d_E,unsigned int noElem_d_E){
 	cudaStatus=cudaGetLastError();
 	if(cudaStatus != cudaSuccess){
 		fprintf(stderr,"\nkernelPrintExtention failed");
+		goto Error;
+	}
+Error:
+	
+	return cudaStatus;
+}
+
+
+__global__ void kernelPrintUniEdge(UniEdge *d_UniqueEdge,unsigned int n){
+	int i=blockIdx.x*blockDim.x + threadIdx.x;
+	if (i<n){		
+		int li = d_UniqueEdge[i].li;
+		int lij = d_UniqueEdge[i].lij;
+		int lj = d_UniqueEdge[i].lj;
+		printf("\n Edge %d: (%d,%d,%d)",i,li,lij,lj);		
+	}
+}
+
+
+cudaError_t printfUniEdge(UniEdge *d_E,unsigned int noElem_d_E){
+	cudaError cudaStatus;
+
+	dim3 block(1024);
+	dim3 grid((noElem_d_E+block.x-1)/block.x);
+
+	kernelPrintUniEdge<<<grid,block>>>(d_E,noElem_d_E);
+	cudaDeviceSynchronize();
+
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus != cudaSuccess){
+		fprintf(stderr,"\nkernelPrintUniEdge failed");
 		goto Error;
 	}
 Error:

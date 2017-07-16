@@ -332,3 +332,16 @@ C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_pa
 d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtensionFromEmbedding.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
 C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\ExtensionStructure.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scan_largearray_kernel.h
+d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\cuda_runtime.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions_decls.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_functions.h
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include\device_launch_parameters.h

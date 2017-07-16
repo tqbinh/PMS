@@ -169,6 +169,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <CudaCompile Include="getValidExtension.cu" />
     <CudaCompile Include="getValidExtensionFromEmbeding.cu" />
     <CudaCompile Include="getValidForwardExtensionFromTheLastQ.cu" />
+    <CudaCompile Include="header.cu" />
     <CudaCompile Include="kernel.cu">
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20</CodeGeneration>
     </CudaCompile>
@@ -226,6 +227,7 @@ copy "$(CudaToolkitBinDir)\cudart*.dll" "$(OutDir)"</Command>
     <ClInclude Include="getValidExtension.h" />
     <ClInclude Include="getValidForwardExtensionFromTheLastQ.h" />
     <ClInclude Include="gspan.h" />
+    <ClInclude Include="header.h" />
     <ClInclude Include="helper_cuda.h" />
     <ClInclude Include="helper_string.h" />
     <ClInclude Include="helper_timer.h" />

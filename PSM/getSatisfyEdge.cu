@@ -1,6 +1,6 @@
 #include "getSatisfyEdge.h"
 
-__global__ void kernelGetSatisfyEdge(Extension *d_UniqueExtension,int indexOfSatisfyEdge,int *d_li,int *d_lij,int *d_lj,int *d_arr_labelEdge){
+__global__ void kernelGetSatisfyEdge(UniEdge *d_UniqueExtension,int indexOfSatisfyEdge,int *d_li,int *d_lij,int *d_lj,int *d_arr_labelEdge){
 
 	d_li[0]=d_UniqueExtension[indexOfSatisfyEdge].li;
 	d_lij[0]=d_UniqueExtension[indexOfSatisfyEdge].lij;
@@ -17,7 +17,7 @@ __global__ void kernelGetSatisfyEdge(Extension *d_UniqueExtension,int indexOfSat
 
 
 
-inline cudaError_t getSatisfyEdge(Extension *d_UniqueExtension,int number,int indexOfSatisfyEdge,int &li,int &lij,int &lj,int* &d_arr_edgeLabel){
+inline cudaError_t getSatisfyEdge(UniEdge *d_UniqueExtension,int number,int indexOfSatisfyEdge,int &li,int &lij,int &lj,int* &d_arr_edgeLabel){
 	cudaError_t cudaStatus;
 
 	int *d_li=nullptr;

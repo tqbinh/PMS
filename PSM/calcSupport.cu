@@ -2,8 +2,6 @@
 #include "kernelPrintf.h"
 
 
-
-
 __global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F){
 	int i= blockIdx.x*blockDim.x + threadIdx.x;
 	if(i<noElem_d_ValidExtension){
@@ -15,8 +13,7 @@ __global__ void kernelCalcSupport(int li,int lij,int lj,Extension *d_ValidExtens
 }
 
 
-
-cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,unsigned int noElem_F,unsigned int minsup,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg,vector<int> &h_satisfyEdge,vector<int> &h_satisfyEdgeSupport){
+cudaError_t calcSupport(UniEdge *d_UniqueExtension,unsigned int noElem_d_UniqueExtension,Extension *d_ValidExtension,unsigned int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,unsigned int noElem_F,unsigned int minsup,int *d_O,int *d_LO,int numberOfElementd_O,int *d_N,int *d_LN,int numberOfElementd_N,unsigned int Lv,unsigned int Le,unsigned int maxOfVer,unsigned int numberOfGraph,unsigned int noDeg,vector<int> &h_satisfyEdge,vector<int> &h_satisfyEdgeSupport){
 	cudaError_t cudaStatus;
 
 	dim3 block(blocksize);
@@ -24,16 +21,16 @@ cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_Uniqu
 
 	//chép dữ liệu của mảng d_UniqueExtension sang host
 
-	Extension *h_UniqueExtension;
-	h_UniqueExtension = new Extension[noElem_d_UniqueExtension];
+	UniEdge *h_UniqueExtension;
+	h_UniqueExtension = new UniEdge[noElem_d_UniqueExtension];
 	if(h_UniqueExtension==NULL){
 		printf("\n!!!Memory Problem h_UniqueExtension");
 		exit(1);
 	}else{
-		memset(h_UniqueExtension,0, noElem_d_UniqueExtension*sizeof(Extension));
+		memset(h_UniqueExtension,0, noElem_d_UniqueExtension*sizeof(UniEdge));
 	}
 
-	cudaMemcpy(h_UniqueExtension,d_UniqueExtension,noElem_d_UniqueExtension*sizeof(Extension),cudaMemcpyDeviceToHost);
+	cudaMemcpy(h_UniqueExtension,d_UniqueExtension,noElem_d_UniqueExtension*sizeof(UniEdge),cudaMemcpyDeviceToHost);
 	
 
 	for (int i=0;i<noElem_d_UniqueExtension;i++){	
@@ -62,11 +59,11 @@ cudaError_t calcSupport(Extension *d_UniqueExtension,unsigned int noElem_d_Uniqu
 			
 			//xây dựng embedding cho mở rộng thoả minsup
 			//printf("\n***********support of (%d,%d,%d) >= %d --> create embeddings for DFS_CODE************",li,lij,lj,minsup);
-			/*cudaStatus=createForwardEmbedding(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg);
-			if (cudaStatus!=cudaSuccess){
-				fprintf(stderr,"\ncreateForwardEmbedding failed");
-				goto Error;
-			}*/
+			//cudaStatus=createForwardEmbedding(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,d_O,d_LO,numberOfElementd_O,d_N,d_LN,numberOfElementd_N,Lv,Le,minsup,maxOfVer,numberOfGraph,noDeg);
+			//if (cudaStatus!=cudaSuccess){
+			//	fprintf(stderr,"\ncreateForwardEmbedding failed");
+			//	goto Error;
+			//}
 		}
 		
 		cudaMemset(d_F,0,noElem_F*sizeof(int));
@@ -84,10 +81,10 @@ Error:
 }
 
 
-__global__ void kernelGetGraphIdContainEmbedding(int *d_arr_edgeLabel,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *d_arr_graphIdContainEmbedding,unsigned int maxOfVer){
+__global__ void kernelGetGraphIdContainEmbedding(int li,int lij,int lj,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *d_arr_graphIdContainEmbedding,unsigned int maxOfVer){
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	if (i<noElem_d_ValidExtension){
-		if(	d_ValidExtension[i].li == d_arr_edgeLabel[0] && d_ValidExtension[i].lij == d_arr_edgeLabel[1] && 	d_ValidExtension[i].lj == d_arr_edgeLabel[2]){
+		if(	d_ValidExtension[i].li == li && d_ValidExtension[i].lij == lij && 	d_ValidExtension[i].lj == lj){
 			int graphid = (d_ValidExtension[i].vgi/maxOfVer);
 			d_arr_graphIdContainEmbedding[graphid]=1;
 		}
@@ -105,7 +102,7 @@ __global__ void kernelGetGraph(int *d_arr_graphIdContainEmbedding,int noEle_d_ar
 }
 
 
-inline cudaError_t getGraphIdContainEmbedding(int *d_arr_edgeLabel,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *&h_graphIdContainEmbedding,int &noElem_h_arr_graphIdContainEmbedding,unsigned int maxOfVer){
+inline cudaError_t getGraphIdContainEmbedding(int li,int lij,int lj,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *&h_graphIdContainEmbedding,int &noElem_h_arr_graphIdContainEmbedding,unsigned int maxOfVer){
 	cudaError_t cudaStatus;
 
 	//Từ global id của đỉnh (vgi hoặc vgj) trong d_ValidExtension chúng ta sẽ tính được graphID chứa mở rộng đó.
@@ -118,10 +115,13 @@ inline cudaError_t getGraphIdContainEmbedding(int *d_arr_edgeLabel,Extension *d_
 	dim3 block(blocksize);
 	dim3 grid((noElem_d_ValidExtension+block.x)/block.x);
 	int noEle_d_arr_graphIdContainEmbedding;
+	
+	//Lấy graphId chứa Embedding cuối cùng
 	getLastElementExtension(d_ValidExtension,noElem_d_ValidExtension,noEle_d_arr_graphIdContainEmbedding,maxOfVer);
 	noEle_d_arr_graphIdContainEmbedding++;
 	//printf("\n noEle_d_arr_graphIdContainEmbedding: %d",noEle_d_arr_graphIdContainEmbedding);
 
+	//Cấp phát bộ nhớ cho biến mảng chứa các graphId của embedding
 	int *d_arr_graphIdContainEmbedding=NULL;
 	cudaStatus=cudaMalloc((void**)&d_arr_graphIdContainEmbedding,noEle_d_arr_graphIdContainEmbedding*sizeof(int));
 	if(cudaStatus!=cudaSuccess){
@@ -134,7 +134,7 @@ inline cudaError_t getGraphIdContainEmbedding(int *d_arr_edgeLabel,Extension *d_
 	}
 
 	//Gọi hàm kernelGetGraphIdContainEmbedding để đánh dấu vị trí đồ thị trong mảng d_arr_graphIdContainEmbedding là 1  
-	kernelGetGraphIdContainEmbedding<<<grid,block>>>(d_arr_edgeLabel,d_ValidExtension,noElem_d_ValidExtension,d_arr_graphIdContainEmbedding,maxOfVer);
+	kernelGetGraphIdContainEmbedding<<<grid,block>>>(li,lij,lj,d_ValidExtension,noElem_d_ValidExtension,d_arr_graphIdContainEmbedding,maxOfVer);
 	cudaDeviceSynchronize();
 	printf("\n*************d_arr_graphIdContainEmbedding***************\n");
 	printInt(d_arr_graphIdContainEmbedding,noEle_d_arr_graphIdContainEmbedding);
@@ -188,3 +188,93 @@ inline cudaError_t getGraphIdContainEmbedding(int *d_arr_edgeLabel,Extension *d_
 Error:
 	return cudaStatus;
 }
+
+//Kernel tính độ hỗ trợ cho các cạnh trong mảng d_UniqueExtension
+__global__ void kernelSetValuedF(UniEdge *d_UniqueExtension,int noElem_d_UniqueExtension,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,int noElemF){
+	int i = blockDim.x * blockIdx.x +threadIdx.x;
+	if(i<noElem_d_ValidExtension){
+		for (int j = 0; j < noElem_d_UniqueExtension; j++)
+		{
+			if(d_UniqueExtension[j].li==d_ValidExtension[i].li && d_UniqueExtension[j].lij==d_ValidExtension[i].lij &&	d_UniqueExtension[j].lj==d_ValidExtension[i].lj){
+				d_F[d_scanB_Result[i]+j*noElemF]=1;
+			}
+		}
+	}
+
+}
+
+__global__ void kernelCopyFromdFtoTempF(float *d_F,float *tempF,int from,int noElemNeedToCopy){
+	int i = blockDim.x * blockIdx.x + threadIdx.x;
+	if(i<noElemNeedToCopy){
+		int index = from*noElemNeedToCopy + i;
+		tempF[i]=d_F[index];
+	}
+}
+
+
+//Hàm tính độ hỗ trợ cho các cạnh trong mảng d_UniqueExtension
+inline cudaError_t computeSupport(UniEdge *d_UniqueExtension,int noElem_d_UniqueExtension,Extension *d_ValidExtension,int noElem_d_ValidExtension,int *d_scanB_Result,float *d_F,int noElemF,float *&h_resultSup){
+	cudaError_t cudaStatus;
+
+	//Đánh dấu những đồ thị chứa embedding trong mảng d_F
+	dim3 block(blocksize);
+	dim3 grid((noElem_d_ValidExtension+block.x - 1)/block.x);
+	kernelSetValuedF<<<grid,block>>>(d_UniqueExtension,noElem_d_UniqueExtension,d_ValidExtension,noElem_d_ValidExtension,d_scanB_Result,d_F,noElemF);
+	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaDeviceSynchronize() of kernelComputeSupport in computeSupport failed",cudaStatus);
+		goto Error;
+	}
+
+	//Duyệt qua mảng d_UniqueExtension, tính reduction cho mỗi segment i*noElemF, kết quả của reduction là độ support của cạnh i trong d_UniqueExtension
+	float *tempF;
+	cudaStatus = cudaMalloc((void**)&tempF,noElemF*sizeof(float));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n CudaMalloc tempF in computeSupport failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(tempF,0,noElemF*sizeof(float));
+	}
+
+	//float *resultSup; /* Lưu kết quả reduction */
+	h_resultSup = (float*)malloc(noElem_d_UniqueExtension*sizeof(float));
+	if (h_resultSup==NULL){
+		printf("\n Malloc resultSup in computeSupport failed");
+		exit(1);
+	}
+
+	dim3 blocka(blocksize);
+	dim3 grida((noElemF+blocka.x-1)/blocka.x);
+	/*int from =0;*/	
+	for (int i = 0; i < noElem_d_UniqueExtension; i++)
+	{		
+		//chép dữ liệu d_F sang tempF ứng theo các phần tử lần lược là i*noElemF, copy đúng noElemF
+		/*from =i;*/				
+		kernelCopyFromdFtoTempF<<<grid,block>>>(d_F,tempF,i,noElemF);
+		cudaDeviceSynchronize();
+		reduction(tempF,noElemF,h_resultSup[i]);		
+	}
+	////In độ hỗ trợ cho các cạnh tương ứng trong mảng kết quả resultSup
+	//for (int i = 0; i < noElem_d_UniqueExtension; i++)
+	//{
+	//	printf("\n resultSup[%d]:%.1f",i,h_resultSup[i]);
+	//}
+
+	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaDeviceSynchronize() in computeSupport failed",cudaStatus);
+		goto Error;
+	}
+Error:
+
+	cudaFree(tempF);
+	return cudaStatus;
+
+}
+
+
+

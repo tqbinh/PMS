@@ -7,4 +7,4 @@
 
 #define blocksize 512
 
-extern "C" inline cudaError_t getSatisfyEdge(Extension *d_UniqueExtension,int noElem_d_UniqueExtension,int indexOfSatisfyEdge,int &li,int &lij,int &lj,int *&d_arr_edgeLabel);
+extern "C" inline cudaError_t getSatisfyEdge(UniEdge *d_UniqueExtension,int noElem_d_UniqueExtension,int indexOfSatisfyEdge,int &li,int &lij,int &lj,int *&d_arr_edgeLabel);

@@ -7,3 +7,4 @@
 
 extern "C" inline cudaError_t getLastElement(int* inputArray,unsigned int numberElementOfInputArray,int &outputValue);
 extern "C" inline cudaError_t getLastElementExtension(Extension* inputArray,unsigned int numberElementOfInputArray,int &outputValue,unsigned int maxOfVer);
+extern "C" inline cudaError_t getSizeBaseOnScanResult(int *d_allPossibleExtension,int *d_allPossibleExtensionScanResult,unsigned int noElem_allPossibleExtension,int &noElem_d_UniqueExtension);
