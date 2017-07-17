@@ -97,4 +97,4 @@ extern inline cudaError_t assigndArrUniEdge(int *dArrAllPossibleExtension,int *d
 extern inline cudaError_t cudaFreeArrPointerUniEdge(UniEdge **&dArrPointerUniEdge,int *&dArrNoELemPointerUniEdge,int noElem_dArrPointerUniEdge);
 extern inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerExt,int *hArrNoElemPointerExt,int noElem_dArrPointerExt,UniEdge **dArrPointerUniEdge,int *dArrNoELemPointerUniEdge,int *hArrNoELemPointerUniEdge,int noElem_dArrPointerUniEdge,unsigned int **&hArrPointerSupport,unsigned int *&hArrNoElemPointerSupport,unsigned int noElem_hArrPointerSupport,unsigned int maxOfVer);
 extern inline cudaError_t findBoundary(EXT **dArrPointerExt,int *hArrNoElemPointerExt,int pos,unsigned int *&dArrBoundary,unsigned int maxOfVer);
-extern inline cudaError_t computeSup(UniEdge **dArrPointerUniEdge,int j,int noElemdArrUniEdge,unsigned int *&hArrSupport,unsigned int *dArrBoundary,unsigned int *dArrBoundaryScanResult,EXT** dArrPointerExt);
+

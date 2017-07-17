@@ -2489,57 +2489,36 @@ Error:
 }
 
 
-__global__ void kernelfindBoundary(EXT **dArrPointerExt,int pos,int n,unsigned int *dArrBoundary,unsigned int maxOfVer){
+
+
+__global__ void kernelExtractPointerUniEdge(UniEdge **dPointerArrUniEdge,UniEdge **dArrPointerUniEdge,int pos){
+	dPointerArrUniEdge[0] = dArrPointerUniEdge[pos];
+}
+
+__global__ void kernelExtractPointerExt(EXT **dPointerArrExt,EXT **dArrPointerExt,int pos,unsigned int noElemdArrExt){
+	dPointerArrExt[0] = dArrPointerExt[pos];
+}
+
+__global__ void kernelfindBoundary(EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundary,unsigned int maxOfVer){
 	int i = blockDim.x*blockIdx.x + threadIdx.x;
-	if(i<n-1){
-		EXT* dArrExt = dArrPointerExt[pos];
+	EXT *dArrExt = dPointerArrExt[0];
+	if(i<noElemdArrExt-1){		
 		unsigned int graphIdAfter=dArrExt[i+1].vgi/maxOfVer;
 		unsigned int graphIdCurrent=dArrExt[i].vgi/maxOfVer;
-		unsigned int resultDiff=graphIdAfter-graphIdCurrent;
-		dArrBoundary[i]=resultDiff;
+		if(graphIdAfter!=graphIdCurrent){
+			dArrBoundary[i]=1;
+		}
 	}
-
 }
 
-
-inline cudaError_t findBoundary(EXT **dArrPointerExt,int *hArrNoElemPointerExt,int pos,unsigned int *&dArrBoundary,unsigned int maxOfVer){
-	cudaError_t cudaStatus;
-	dim3 block(blocksize);
-	dim3 grid((hArrNoElemPointerExt[pos]+block.x-1)/block.x);
-
-
-	kernelfindBoundary<<<grid,block>>>(dArrPointerExt,pos,hArrNoElemPointerExt[pos],dArrBoundary,maxOfVer);
-
-	cudaDeviceSynchronize();
-	cudaStatus = cudaGetLastError();
-	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\n cudaDeviceSynchronize() in findBoundary() failed",cudaStatus);
-		goto Error;
-	}
-Error:
-	
-	return cudaStatus;
-}
-
-//__global__ void kernelcomputeSupEdge(UniEdge **dArrPointerUniEdge,int pos,int row,unsigned int *&hArrSupport,unsigned int *dArrBoundary,unsigned int *dArrBoundaryScanResult,EXT **dArrPointerExt,int noElemdArrExt,int *dArrF){
-//	int i = blockDim.x*blockIdx.x+threadIdx.x;
-//	if(i<noElemdArrExt){
-//		int li=dArrPointerUniEdge[pos][row].li;
-//		int lj=li=dArrPointerUniEdge[pos][row].lj;
-//		int lij=li=dArrPointerUniEdge[pos][row].lij;
-//
-//	}
-//
-//}
-
-
-
-inline cudaError_t computeSupEdge(UniEdge **dArrPointerUniEdge,int pos,int i,unsigned int *&hArrSupport,unsigned int *dArrBoundary,unsigned int *dArrBoundaryScanResult,EXT **dArrPointerExt,int noElemdArrExt,int *&dArrF){
+inline cudaError_t findBoundary(EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *&dArrBoundary,unsigned int maxOfVer){
 	cudaError_t cudaStatus;
 	dim3 block(blocksize);
 	dim3 grid((noElemdArrExt+block.x-1)/block.x);
 
-//	kernelcomputeSupEdge<<<grid,block>>>(dArrPointerUniEdge, pos,i,hArrSupport,dArrBoundary,*dArrBoundaryScanResult,dArrPointerExt,noElemdArrExt,dArrF);
+
+	kernelfindBoundary<<<grid,block>>>(dPointerArrExt,noElemdArrExt,dArrBoundary,maxOfVer);
+
 	cudaDeviceSynchronize();
 	cudaStatus = cudaGetLastError();
 	if(cudaStatus!=cudaSuccess){
@@ -2547,37 +2526,16 @@ inline cudaError_t computeSupEdge(UniEdge **dArrPointerUniEdge,int pos,int i,uns
 		goto Error;
 	}
 Error:
-
-	return cudaStatus;
-}
-
-//computeSup(dArrPointerUniEdge,j,hArrNoELemPointerUniEdge[j],hArrSupport,dArrBoundary,dArrBoundaryScanResult,dArrPointerExt);
-inline cudaError_t computeSup(UniEdge **dArrPointerUniEdge,int pos,int noElemdArrUniEdge,unsigned int *&hArrSupport,unsigned int *dArrBoundary,unsigned int *dArrBoundaryScanResult,EXT** dArrPointerExt,int noElemdArrExt,int *&dArrF){
-	cudaError_t cudaStatus;
-
 	
-	for (int i = 0; i < noElemdArrUniEdge; i++)
-	{
-		cudaStatus=computeSupEdge(dArrPointerUniEdge,pos,i,hArrSupport,dArrBoundary,dArrBoundaryScanResult,dArrPointerExt,noElemdArrExt,dArrF);
-		if(cudaStatus!=cudaSuccess){
-			fprintf(stderr,"\ncomputeSupEdge() in computeSup() failed",cudaStatus);
-			goto Error;
-		}
-
-	}
-	cudaDeviceSynchronize();
-	cudaStatus = cudaGetLastError();
-	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\n cudaDeviceSynchronize() in findBoundary() failed",cudaStatus);
-		goto Error;
-	}
-Error:
-
 	return cudaStatus;
 }
 
-__global__ void kernelExtractPointerUniEdge(UniEdge *dArrUniEdge,UniEdge **dArrPointerUniEdge,int pos){
-	dArrUniEdge = dArrPointerUniEdge[pos];
+__global__ void kernelPrint(EXT **dArrExt,unsigned int noElemdArrExt){
+	int i = blockDim.x * blockIdx.x + threadIdx.x;
+	if(i<noElemdArrExt){
+		EXT * arrExt = dArrExt[0];
+		printf("\n vgi:%d vgj:%d",arrExt[i].vgi,arrExt[i].vgj);
+	}
 }
 
 //Hàm tính độ hỗ trợ computeSupportv2
@@ -2613,24 +2571,39 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 		unsigned int *dArrBoundaryScanResult=nullptr;
 		unsigned int noElemdArrBoundary=0; //Bằng với hArrNoElemPointerExt[j]
 		if(hArrNoELemPointerUniEdge[j]>0){ //Nếu tồn tại unique edge tại dArrPointerUniEdge j đang xét thì tìm boundary của EXTk j tương ứng
-			UniEdge *dArrUniEdge=nullptr;
-			int noElemdArrUniEdge = hArrNoELemPointerUniEdge[j];
-			cudaStatus = cudaMalloc((void**)&dArrUniEdge,noElemdArrUniEdge*sizeof(UniEdge));
+			UniEdge **dPointerArrUniEdge=nullptr;
+			unsigned int noElemdArrUniEdge = hArrNoELemPointerUniEdge[j];
+			cudaStatus = cudaMalloc((void**)&dPointerArrUniEdge,sizeof(UniEdge*));
 			if(cudaStatus!=cudaSuccess){
-				fprintf(stderr,"\ncudaMalloc dArrUniEdge in computeSupportv2() failed",cudaStatus);
+				fprintf(stderr,"\ncudaMalloc dPointerArrUniEdge in computeSupportv2() failed",cudaStatus);
 				goto Error;
 			}
 
-			kernelExtractPointerUniEdge<<<1,1>>>(dArrUniEdge,dArrPointerUniEdge,j); //Trích phần tử đầu tiên trong mảng dArrPointerUniEdge lưu vào biến dArrUniEdge đê tiện tính toán
+			
+			EXT **dPointerArrExt = nullptr;
+			unsigned int noElemdArrExt = hArrNoElemPointerExt[j];
+			cudaStatus = cudaMalloc((void**)&dPointerArrExt,sizeof(EXT*));
+			if(cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\ncudaMalloc dPointerArrExt in computeSupportv2() failed",cudaStatus);
+				goto Error;
+			}
+			//Hoạt động rút trích diễn ra song song
+						
+			kernelExtractPointerUniEdge<<<1,1>>>(dPointerArrUniEdge,dArrPointerUniEdge,j); //Trích phần tử  trong mảng dArrPointerUniEdge lưu vào biến dArrUniEdge để tiện tính toán
+			cudaDeviceSynchronize();
+			kernelExtractPointerExt<<<1,1>>>(dPointerArrExt,dArrPointerExt,j,noElemdArrExt); //Trích phần tử trong mảng dArrPointerExt lưu vào biến dArrExt để tiện tính toán
 			cudaDeviceSynchronize();
 			cudaStatus = cudaGetLastError();
 			if(cudaStatus!=cudaSuccess){
-				fprintf(stderr,"\n cudaDeviceSynchronize() kernelExtractPointerUniEdge in computeSupportv2() failed",cudaStatus);
+				fprintf(stderr,"\n cudaDeviceSynchronize() kernelExtractPointerExt kernelExtractPointerUniEdge in computeSupportv2() failed",cudaStatus);
 				goto Error;
 			}
 
+			printf("\n*********dArrExt**************\n");
+			kernelPrint<<<1,noElemdArrExt>>>(dPointerArrExt,noElemdArrExt);
+			cudaDeviceSynchronize();
 
-			noElemdArrBoundary = hArrNoElemPointerExt[j];
+			noElemdArrBoundary = noElemdArrExt;
 			cudaStatus=cudaMalloc((void**)&dArrBoundary,sizeof(unsigned int)*noElemdArrBoundary);
 			if(cudaStatus!=cudaSuccess){
 				fprintf(stderr,"\n cudaMalloc dArrBoundary in computeSupportv2() failed");
@@ -2652,14 +2625,14 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 			}
 
 			//Tìm boundary của EXTk và lưu kết quả vào mảng dArrBoundary
-			cudaStatus=findBoundary(dArrPointerExt,hArrNoElemPointerExt,j,dArrBoundary,maxOfVer);
+			cudaStatus = findBoundary(dPointerArrExt,noElemdArrExt,dArrBoundary,maxOfVer);
 			if(cudaStatus!=cudaSuccess){
 				fprintf(stderr,"\n findBoundary() in computeSupportv2() failed");
 				goto Error;
 			}
 
 			printf("\n ************* dArrBoundary ************\n");
-			cudaStatus=printUnsignedInt(dArrBoundary,hArrNoElemPointerExt[j]);
+			cudaStatus=printUnsignedInt(dArrBoundary,noElemdArrBoundary);
 			if(cudaStatus!=cudaSuccess){
 				fprintf(stderr,"\n printUnsignedInt in computeSupportv2() failed", cudaStatus);
 				goto Error;
@@ -2675,33 +2648,13 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 			printf("\n**************dArrBoundaryScanResult****************\n");
 			printUnsignedInt(dArrBoundaryScanResult,noElemdArrBoundary);
 
-			////Duyệt qua từng phần tử trong dArrUniEdge của dArrPointerUniEdge để tính độ hỗ trợ và lưu kết quả vào hArrSupport
-			unsigned int *hArrSupport=NULL;
-			hArrSupport = (unsigned int *)malloc(sizeof(unsigned int)*hArrNoELemPointerUniEdge[j]);
-			if(hArrSupport==NULL){
-				printf("\nMalloc hArrSupport in computeSupportv2() failed");
-				exit(1);
-			}
-			else
-			{
-				memset(hArrSupport,0,sizeof(unsigned int)*hArrNoELemPointerUniEdge[j]);
-			}
-
-			//getLastElement(
-
-			int *dArrF=nullptr;
-			cudaStatus=computeSup(dArrPointerUniEdge,j,hArrNoELemPointerUniEdge[j],hArrSupport,dArrBoundary,dArrBoundaryScanResult,dArrPointerExt,hArrNoElemPointerExt[j],dArrF);
-			if(cudaStatus!=cudaSuccess){
-				fprintf(stderr,"\n computeSup() in ComputeSupportv2() failed",cudaStatus);
-				goto Error;
-			}
-
-			hArrPointerSupport[j]=hArrSupport;
+			//Duyệt và tính độ hỗ trợ của các cạnh
 
 			//Giải phóng bộ nhớ boundary
 			cudaFree(dArrBoundary);
 			cudaFree(dArrBoundaryScanResult);
-			cudaFree(dArrUniEdge);
+			cudaFree(dPointerArrUniEdge);
+			cudaFree(dPointerArrExt);
 		}		
 	}
 

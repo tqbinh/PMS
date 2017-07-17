@@ -1,10 +1,10 @@
-﻿Build started 7/17/2017 6:45:56 AM.
+﻿Build started 7/17/2017 9:22:05 AM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu 
        CudaBuild:
          Compiling CUDA source file header.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpe3a9c5428e9d4ef6891fcc5fa35334e9.cmd"
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp3e98132fce06439baa265d48ee7c2f6c.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu"
          
          D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu" 
@@ -70,7 +70,7 @@
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2579): warning : parameter "dArrUniEdge" was set but never used
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2575): warning : variable "noElemdArrUniEdge" was declared but never referenced
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
@@ -144,7 +144,7 @@
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2579): warning : parameter "dArrUniEdge" was set but never used
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2575): warning : variable "noElemdArrUniEdge" was declared but never referenced
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
@@ -314,4 +314,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:19.01
+Time Elapsed 00:00:10.62
