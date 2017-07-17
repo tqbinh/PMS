@@ -2537,6 +2537,51 @@ __global__ void kernelPrint(EXT **dArrExt,unsigned int noElemdArrExt){
 		printf("\n vgi:%d vgj:%d",arrExt[i].vgi,arrExt[i].vgj);
 	}
 }
+__global__ void kernelFilldF(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundaryScanResult,float *dF){
+	int i = blockDim.x*blockIdx.x + threadIdx.x;
+	if(i<noElemdArrExt){
+		UniEdge *dUniEdge = dPointerArrUniEdge[0];
+		int li = dUniEdge[pos].li;
+		int lij = dUniEdge[pos].lij;
+		int lj = dUniEdge[pos].lj;
+		EXT *dArrExt = dPointerArrExt[0];
+		int Li = dArrExt[i].li;
+		int Lij = dArrExt[i].lij;
+		int Lj = dArrExt[i].lj;
+		printf("\nThread %d: UniEdge(li:%d lij:%d lj:%d) (Li:%d Lij:%d Lj:%d)",i,li,lij,lj,Li,Lij,Lj);
+
+		if(li==Li && lij==Lij && lj==Lj){
+			dF[dArrBoundaryScanResult[i]]=1;
+		}
+	}
+}
+
+
+inline cudaError_t calcSupport(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundaryScanResult,float *dF,unsigned int noElemdF,float &support){
+	cudaError_t cudaStatus;
+	dim3 block(blocksize);
+	dim3 grid((noElemdArrExt+block.x-1)/block.x);
+
+	kernelFilldF<<<grid,block>>>(dPointerArrUniEdge,pos,dPointerArrExt,noElemdArrExt,dArrBoundaryScanResult,dF);
+	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n 	cudaDeviceSynchronize() kernelFilldF in calcSupport() failed",cudaStatus);
+		goto Error;
+	}
+	printf("\n**********dF****************\n");
+	printFloat(dF,noElemdF);
+
+	reduction(dF,noElemdF,support);
+
+	printf("******support********");
+	printf("\n Support:%f",support);
+
+	
+Error:
+	return cudaStatus;
+}
+
 
 //Hàm tính độ hỗ trợ computeSupportv2
 inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerExt,int *hArrNoElemPointerExt,int noElem_dArrPointerExt,UniEdge **dArrPointerUniEdge,int *dArrNoELemPointerUniEdge,int *hArrNoELemPointerUniEdge,int noElem_dArrPointerUniEdge,unsigned int **&hArrPointerSupport,unsigned int *&hArrNoElemPointerSupport,unsigned int noElem_hArrPointerSupport,unsigned int maxOfVer){
@@ -2599,7 +2644,7 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 				goto Error;
 			}
 
-			printf("\n*********dArrExt**************\n");
+			printf("\n*********dPointerArrExt**************\n");
 			kernelPrint<<<1,noElemdArrExt>>>(dPointerArrExt,noElemdArrExt);
 			cudaDeviceSynchronize();
 
@@ -2648,9 +2693,40 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 			printf("\n**************dArrBoundaryScanResult****************\n");
 			printUnsignedInt(dArrBoundaryScanResult,noElemdArrBoundary);
 
+			float *dF=nullptr;
+			unsigned int noElemdF = 0;
+
+			cudaStatus = cudaMemcpy(&noElemdF,&dArrBoundaryScanResult[noElemdArrBoundary-1],sizeof(unsigned int),cudaMemcpyDeviceToHost);
+			if(cudaStatus !=cudaSuccess){
+				fprintf(stderr,"\n cudamemcpy dF failed",cudaStatus);
+				goto Error;
+			}
+			noElemdF++;
+			printf("\n*****noElemdF******\n");
+			printf("noElemdF:%d",noElemdF);
+
+			cudaStatus = cudaMalloc((void**)&dF,sizeof(unsigned int)*noElemdF);
+			if(cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\ncudaMalloc dF failed",cudaStatus);
+				goto Error;
+			}
+			else
+			{
+				cudaMemset(dF,0,sizeof(float)*noElemdF);
+			}
 			//Duyệt và tính độ hỗ trợ của các cạnh
+			for (int i = 0; i < noElemdArrUniEdge; i++)
+			{
+				float support=0;
+				cudaStatus =calcSupport(dPointerArrUniEdge,i,dPointerArrExt,noElemdArrExt,dArrBoundaryScanResult,dF,noElemdF,support);
+				if(cudaStatus !=cudaSuccess){
+					fprintf(stderr,"\n calcSupport failed",cudaStatus);
+					goto Error;
+				}				
+			}
 
 			//Giải phóng bộ nhớ boundary
+			cudaFree(dF);
 			cudaFree(dArrBoundary);
 			cudaFree(dArrBoundaryScanResult);
 			cudaFree(dPointerArrUniEdge);

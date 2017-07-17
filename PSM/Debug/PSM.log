@@ -1,10 +1,10 @@
-﻿Build started 7/17/2017 9:22:05 AM.
+﻿Build started 7/17/2017 4:16:02 PM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu 
        CudaBuild:
          Compiling CUDA source file header.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp3e98132fce06439baa265d48ee7c2f6c.cmd"
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp2f6ffbc0e8214a5a8aed52ad24224e7c.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu"
          
          D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu" 
@@ -70,7 +70,6 @@
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2575): warning : variable "noElemdArrUniEdge" was declared but never referenced
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
@@ -82,6 +81,8 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
@@ -144,7 +145,6 @@
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2575): warning : variable "noElemdArrUniEdge" was declared but never referenced
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
@@ -156,6 +156,8 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46): warning C4533: initialization of 'grid' is skipped by 'goto Error'
                  D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(35) : see declaration of 'grid'
                  D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46) : see declaration of 'Error'
@@ -258,6 +260,7 @@
                  D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
                  D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
                  D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2718): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\calcBoundary.cu.obj
@@ -314,4 +317,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.62
+Time Elapsed 00:00:09.76

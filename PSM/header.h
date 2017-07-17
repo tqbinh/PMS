@@ -6,6 +6,7 @@
 #include "kernelPrintf.h"
 #include "createForwardEmbedding.h"
 #include "device_functions.h"
+#include "reduction.h"
 
 #define blocksize 512
 
