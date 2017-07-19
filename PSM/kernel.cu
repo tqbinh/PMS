@@ -1116,6 +1116,16 @@ int main(int argc, char * const  argv[])
 					goto Error;
 				}
 				
+				for (int i = 0; i < noElem_hArrPointerSupport; i++)
+				{
+					int noElem = hArrNoElemPointerSupport[i];
+					unsigned int *dArr = hArrPointerSupport[i];
+					for (int j = 0; j < noElem; j++)
+					{
+						printf("\nSupport of i:%d in j:%d:%d",i,j,dArr[j]);
+					}
+				}
+
 #pragma endregion "Ending of compute support"
 
 

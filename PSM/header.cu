@@ -2493,10 +2493,12 @@ Error:
 
 __global__ void kernelExtractPointerUniEdge(UniEdge **dPointerArrUniEdge,UniEdge **dArrPointerUniEdge,int pos){
 	dPointerArrUniEdge[0] = dArrPointerUniEdge[pos];
+	printf("\nPointer UniEdge:%p",dArrPointerUniEdge[pos]);
 }
 
 __global__ void kernelExtractPointerExt(EXT **dPointerArrExt,EXT **dArrPointerExt,int pos,unsigned int noElemdArrExt){
 	dPointerArrExt[0] = dArrPointerExt[pos];
+	printf("\nPointer:%p",dArrPointerExt[pos]);
 }
 
 __global__ void kernelfindBoundary(EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundary,unsigned int maxOfVer){
@@ -2533,10 +2535,24 @@ Error:
 __global__ void kernelPrint(EXT **dArrExt,unsigned int noElemdArrExt){
 	int i = blockDim.x * blockIdx.x + threadIdx.x;
 	if(i<noElemdArrExt){
-		EXT * arrExt = dArrExt[0];
+		EXT *arrExt = dArrExt[0];
+		printf("\nPointer ext:%p",dArrExt[0]);
 		printf("\n vgi:%d vgj:%d",arrExt[i].vgi,arrExt[i].vgj);
 	}
 }
+
+__global__ void kernelPrintUE(UniEdge **dPointerArrUniEdge,unsigned int noElem){
+	int i = blockDim.x*blockIdx.x + threadIdx.x;
+	if(i<noElem){
+		UniEdge *arrUniEdge = dPointerArrUniEdge[0];
+		printf("\nPointer ue:%p",dPointerArrUniEdge[0]);
+		printf("\n UniEdge: li:%d, lij:%d, lj:%d)",arrUniEdge[i].li,arrUniEdge[i].lij,arrUniEdge[i].lj);
+	}
+
+}
+
+
+
 __global__ void kernelFilldF(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundaryScanResult,float *dF){
 	int i = blockDim.x*blockIdx.x + threadIdx.x;
 	if(i<noElemdArrExt){
@@ -2557,10 +2573,28 @@ __global__ void kernelFilldF(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT *
 }
 
 
-inline cudaError_t calcSupport(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundaryScanResult,float *dF,unsigned int noElemdF,float &support){
+inline cudaError_t calcSupport(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT **dPointerArrExt,unsigned int noElemdArrExt,unsigned int *dArrBoundaryScanResult,float *dF,unsigned int noElemdF,float &support,unsigned int noElemdArrUniEdge){
 	cudaError_t cudaStatus;
 	dim3 block(blocksize);
 	dim3 grid((noElemdArrExt+block.x-1)/block.x);
+
+	printf("\n**********dPointerArrExt***********\n");
+	kernelPrint<<<1,noElemdArrExt>>>(dPointerArrExt,noElemdArrExt);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelPrintExt  in computeSupportv2() failed");
+		goto Error;
+	}
+
+	printf("\n**********dPointerArrUniEdge***********\n");
+	kernelPrintUE<<<1,noElemdArrUniEdge>>>(dPointerArrUniEdge,noElemdArrUniEdge);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelPrintUE  in computeSupportv2() failed");
+		goto Error;
+	}
 
 	kernelFilldF<<<grid,block>>>(dPointerArrUniEdge,pos,dPointerArrExt,noElemdArrExt,dArrBoundaryScanResult,dF);
 	cudaDeviceSynchronize();
@@ -2574,11 +2608,11 @@ inline cudaError_t calcSupport(UniEdge **dPointerArrUniEdge,unsigned int pos,EXT
 
 	reduction(dF,noElemdF,support);
 
-	printf("******support********");
+	printf("\n******support********");
 	printf("\n Support:%f",support);
-
 	
-Error:
+	cudaMemset(dF,0,noElemdF*sizeof(float));
+Error:				
 	return cudaStatus;
 }
 
@@ -2611,6 +2645,7 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 	//Duyệt qua mảng các pointer trỏ đến mảng chứa các cạnh duy nhất. Mỗi vòng lặp j sẽ ứng với một segment EXTk, và mỗi EXTk sẽ có một boundary 
 	for (int j = 0; j < noElem_dArrPointerUniEdge ; j++)
 	{
+		
 		//Mảng dArrBoundary dùng để lưu trữ boundary của EXTk (ở đây là EXT thứ j theo như vòng lặp for bên dưới)
 		unsigned int *dArrBoundary=nullptr;
 		unsigned int *dArrBoundaryScanResult=nullptr;
@@ -2644,10 +2679,27 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 				goto Error;
 			}
 
-			printf("\n*********dPointerArrExt**************\n");
+			printf("\n**********dPointerArrExt***********\n");
 			kernelPrint<<<1,noElemdArrExt>>>(dPointerArrExt,noElemdArrExt);
 			cudaDeviceSynchronize();
+			cudaStatus=cudaGetLastError();
+			if(cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\n kernelPrintExt  in computeSupportv2() failed");
+				goto Error;
+			}
 
+			printf("\n**********dPointerArrUniEdge***********\n");
+			kernelPrintUE<<<1,noElemdArrUniEdge>>>(dPointerArrUniEdge,noElemdArrUniEdge);
+			cudaDeviceSynchronize();
+			cudaStatus=cudaGetLastError();
+			if(cudaStatus!=cudaSuccess){
+				fprintf(stderr,"\n kernelPrintUE  in computeSupportv2() failed");
+				goto Error;
+			}
+
+			
+					
+#pragma region "find Boundary and scan Boundary"
 			noElemdArrBoundary = noElemdArrExt;
 			cudaStatus=cudaMalloc((void**)&dArrBoundary,sizeof(unsigned int)*noElemdArrBoundary);
 			if(cudaStatus!=cudaSuccess){
@@ -2714,24 +2766,36 @@ inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerE
 			{
 				cudaMemset(dF,0,sizeof(float)*noElemdF);
 			}
+#pragma endregion "end of finding Boundary"
+
+			hArrNoElemPointerSupport[j]=noElemdArrUniEdge;
+			unsigned int * hArrSupport = (unsigned int*)malloc(sizeof(unsigned int)*noElemdArrUniEdge);
+			if(hArrSupport==NULL){
+				printf("\n Malloc hArrSupport in computeSupportv2() failed");
+				exit(1);
+			}
+			else
+			{
+				memset(hArrSupport,0,sizeof(unsigned int)*noElemdArrUniEdge);
+			}
 			//Duyệt và tính độ hỗ trợ của các cạnh
 			for (int i = 0; i < noElemdArrUniEdge; i++)
-			{
+			{					
 				float support=0;
-				cudaStatus =calcSupport(dPointerArrUniEdge,i,dPointerArrExt,noElemdArrExt,dArrBoundaryScanResult,dF,noElemdF,support);
+				cudaStatus =calcSupport(dPointerArrUniEdge,i,dPointerArrExt,noElemdArrExt,dArrBoundaryScanResult,dF,noElemdF,support,noElemdArrUniEdge);
 				if(cudaStatus !=cudaSuccess){
 					fprintf(stderr,"\n calcSupport failed",cudaStatus);
 					goto Error;
 				}				
-			}
-
-			//Giải phóng bộ nhớ boundary
-			cudaFree(dF);
-			cudaFree(dArrBoundary);
-			cudaFree(dArrBoundaryScanResult);
-			cudaFree(dPointerArrUniEdge);
-			cudaFree(dPointerArrExt);
-		}		
+				hArrSupport[i]=support;
+			}			
+		    hArrPointerSupport[j]=hArrSupport;
+			/*printf("\n***************hArrPointerSupport*************\n");
+			for (int i = 0; i < noElemdArrUniEdge; i++)
+			{
+				printf("\n support:%d ",hArrSupport[i]);
+			}*/
+		}			
 	}
 
 
