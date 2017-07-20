@@ -1,10 +1,344 @@
-﻿Build started 7/19/2017 11:56:54 AM.
+﻿Build started 7/20/2017 7:09:09 PM.
      1>Project "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\PSM.vcxproj" on node 2 (Build target(s)).
      1>AddCudaCompileDeps:
+         C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu 
+       AddCudaCompileDeps:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\cl.exe /E /nologo /showIncludes /TP /D__CUDACC__ /DWIN32 /D_DEBUG /D_CONSOLE /D_MBCS /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" /I. /FIcuda_runtime.h /c D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu 
        CudaBuild:
+         Compiling CUDA source file header.cu...
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmpb150f311149c49b097979a0b7ac7ec13.cmd"
+         "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu"
+         
+         D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\header.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\header.cu" 
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(18): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(24): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(158): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(269): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(496): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(527): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(577): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(637): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(668): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(679): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(944): warning : variable "noElem_dHO" was declared but never referenced
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1055): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1134): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1250): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1268): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1366): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1506): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1557): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1775): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1784): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1796): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1807): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1819): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1831): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1871): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1888): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1908): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1966): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2122): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2123): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2154): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2155): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2267): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2499): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2535): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3003): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3016): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3030): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3045): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3056): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3066): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3074): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3090): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(23): warning : extern inline function "printUnsignedInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(11): warning : extern inline function "scanV(unsigned int *, unsigned int, unsigned int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV(int *, unsigned int, int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(10): warning : extern inline function "getSizeBaseOnScanResult" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(14): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(8): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(9): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(10): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\castingIntToFloat.h(11): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(16): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(18): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(41): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(42): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getExtension.h(43): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(18): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(19): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(24): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(158): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(165): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(269): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(496): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(527): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(577): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(637): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(668): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(679): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(944): warning : variable "noElem_dHO" was declared but never referenced
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1055): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1134): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1250): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1268): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1366): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1506): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1538): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1557): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1567): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1775): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1784): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1796): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1807): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1819): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1831): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1871): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1888): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1908): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1966): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2122): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2123): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2154): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2155): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2267): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2277): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2473): warning : unrecognized character escape sequence
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2474): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2499): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2535): warning : inline qualifier ignored for "__global__" function
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3003): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3016): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3030): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3045): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3056): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3066): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3074): warning : transfer of control bypasses initialization of:
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3090): warning : transfer of control bypasses initialization of:
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(12): warning : extern inline function "printInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(15): warning : extern inline function "printFloat" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(21): warning : extern inline function "printfUniEdge" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(23): warning : extern inline function "printUnsignedInt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(11): warning : extern inline function "scanV(unsigned int *, unsigned int, unsigned int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\scanV.h(10): warning : extern inline function "scanV(int *, unsigned int, int *)" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(8): warning : extern inline function "getLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getLastElement.h(10): warning : extern inline function "getSizeBaseOnScanResult" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\getValidForwardExtensionFromTheLastQ.h(17): warning : extern inline function "find_maximum_kernel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : extern inline function "kernelMatchLastElement" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : extern inline function "kernelMarkExtension" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(13): warning : extern inline function "reduction" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(35) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(34) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(46) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(509) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(508) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(615) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(650) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(649) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(748) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1059) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1058) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1082) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1138) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1137) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1147) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1370) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1369) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1397) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1514) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1513) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1523) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595): warning C4533: initialization of 'blockSize' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595): warning C4533: initialization of 'gridSize' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1575) : see declaration of 'blockSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1574) : see declaration of 'gridSize'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1595) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'gridb' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'blockb' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1838) : see declaration of 'gridb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1837) : see declaration of 'blockb'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1778) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1777) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1855) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1920) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1919) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(1943) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2782): warning C4018: '<' : signed/unsigned mismatch
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(2790): warning C4244: '=' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119): warning C4533: initialization of 'grida' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119): warning C4533: initialization of 'blocka' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119): warning C4533: initialization of 'grid' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3039) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119): warning C4533: initialization of 'block' is skipped by 'goto Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3038) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3039) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3038) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3098) : see declaration of 'grida'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3097) : see declaration of 'blocka'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3039) : see declaration of 'grid'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3038) : see declaration of 'block'
+                 D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/header.cu(3119) : see declaration of 'Error'
+       CudaBuild:
          Compiling CUDA source file kernel.cu...
-         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp304f50127c834754a4986d3035876760.cmd"
+         cmd.exe /C "C:\Users\BenCat\AppData\Local\Temp\tmp5038b71673cf4ed2a26c2fafc5138cd8.cmd"
          "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu"
          
          D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2012 -ccbin "C:\Program Files\Microsoft Visual Studio 11.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o Debug\kernel.cu.obj "D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\PSM\kernel.cu" 
@@ -49,6 +383,8 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : inline qualifier ignored for "__global__" function
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(758): warning : expression has no effect
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(767): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(761): warning : variable "noElem_hNumberEdgeInEachGraph" was declared but never referenced
@@ -83,6 +419,11 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(96): warning : extern inline function "printArrPointerUniEdge" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(98): warning : extern inline function "cudaFreeArrPointerUniEdge" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(99): warning : extern inline function "computeSupportv2" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(101): warning : extern inline function "getEdgeLabel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(102): warning : extern inline function "getViVj" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : extern inline function "kernelExtractPointerExt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : extern inline function "kernelPrint" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(105): warning : extern inline function "getGraphId" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(1): warning : extra text after expected end of preprocessing directive
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\kernelPrintf.h(8): warning : inline qualifier ignored for "__global__" function
@@ -125,6 +466,8 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(20): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(21): warning : inline qualifier ignored for "__global__" function
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\createForwardEmbedding.h(22): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : inline qualifier ignored for "__global__" function
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : inline qualifier ignored for "__global__" function
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(758): warning : expression has no effect
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(767): warning : transfer of control bypasses initialization of:
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(761): warning : variable "noElem_hNumberEdgeInEachGraph" was declared but never referenced
@@ -159,12 +502,17 @@
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(96): warning : extern inline function "printArrPointerUniEdge" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(98): warning : extern inline function "cudaFreeArrPointerUniEdge" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(99): warning : extern inline function "computeSupportv2" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(101): warning : extern inline function "getEdgeLabel" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(102): warning : extern inline function "getViVj" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(103): warning : extern inline function "kernelExtractPointerExt" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(104): warning : extern inline function "kernelPrint" was referenced but not defined
+     1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\header.h(105): warning : extern inline function "getGraphId" was referenced but not defined
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\reduction.h(8): warning C4005: 'BLOCK_SIZE' : macro redefinition
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(142): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
      1>d:\binhluanvan\codeluanvangpu\disseration\pms\psm\gspan.h(143): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(771): warning C4018: '<' : signed/unsigned mismatch
      1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(847): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
-     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(1119): warning C4018: '<' : signed/unsigned mismatch
+     1>D:/BinhLuanVan/CodeLuanVanGPU/Disseration/PMS/PSM/kernel.cu(1120): warning C4018: '<' : signed/unsigned mismatch
        Link:
          C:\Program Files\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.5\lib\Win32" cudart.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\BinhLuanVan\CodeLuanVanGPU\Disseration\PMS\Debug\PSM.lib" /MACHINE:X86 Debug\access_d_LO_from_idx_of_d_O.cu.obj
          Debug\calcBoundary.cu.obj
@@ -221,4 +569,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:11.33
+Time Elapsed 00:00:18.65

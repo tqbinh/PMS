@@ -2809,3 +2809,315 @@ Error:
 	
 	return cudaStatus;
 }
+//kernel trích nhãn của mở rộng thoả minsup
+__global__ void kernelgetEdgeLabel(UniEdge **dArrPointerUniEdge,int pointerPos,int edgePos,UniEdge *dUniEdge){
+	dUniEdge->li = dArrPointerUniEdge[pointerPos][edgePos].li;
+	dUniEdge->lij = dArrPointerUniEdge[pointerPos][edgePos].lij;
+	dUniEdge->lj = dArrPointerUniEdge[pointerPos][edgePos].lj;
+	printf("\n dUniEdge: (li:%d, lij:%d, lj:%d)",dUniEdge->li,dUniEdge->lij,dUniEdge->lj);
+}
+
+
+//Hàm sao chép nhãn (li,lij,lj) của mở rộng thoả minsup sang host để build DFS_CODE
+inline cudaError_t getEdgeLabel(UniEdge **dArrPointerUniEdge,int pos,int edgePos,UniEdge *&hUniEdge){
+	cudaError_t cudaStatus;
+
+	hUniEdge = (UniEdge*)malloc(sizeof(UniEdge));
+	if(hUniEdge==NULL){
+		printf("\n malloc hUniEdge in getEdgeLabel() failed\n");
+		exit(1);
+	}
+	else
+	{
+		memset(hUniEdge,0,sizeof(UniEdge));
+	}
+
+	UniEdge *dUniEdge =nullptr;
+	cudaStatus = cudaMalloc((void**)&dUniEdge,sizeof(UniEdge));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dUniEdge in getEdgeLabel() failed\n",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dUniEdge,0,sizeof(UniEdge));
+	}
+
+	kernelgetEdgeLabel<<<1,1>>>(dArrPointerUniEdge,pos,edgePos,dUniEdge);
+	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n CudaDeviceSynchornize() kernelgetEdgeLabel in getEdgeLabel() failed", cudaStatus);
+		goto Error;
+	}
+
+	cudaStatus = cudaMemcpy(hUniEdge,dUniEdge,sizeof(UniEdge),cudaMemcpyDeviceToHost);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMemcpy() (dUniEdge --> hUniEdge) in getEdgeLabel() failed", cudaStatus);
+		goto Error;
+	}
+
+	/*printf("\n*********hUniEdge*********\n");
+	printf("\n hUniEdge: (li:%d, lij:%d, lj:%d)",hUniEdge->li,hUniEdge->lij,hUniEdge->lj);*/
+
+Error:
+	return cudaStatus;
+}
+
+__global__ void kernelgetViVj(EXT **dArrPointerExt,int posPointer,int *Vi,int *Vj){
+	*Vi = dArrPointerExt[posPointer][0].vi;
+	*Vj = dArrPointerExt[posPointer][0].vj;
+	//printf("\n Vi:%d, Vj:%d",Vi[0],Vj[0]);
+}
+
+//Hàm trích ViVj từ ExtK để xây dựng DFS code
+inline cudaError_t getViVj(EXT **dArrPointerExt,int posPointer, int &vi, int &vj){
+	cudaError_t cudaStatus;
+	int *Vi=nullptr;
+	int *Vj=nullptr;
+	cudaStatus = cudaMalloc((void**)&Vi,sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc() Vi in getViVj() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(Vi,-1,sizeof(int));
+	}
+	cudaStatus = cudaMalloc((void**)&Vj,sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc() Vj in getViVj() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(Vj,-1,sizeof(int));
+	}
+	kernelgetViVj<<<1,1>>>(dArrPointerExt,posPointer,Vi,Vj);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaDeviceSynchronize() in getViVj() failed",cudaStatus);
+		goto Error;
+	}
+
+	cudaMemcpy(&vi,Vi,sizeof(int),cudaMemcpyDeviceToHost);
+	cudaMemcpy(&vj,Vj,sizeof(int),cudaMemcpyDeviceToHost);
+	/*printf("\n**********(vi,vj)*************\n");
+	printf("\n (vi:%d,vj:%d)",vi,vj);*/
+
+Error:
+	return cudaStatus;
+}
+
+__global__ void kernelMatchValueInEXT(EXT **dPointerArrExt,unsigned int noElemInArrExt,unsigned int *dValidEdge,int li,int lij,int lj,unsigned int maxOfVer){
+	int i =blockDim.x*blockIdx.x + threadIdx.x;
+	if(i<noElemInArrExt){
+		EXT *dArrExt = dPointerArrExt[0];
+		int Li,Lij,Lj;
+		Li=dArrExt[i].li;
+		Lij=dArrExt[i].lij;
+		Lj=dArrExt[i].lj;
+		if(li==Li && lij==Lij && lj==Lj){
+			int vgi = dArrExt[i].vgi/maxOfVer;
+			dValidEdge[vgi]=1;
+		}
+	}
+}
+
+__global__ void kernelGetLastElement(unsigned int *dValidEdge,unsigned int *dValidEdgeScanResult,unsigned int noElemdValidEdge,int *dnoElem_hArrGraphId){
+	if(dValidEdge[noElemdValidEdge-1]==1){
+		*dnoElem_hArrGraphId = dValidEdgeScanResult[noElemdValidEdge-1]+1;
+	}
+	else
+	{
+		*dnoElem_hArrGraphId = dValidEdgeScanResult[noElemdValidEdge-1];
+	}
+
+}
+
+
+inline cudaError_t findNumberElemBaseOnScanResult(unsigned int *dValidEdge,unsigned int *dValidEdgeScanResult,unsigned int noElemdValidEdge,int &noElem_hArrGraphId){
+	cudaError_t cudaStatus;
+	
+	int *dnoElem_hArrGraphId=nullptr;
+	cudaStatus = cudaMalloc((void**)&dnoElem_hArrGraphId,sizeof(int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dnoElem_hArrGraphId in findNumberElemBaseOnScanResult() failfed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dnoElem_hArrGraphId,0,sizeof(int));
+	}
+	
+	kernelGetLastElement<<<1,1>>>(dValidEdge,dValidEdgeScanResult,noElemdValidEdge,dnoElem_hArrGraphId);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelGetLastElement dValidEdgeScanResult in findNumberElemBaseOnScanResult() failed",cudaStatus);
+		goto Error;
+	}
+	
+	cudaStatus  = cudaMemcpy(&noElem_hArrGraphId,dnoElem_hArrGraphId,sizeof(int),cudaMemcpyDeviceToHost);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMemcpy (dnoElem_hArrGraphId -->noElem_hArrGraphId) in findNumberElemBaseOnScanResult() failed",cudaStatus);
+		goto Error;
+	}
+
+
+Error:
+	cudaFree(dnoElem_hArrGraphId);
+	return cudaStatus;
+}
+
+__global__ void kernelFilldArrGraphId(unsigned int *dValidEdge,unsigned int *dValidEdgeScanResult, unsigned int noElemdValidEdge, int *dArrGraphId){
+	int i = blockDim.x*blockIdx.x + threadIdx.x;
+	if(i<noElemdValidEdge){
+		if(dValidEdge[i]==1){
+			dArrGraphId[dValidEdgeScanResult[i]]=i;
+		}
+	}
+}
+
+__global__ void kernelGetLastElementExt(EXT **dPointerArrExt,unsigned int noElemInArrExt,unsigned int *dnoElemdValidEdge,unsigned int maxOfVer){
+	*dnoElemdValidEdge = dPointerArrExt[0][noElemInArrExt-1].vgi/maxOfVer;
+	printf("\ndnoElemdValidEdge:%d",*dnoElemdValidEdge);
+}
+
+
+//Hàm lấy graphid chứa embedding thoả minDFS_CODE
+inline cudaError_t getGraphId(UniEdge *hUniEdge,EXT **dPointerArrExt,unsigned int noElemInArrExt,int *&hArrGraphId,int &noElem_hArrGraphId,unsigned int maxOfVer){
+	cudaError_t cudaStatus;
+	int li,lij,lj;
+	li=hUniEdge->li;
+	lij=hUniEdge->lij;
+	lj=hUniEdge->lj;
+
+	unsigned int *dValidEdge=nullptr;
+	unsigned int noElemdValidEdge=0;
+	unsigned int *dnoElemdValidEdge=nullptr;
+	cudaStatus=cudaMalloc((void**)&dnoElemdValidEdge,sizeof(unsigned int));
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dnoElemdValidEdge in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dnoElemdValidEdge,0,sizeof(unsigned int));
+	}
+
+	//First: Lấy phần tử cuối cùng trong EXTk, lấy graphId của nó để định kích thước cho mảng dValidEdge
+	kernelGetLastElementExt<<<1,1>>>(dPointerArrExt,noElemInArrExt,dnoElemdValidEdge,maxOfVer);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelGetLastElementExt in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+
+	cudaMemcpy(&noElemdValidEdge,dnoElemdValidEdge,sizeof(unsigned int),cudaMemcpyDeviceToHost);
+
+	noElemdValidEdge++;
+
+	printf("\n noElemdValidEdge:%d",noElemdValidEdge);
+
+	//1. Khởi tạo mảng có số lượng phần tử bằng với noELemInArrExt
+	
+	cudaStatus = cudaMalloc((void**)&dValidEdge,sizeof(unsigned int)*noElemdValidEdge);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dValidEdge in getGraphId() failed");
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dValidEdge,0,sizeof(unsigned int)*noElemdValidEdge);
+	}
+
+	//2. Duyệt qua EXTk và set value 1 trên mảng dValidEdge tại index mà giá trị (li,lij,li) trong EXTk bằng với trong hUniEdge
+	dim3 block(blocksize);
+	dim3 grid((noElemInArrExt+block.x-1)/block.x);
+	kernelMatchValueInEXT<<<grid,block>>>(dPointerArrExt,noElemInArrExt,dValidEdge,li,lij,lj,maxOfVer);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelMatchValueInEXT in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+
+	printf("\n*************dValidEdge*************\n");
+	printUnsignedInt(dValidEdge,noElemdValidEdge);
+	//3. Scan mảng dValidEdge để cung cấp thông tin cho hArrGraphId 
+	//3.1. Cấp phát mảng dValidEdgeScanResult để lưu kết quả scan
+	unsigned int *dValidEdgeScanResult=nullptr;
+	cudaStatus = cudaMalloc((void**)&dValidEdgeScanResult,sizeof(unsigned int)*noElemdValidEdge);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dValidEdgeScanResult in getGraphId() failed");
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dValidEdgeScanResult,0,sizeof(unsigned int)*noElemdValidEdge);
+	}
+
+	cudaStatus = scanV(dValidEdge,noElemdValidEdge,dValidEdgeScanResult);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n scanV() dValidEdge in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+	printf("\n*************dValidEdgeScanResult*************\n");
+	printUnsignedInt(dValidEdgeScanResult,noElemdValidEdge);
+	//4. Xác định số lượng phần tử của mảng hArrGraphId
+	cudaStatus = findNumberElemBaseOnScanResult(dValidEdge,dValidEdgeScanResult,noElemdValidEdge,noElem_hArrGraphId);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n findNumberElemBaseOnScanResult dValiedEdgeScanResult in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+
+	printf("\n Value of noELem_hArrGraphId:%d",noElem_hArrGraphId);
+	
+	//5. Khởi tạo mảng hArrGraphId với số lượng phần tử vừa tìm được noElem_hArrGraphId
+	hArrGraphId = (int*)malloc(sizeof(int)*noElem_hArrGraphId);
+	if(hArrGraphId==NULL){
+		printf("\n Malloc hArrGraphId in getGraphId() failed");
+		exit(1);
+	}
+
+	int *dArrGraphId=nullptr;
+	cudaStatus = cudaMalloc((void**)&dArrGraphId,sizeof(int)*noElem_hArrGraphId);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dArrGraphId in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dArrGraphId,0,sizeof(int)*noElem_hArrGraphId);
+	}
+
+	dim3 blocka(blocksize);
+	dim3 grida((noElem_hArrGraphId+blocka.x-1)/blocka.x);
+
+	kernelFilldArrGraphId<<<grida,blocka>>>(dValidEdge, dValidEdgeScanResult, noElemdValidEdge, dArrGraphId);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelFilldArrGraphId in getGraphId() failed",cudaStatus);
+		goto Error;
+	}
+
+	cudaStatus = cudaMemcpy(hArrGraphId,dArrGraphId,sizeof(int)*noElem_hArrGraphId,cudaMemcpyDeviceToHost);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMemcpy (dArrGraphId --> hArrGraphId)",cudaStatus);
+		goto Error;
+	}
+
+	printf("\n*************dArrGraphId*************\n");
+	printInt(dArrGraphId,noElem_hArrGraphId);
+
+
+
+Error:
+	cudaFree(dValidEdge);
+	cudaFree(dArrGraphId);
+	return cudaStatus;
+}

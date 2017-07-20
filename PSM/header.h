@@ -98,4 +98,8 @@ extern inline cudaError_t assigndArrUniEdge(int *dArrAllPossibleExtension,int *d
 extern inline cudaError_t cudaFreeArrPointerUniEdge(UniEdge **&dArrPointerUniEdge,int *&dArrNoELemPointerUniEdge,int noElem_dArrPointerUniEdge);
 extern inline cudaError_t computeSupportv2(EXT **dArrPointerExt,int *dArrNoElemPointerExt,int *hArrNoElemPointerExt,int noElem_dArrPointerExt,UniEdge **dArrPointerUniEdge,int *dArrNoELemPointerUniEdge,int *hArrNoELemPointerUniEdge,int noElem_dArrPointerUniEdge,unsigned int **&hArrPointerSupport,unsigned int *&hArrNoElemPointerSupport,unsigned int noElem_hArrPointerSupport,unsigned int maxOfVer);
 extern inline cudaError_t findBoundary(EXT **dArrPointerExt,int *hArrNoElemPointerExt,int pos,unsigned int *&dArrBoundary,unsigned int maxOfVer);
-
+extern inline cudaError_t getEdgeLabel(UniEdge **dArrPointerUniEdge,int pointerPos,int edgePos,UniEdge *&hUniEdge);
+extern inline cudaError_t getViVj(EXT **dArrPointerExt,int posPointer, int &vi, int &vj);
+extern inline __global__ void kernelExtractPointerExt(EXT **dPointerArrExt,EXT **dArrPointerExt,int pos,unsigned int noElemdArrExt);
+extern inline __global__ void kernelPrint(EXT **dArrExt,unsigned int noElemdArrExt);
+extern inline cudaError_t getGraphId(UniEdge *hUniEdge,EXT **dPointerArrExt,unsigned int noElemInArrExt,int *&hArrGraphId,int &noElem_hArrGraphId,unsigned int maxOfVer);

@@ -17,7 +17,7 @@ struct Extension
 
 //Cấu trúc này lưu trữ các cạnh phân biệt dựa vào nhãn của chúng
 struct UniEdge
-{
+{	
 	int li;
 	int lij;
 	int lj;

@@ -1092,7 +1092,7 @@ int main(int argc, char * const  argv[])
 					Tính độ hỗ trợ của các cạnh trong dArrPointerUniEdge
 					Giải thuật:
 					1. Duyệt qua từng phần tử trong dArrPointerUniEdge. 
-					2. 
+					2. Kết quả độ hỗ trợ được lưu vào mảng hArrPointerSupport và hArrNoElemPointerSupport
 				*/
 				
 				int *hArrNoELemPointerUniEdge =(int*)malloc(sizeof(int)*noElem_dArrPointerUniEdge);
@@ -1116,13 +1116,86 @@ int main(int argc, char * const  argv[])
 					goto Error;
 				}
 				
-				for (int i = 0; i < noElem_hArrPointerSupport; i++)
+				//Hiển thị độ hỗ trợ trong mảng hArrPointerSupport. Tiếp tục khai thác các cạnh có độ hỗ trợ thoả minSup
+				for (int j = 0;	j < noElem_hArrPointerSupport; j++)
 				{
-					int noElem = hArrNoElemPointerSupport[i];
-					unsigned int *dArr = hArrPointerSupport[i];
-					for (int j = 0; j < noElem; j++)
+					int noElem = hArrNoElemPointerSupport[j];
+					unsigned int *dArr = hArrPointerSupport[j];
+					for (int k = 0; k < noElem; k++)
 					{
-						printf("\nSupport of i:%d in j:%d:%d",i,j,dArr[j]);
+						printf("\nSupport of i:%d in j:%d:%d",i,j,dArr[k]);
+						if(dArr[k]>=minsup){ //Nếu thoả minsup thì trích nhãn (li,lij,lj) và (vi,vj: trong dEXTk) để xây dựng DFS_CODE
+							//li=lij=lj=0;
+							UniEdge *hUniEdge = nullptr;							
+							cudaStatus=getEdgeLabel(dArrPointerUniEdge,j,k,hUniEdge);
+							if(cudaStatus!=cudaSuccess){
+								fprintf(stderr,"\n getEdgeLabel() in kernel.cu failed", cudaStatus);
+								goto Error;
+							}
+
+							printf("\n*********hUniEdge*********\n");
+							printf("\n hUniEdge: (li:%d, lij:%d, lj:%d)",hUniEdge->li,hUniEdge->lij,hUniEdge->lj);
+
+							////(vi,vj) sẽ được trích từ dArrPointerExt
+							int vi,vj;
+							vi=vj=-1;
+							cudaStatus = getViVj(dArrPointerExt,j,vi,vj);
+							if(cudaStatus!=cudaSuccess){
+								fprintf(stderr,"\n getViVj() in kernel.cu failed", cudaStatus);
+								goto Error;
+							}
+
+							printf("\n**********(vi,vj)*************\n");
+							printf("\n (vi:%d,vj:%d)",vi,vj);
+							//Đưa cạnh đó vào DFS_Code, tới đây vẫn chưa có backward Edge
+							gspan.DFS_CODE.push(vi,vj,-1,hUniEdge->lij,hUniEdge->lj);
+							if(gspan.is_min()==true){
+								printf("\n This is minDFSCode");
+								//Tìm các graphId chứa Embedding của cạnh hUniEdge trong EXTk
+
+								EXT **dPointerArrExt = nullptr;
+								unsigned int noElemInArrExt = hArrNoElemPointerExt[j];
+								cudaStatus = cudaMalloc((void**)&dPointerArrExt,sizeof(EXT*));
+								if(cudaStatus!=cudaSuccess){
+									fprintf(stderr,"\n cudaMalloc dPointerArrExt in kernel.cu failed",cudaStatus);
+									goto Error;
+								}
+
+								kernelExtractPointerExt<<<1,1>>>(dPointerArrExt,dArrPointerExt,j,noElemInArrExt);
+								cudaDeviceSynchronize();
+								cudaStatus=cudaGetLastError();
+								if(cudaStatus!=cudaSuccess){
+									fprintf(stderr,"\n kernelExtractPointerExt in kernel.cu failed",cudaStatus);
+									goto Error;
+								}
+
+								printf("\n**********dPointerArrExt***********\n");
+								kernelPrint<<<1,noElemInArrExt>>>(dPointerArrExt,noElemInArrExt);
+								cudaDeviceSynchronize();
+								cudaStatus=cudaGetLastError();
+								if(cudaStatus!=cudaSuccess){
+									fprintf(stderr,"\n kernelPrintExt  in computeSupportv2() failed");
+									goto Error;
+								}
+
+								int *hArrGraphId=nullptr;
+								noElem_hArrGraphId=0;
+								cudaStatus =getGraphId(hUniEdge,dPointerArrExt,noElemInArrExt,hArrGraphId,noElem_hArrGraphId,maxOfVer);
+								if (cudaStatus!=cudaSuccess){
+									fprintf(stderr,"\n getGraphIdContainEmbedding in kernel.cu failed",cudaStatus);
+									exit(1);
+								}
+
+								printf("\n*************hArrGraphId*************\n");
+								for (int i = 0; i < noElem_hArrGraphId; i++)
+								{
+									printf("\n hArrGraphId: %d",hArrGraphId[i]);
+								}
+
+
+							} //endif gspan.is_min
+							gspan.DFS_CODE.pop();
+						}
 					}
 				}
 
