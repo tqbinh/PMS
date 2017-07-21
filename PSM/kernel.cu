@@ -31,11 +31,16 @@
 #include "getSatisfyEdge.h"
 #include "header.h"
 
+
+#include "helper_timer.h"
+
 //#include <thrust\device_vector.h>
 //#include <thrust\host_vector.h>	
 using namespace std;
 
 #define blocksize 512
+
+
 
 #define CHECK(call) \
 { \
@@ -53,9 +58,13 @@ exit(1); \
 //bool checkArray(int*, int*, const int);
 //__device__ void __syncthreads(void);
 
+
+
 int main(int argc, char * const  argv[])
 {	
-
+	StopWatchWin timer;
+	
+	timer.start();
 #pragma region "Load data in to database. OutPut: d_O,d_LO,d_N,d_LN"
 
 	//*************************** Load Graph database with some parameters ***********************
@@ -72,9 +81,9 @@ int main(int argc, char * const  argv[])
 	//int opt;
 	char* fname;
 	//fname = "Klesscus";
-	fname = "Klessorigin";
+	//fname = "Klessorigin";
 	//fname = "KlessoriginCust1";
-	//fname= "G0G1G2_custom";
+	fname= "G0G1G2_custom";
 	
 
 	gSpan gspan;	
@@ -242,10 +251,15 @@ int main(int argc, char * const  argv[])
 	}
 	printf("\n***********Finished: Database has been copied from host to device. Next: count different label of vertex in all graph in database **********");
 	printf("\n***********Press the Enter key to continous**********\n");
-	getch();
+	//getch();
 
 #pragma endregion
-
+	timer.stop();
+	printf("\n\n**===-------------------------------------------------===**\n");
+    printf("Loading data...\n");
+	printf("Host CPU Processing time: %f (ms)\n", timer.getTime());
+	hTime=timer.getTime();
+	timer.reset();
 	//don't use this snippet 
 
 	/*
@@ -1109,22 +1123,30 @@ int main(int argc, char * const  argv[])
 				unsigned int **hArrPointerSupport=nullptr;
 				unsigned int *hArrNoElemPointerSupport=nullptr;
 				unsigned int noElem_hArrPointerSupport=noElem_dArrPointerUniEdge;
+
+				timer.start();
 				//Gọi hàm computeSupportv2 để tính độ hỗ trợ và lưu kết quả vào hArrPointerSupport
 				cudaStatus=computeSupportv2(dArrPointerExt,dArrNoElemPointerExt,hArrNoElemPointerExt,noElem_dArrPointerExt,dArrPointerUniEdge,dArrNoELemPointerUniEdge,hArrNoELemPointerUniEdge,noElem_dArrPointerUniEdge,hArrPointerSupport,hArrNoElemPointerSupport,noElem_hArrPointerSupport,maxOfVer);
 				if(cudaStatus!=cudaSuccess){
 					fprintf(stderr,"\n computeSupportv2 in kernel.cu failed",cudaStatus);
 					goto Error;
 				}
-				
-				//Hiển thị độ hỗ trợ trong mảng hArrPointerSupport. Tiếp tục khai thác các cạnh có độ hỗ trợ thoả minSup
+				timer.stop();
+				printf("\n\n**===-------------------------------------------------===**\n");
+				printf("Loading data...\n");
+				printf("Host CPU Processing time: %f (ms)\n", timer.getTime());
+				hTime=timer.getTime();
+				timer.reset();
+
+				//Hiển thị độ hỗ trợ trong mảng hArrPointerSupport. Tiếp tục khai thác các cạnh có độ hỗ trợ thoả minSup.
 				for (int j = 0;	j < noElem_hArrPointerSupport; j++)
 				{
 					int noElem = hArrNoElemPointerSupport[j];
-					unsigned int *dArr = hArrPointerSupport[j];
+					unsigned int *hArrSupport = hArrPointerSupport[j];
 					for (int k = 0; k < noElem; k++)
 					{
-						printf("\nSupport of i:%d in j:%d:%d",i,j,dArr[k]);
-						if(dArr[k]>=minsup){ //Nếu thoả minsup thì trích nhãn (li,lij,lj) và (vi,vj: trong dEXTk) để xây dựng DFS_CODE
+						printf("\nSupport of i:%d in j:%d:%d",i,j,hArrSupport[k]);
+						if(hArrSupport[k]>=minsup){ //Nếu thoả minsup thì trích nhãn (li,lij,lj) và (vi,vj: trong dEXTk) để xây dựng DFS_CODE
 							//li=lij=lj=0;
 							UniEdge *hUniEdge = nullptr;							
 							cudaStatus=getEdgeLabel(dArrPointerUniEdge,j,k,hUniEdge);
@@ -1169,10 +1191,9 @@ int main(int argc, char * const  argv[])
 									goto Error;
 								}
 
+								//Cần viết một hàm để In mảng dPointerArrExt
 								printf("\n**********dPointerArrExt***********\n");
-								kernelPrint<<<1,noElemInArrExt>>>(dPointerArrExt,noElemInArrExt);
-								cudaDeviceSynchronize();
-								cudaStatus=cudaGetLastError();
+								cudaStatus = printdPointerArrExt(dPointerArrExt,noElemInArrExt);
 								if(cudaStatus!=cudaSuccess){
 									fprintf(stderr,"\n kernelPrintExt  in computeSupportv2() failed");
 									goto Error;
@@ -1186,18 +1207,31 @@ int main(int argc, char * const  argv[])
 									exit(1);
 								}
 
-								printf("\n*************hArrGraphId*************\n");
-								for (int i = 0; i < noElem_hArrGraphId; i++)
-								{
-									printf("\n hArrGraphId: %d",hArrGraphId[i]);
+								//printf("\n*************hArrGraphId*************\n");
+								//for (int i = 0; i < noElem_hArrGraphId; i++)
+								//{
+								//	printf("\n hArrGraphId: %d",hArrGraphId[i]);
+								//}
+
+								//Ghi kết quả vào file result.txt
+								gspan.report(hArrGraphId,noElem_hArrGraphId,hArrSupport[k]);
+								free(hArrGraphId);
+
+								//Mở rộng forward Embedding
+								cudaStatus = extendEmbeddingRoot(dArrPointerEmbedding,noElem_dArrPointerEmbedding,dArrSizedQ,noElem_dArrSizedQ,dPointerArrExt,noElemInArrExt,hUniEdge);
+								if(cudaStatus!=cudaSuccess){
+									fprintf(stderr,"\n extendEmbeddingRoot in kernel.cu failed");
+									goto Error;
 								}
+
+
 
 
 							} //endif gspan.is_min
 							gspan.DFS_CODE.pop();
 						}
 					}
-				}
+				} //endfor : kết thúc duyệt qua các phần tử trong dArrUniEdge để xét độ hỗ trợ có thoả minsup
 
 #pragma endregion "Ending of compute support"
 

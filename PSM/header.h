@@ -7,7 +7,11 @@
 #include "createForwardEmbedding.h"
 #include "device_functions.h"
 #include "reduction.h"
+#include "helper_timer.h"
 
+
+extern float hTime;
+extern float dTime;
 #define blocksize 512
 
 //cấu trúc Embedding
@@ -103,3 +107,5 @@ extern inline cudaError_t getViVj(EXT **dArrPointerExt,int posPointer, int &vi, 
 extern inline __global__ void kernelExtractPointerExt(EXT **dPointerArrExt,EXT **dArrPointerExt,int pos,unsigned int noElemdArrExt);
 extern inline __global__ void kernelPrint(EXT **dArrExt,unsigned int noElemdArrExt);
 extern inline cudaError_t getGraphId(UniEdge *hUniEdge,EXT **dPointerArrExt,unsigned int noElemInArrExt,int *&hArrGraphId,int &noElem_hArrGraphId,unsigned int maxOfVer);
+extern inline cudaError_t extendEmbeddingRoot(Embedding **&dArrPointerEmbedding,int &noElem_dArrPointerEmbedding,int *&dArrSizedQ,int &noElem_dArrSizedQ,EXT **dPointerArrExt,unsigned int noElemInArrExt,UniEdge *hUniEdge);
+extern inline cudaError_t printdPointerArrExt(EXT **dPointerArrExt,unsigned int noElemInArrExt);

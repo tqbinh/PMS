@@ -1,6 +1,9 @@
 #pragma once
 #include "header.h"
 
+float hTime=0.0;
+float dTime=0.0;
+
 //kernel khởi tạo bộ nhớ và tạo nội dung cho dQ
 __global__ void kernelInitializeDataEmbedding(Embedding *dQ,int sizedQ){
 	int i = blockDim.x * blockIdx.x + threadIdx.x;
@@ -617,6 +620,7 @@ Error:
 
 }
 
+//Hàm tạo Embedding Q ban đầu
 inline cudaError_t createEmbeddingRoot1(Embedding **&dArrPointerEmbedding,int &noElem_dArrPointerEmbedding,int *&dArrSizedQ,int &noElem_dArrSizedQ,Extension *d_ValidExtension,int noElem_d_ValidExtension,int li,int lij,int lj){
 	cudaError_t cudaStatus;
 	//Vì đây là lần đầu tiên tạo Embedding, chúng ta tạo 2 cột Q có kích thước bằng nhau và bằng số lượng Embedding tìm thấy trong d_ValidExtension của nhãn cạnh (li,lij,lj)
@@ -684,17 +688,25 @@ inline cudaError_t createEmbeddingRoot1(Embedding **&dArrPointerEmbedding,int &n
 	Ngược lại thì Q có kích thước là (scanM[LastIndex]+1). 
 	Mỗi phần tử của Q có cấu trúc là {int idx, int vid}
 	*/
-	bool same = false;
-	kernelMatchLastElement<<<1,1>>>(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,same);
-	cudaDeviceSynchronize();
+	//bool same = false;
+	//kernelMatchLastElement<<<1,1>>>(d_ValidExtension,noElem_d_ValidExtension,li,lij,lj,same);
+	//cudaDeviceSynchronize();
 
 	int noElem_d_Q=0;
 
-	cudaStatus=getLastElement(d_scanResult,noElem_d_ValidExtension,noElem_d_Q);
+	//cudaStatus=getLastElement(d_scanResult,noElem_d_ValidExtension,noElem_d_Q);
+	//
 
-	if (same==true){
-		noElem_d_Q++;
+	//if (same==true){
+	//	noElem_d_Q++;
+	//}
+
+	cudaStatus = getSizeBaseOnScanResult(d_M,d_scanResult,noElem_d_ValidExtension,noElem_d_Q);
+	if(cudaStatus !=cudaSuccess){
+		fprintf(stderr,"\n getSizeBaseOnScanResult noELem_d_Q in createEmbeddingRoot1() failed",cudaStatus);
+		goto Error;
 	}
+
 
 	sizedQ=noElem_d_Q;
 
@@ -721,12 +733,27 @@ inline cudaError_t createEmbeddingRoot1(Embedding **&dArrPointerEmbedding,int &n
 	{
 		cudaMemset(Q2,-1,sizedQ*sizeof(Embedding));
 	}
+
 	kernelSetValueFordQ<<<grid,block>>>(d_ValidExtension,noElem_d_ValidExtension,Q1,Q2,d_scanResult,li,lij,lj);
 	cudaDeviceSynchronize();
+	cudaStatus = cudaGetLastError();
+	if(cudaStatus !=cudaSuccess){
+		fprintf(stderr,"\n kernelSetValueFordQ in createEmbeddingRoot1() failed",cudaStatus);
+		goto Error;
+	}
 
-	getPointer(dArrPointerEmbedding,noElem_dArrPointerEmbedding,Q1);
-	getPointer(dArrPointerEmbedding,noElem_dArrPointerEmbedding,Q2);
+	cudaStatus = getPointer(dArrPointerEmbedding,noElem_dArrPointerEmbedding,Q1);
+	if(cudaStatus !=cudaSuccess){
+		fprintf(stderr,"\n getPointer() into dArrPointerEmbedding in createEmbeddingRoot1() failed",cudaStatus);
+		goto Error;
+	}
 
+
+	cudaStatus = getPointer(dArrPointerEmbedding,noElem_dArrPointerEmbedding,Q2);
+	if(cudaStatus !=cudaSuccess){
+		fprintf(stderr,"\n getPointer() into dArrPointerEmbedding in createEmbeddingRoot1() failed",cudaStatus);
+		goto Error;
+	}
 
 	for (int j = 0; j < 2; j++)
 	{
@@ -737,14 +764,7 @@ inline cudaError_t createEmbeddingRoot1(Embedding **&dArrPointerEmbedding,int &n
 			goto Error;
 		}	
 	}
-
-
-	cudaDeviceSynchronize();
-	cudaStatus = cudaGetLastError();
-	if(cudaStatus!=cudaSuccess){
-		fprintf(stderr,"\n cudaDeviceSynchronize() in createEmbeddingRoot() failed",cudaStatus);
-		goto Error;
-	}
+		
 Error:
 	return cudaStatus;
 }
@@ -3114,10 +3134,66 @@ inline cudaError_t getGraphId(UniEdge *hUniEdge,EXT **dPointerArrExt,unsigned in
 	printf("\n*************dArrGraphId*************\n");
 	printInt(dArrGraphId,noElem_hArrGraphId);
 
-
+	
 
 Error:
 	cudaFree(dValidEdge);
 	cudaFree(dArrGraphId);
+	return cudaStatus;
+}
+
+
+
+inline cudaError_t printdPointerArrExt(EXT **dPointerArrExt,unsigned int noElemInArrExt){
+	cudaError_t cudaStatus;
+	dim3 block(blocksize);
+	dim3 grid((noElemInArrExt+block.x-1)/block.x);
+
+	kernelPrint<<<grid,block>>>(dPointerArrExt,noElemInArrExt);
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n kernelPrint in printdPointerArrExt() failed");
+		goto Error;
+	}
+Error:
+	return cudaStatus;
+}
+
+
+inline cudaError_t extendEmbeddingRoot(Embedding **&dArrPointerEmbedding,int &noElem_dArrPointerEmbedding,int *&dArrSizedQ,int &noElem_dArrSizedQ,EXT **dPointerArrExt,unsigned int noElemInArrExt,UniEdge *hUniEdge){
+	cudaError_t cudaStatus;
+
+	//1. Tạo mảng dM và dMScanResult có số lượng phần tử bằng với noElemInArrExt rồi khởi tạo giá trị các phần tử mảng bằng 0
+	//1.1. Tạo và khởi tạo giá trị cho mảng dM
+	unsigned int *dM=nullptr;
+	cudaStatus=cudaMalloc((void**)&dM,sizeof(unsigned int)*noElemInArrExt);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dM in extendEmbeddingRoot() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dM,0,sizeof(unsigned int)*noElemInArrExt);
+	}
+
+	//1.1. Tạo và khởi tạo giá trị cho mảng dMScanResult
+		unsigned int *dMScanResult=nullptr;
+	cudaStatus=cudaMalloc((void**)&dMScanResult,sizeof(unsigned int)*noElemInArrExt);
+	if(cudaStatus!=cudaSuccess){
+		fprintf(stderr,"\n cudaMalloc dM in extendEmbeddingRoot() failed",cudaStatus);
+		goto Error;
+	}
+	else
+	{
+		cudaMemset(dMScanResult,0,sizeof(unsigned int)*noElemInArrExt);
+	}
+
+	//2.
+
+	cudaDeviceSynchronize();
+	cudaStatus=cudaGetLastError();
+	
+Error:
 	return cudaStatus;
 }
